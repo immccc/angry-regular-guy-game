@@ -1,0 +1,6 @@
+const STAND_STATE_ID = "stand_state"
+const WALK_STATE_ID = "walk_state"
+const SMELL_STATE_ID = "smell_state"
+const PEE_STATE_ID = "pee_state"
+const HIT_STATE_ID = "hit_state"
+const SEEK_HUMAN_STATE_ID = "seek_human_state"

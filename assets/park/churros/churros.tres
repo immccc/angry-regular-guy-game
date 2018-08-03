@@ -1,0 +1,13 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=2]
+
+[ext_resource path="res://assets/park/churros/churros.png" type="Texture" id=1]
+
+[resource]
+
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "stand",
+"speed": 5.0
+} ]
+

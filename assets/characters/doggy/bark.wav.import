@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bark.wav-ebf9046c79b5a26930c460711639055b.sample"
+
+[deps]
+
+source_file="res://assets/characters/doggy/bark.wav"
+source_md5="f90c1104edaf9cd3a603a961af544e04"
+
+dest_files=[ "res://.import/bark.wav-ebf9046c79b5a26930c460711639055b.sample" ]
+dest_md5="8b65a85a595887184064428d3017160d"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
