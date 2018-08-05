@@ -8,7 +8,6 @@ const FORCE_X = 200.0
 
 var STATE_CONSTANTS = preload("state_constants.gd")
 
-
 var sprite
 
 var direction = 1
@@ -16,9 +15,9 @@ var direction = 1
 var force
 var initial_y
 
-
 func _init(id, node).(id, node):
 	sprite = node.get_node("Sprite")
+	assert(sprite != null)
 
 func process(delta):
 	_update_shock(delta)
