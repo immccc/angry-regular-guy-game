@@ -26,7 +26,7 @@ func process(delta):
 	sprite.play(ANIMATION_FALL)
 
 	node.global_position += force
-	altitude -= force.y 
+	altitude -= force.y
 
 	force.y += FORCE_Y_INCREMENT * delta
 	if force.y > MAX_FORCE_Y:

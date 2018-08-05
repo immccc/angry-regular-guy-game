@@ -21,7 +21,7 @@ func get_next_state():
 
 	if available_attempts_seeking > 0:
 		return id
-		
+
 	if rand_range(0, 100) < 50:
 		return STATE_CONSTANTS.STAND_STATE_ID
 
@@ -34,7 +34,7 @@ func _is_player_reached():
 
 func enter_into_state():
 	_set_path()
-	
+
 	speed = RUN_FAST_SPEED
 	available_attempts_seeking = randi() % MAX_ATTEMPTS_SEEKING
 

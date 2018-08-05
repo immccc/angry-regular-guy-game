@@ -13,6 +13,6 @@ func get_position_with_altitude():
 
 func get_global_position_with_altitude():
 	return global_position + Vector2(0, altitude)
-	
+
 func _process(delta):
 	state_machine.process(delta)

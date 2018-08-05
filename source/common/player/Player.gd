@@ -12,9 +12,9 @@ var objects_to_punch = Array()
 func _physics_process(delta):
 	player_control.process_input(delta)
 	_process_hits()
-	
 
-func get_height():
+
+func get_width():
 	sprite.get_frame(sprite.animation, sprite.frame).get_width()
 
 func _process_hits():

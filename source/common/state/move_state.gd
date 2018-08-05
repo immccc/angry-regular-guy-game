@@ -18,7 +18,7 @@ func process(delta):
 
 func enter_into_state():
 	var dest = _get_dest()
-	
+
 	path = path_finder.get_simple_path(path_finder.to_local(node.global_position), dest)
 
 	path.remove(0)

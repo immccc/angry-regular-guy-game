@@ -11,11 +11,11 @@ var HitState = preload("hit_state.gd")
 var SeekHumanState = preload("seek_human_state.gd")
 
 func _ready():
-	
+
 	randomize()
 
 	var node = $"."
-	
+
 	state_machine.add(StandState.new(STATE_CONSTANTS.STAND_STATE_ID, node))
 	state_machine.add(WalkState.new(STATE_CONSTANTS.WALK_STATE_ID, node))
 	state_machine.add(SmellState.new(STATE_CONSTANTS.SMELL_STATE_ID, node))
@@ -24,7 +24,7 @@ func _ready():
 	state_machine.add(SeekHumanState.new(STATE_CONSTANTS.SEEK_HUMAN_STATE_ID, node))
 
 	state_machine.current_state_id = STATE_CONSTANTS.STAND_STATE_ID
-	
+
 func _on_kick_area_hit_received(strength, direction):
 	if state_machine.current_state_id != STATE_CONSTANTS.HIT_STATE_ID:
 		var hit_state = state_machine.get(STATE_CONSTANTS.HIT_STATE_ID)

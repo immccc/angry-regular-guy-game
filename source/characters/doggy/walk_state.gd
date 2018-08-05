@@ -20,7 +20,7 @@ func enter_into_state():
 
 func _get_dest():
 	var tile_map = node.get_node("/root").find_node("TileMap", true, false)
-	
+
 	var cells = tile_map.get_used_cells()
 	var chosen_cell_position = tile_map.map_to_world(cells[randi() % cells.size()])
 

@@ -23,7 +23,7 @@ func process(delta):
 
 	_move(delta)
 	_throw_shit_if_applicable()
-	
+
 func _move(delta):
 	node.global_position.x += FLYING_VEL * direction * delta
 	node.global_position.y += FLYING_AMPLITUDE * cos(radians_counter)
@@ -37,6 +37,6 @@ func _throw_shit_if_applicable():
 		thrown_shit.global_position = node.global_position
 		node.get_parent().add_child(thrown_shit)
 		shit_thrown = true
-	
-	
+
+
 
