@@ -1,4 +1,4 @@
-extends "res://source/common/world_objects/world_object.gd"
+extends "res://source/common/world_objects/stateful_world_object.gd"
 
 const STATE_CONSTANTS = preload("state_constants.gd")
 

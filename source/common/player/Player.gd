@@ -34,7 +34,7 @@ func _on_kick_area_area_entered(area):
 
 func _on_kick_area_area_exited(area):
 	objects_to_kick.erase(area)
-	emit_signal("removed_elements_to_be_hit", [area], $".")
+	emit_signal("removed_elements_to_be_hit", [area], $".", StrikeType.KICK)
 
 func _setup_strike_handler():
     var animations_per_strike_type = {

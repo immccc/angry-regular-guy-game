@@ -62,6 +62,8 @@ func _update_striking_if_needed():
 func _hit_objects(strike_type):
     if objects_to_hit_per_strike_type == null:
         return
+    if !objects_to_hit_per_strike_type.has(strike_type):
+        return
     for object in objects_to_hit_per_strike_type[strike_type]:
         object.emit_signal("hit_received", strength, direction)
 
@@ -70,18 +72,15 @@ func _is_striking_climax():
 
 
 func _on_added_elements_to_be_hit(objects, strike_performer, strike_type):
-    objects_to_hit_per_strike_type[strike_type] = objects
-
-    if objects_to_hit_per_strike_type[strike_type] == null:
-        objects_to_hit_per_strike_type[strike_type] = objects
+    if !objects_to_hit_per_strike_type.has(strike_type):
+        objects_to_hit_per_strike_type[strike_type] = objects.duplicate()
     else:
         for object in objects:
             objects_to_hit_per_strike_type[strike_type].append(object)
 
 func _on_removed_elements_to_be_hit(objects, strike_performer, strike_type):
-    if !strike_performer.is_a_parent_of($"."):
+    if !objects_to_hit_per_strike_type.has(strike_type):
         return
 
-    if objects != null:
-        for object in objects_to_hit_per_strike_type[strike_type]:
-            objects_to_hit_per_strike_type[strike_type].erase(object)
+    for object in objects_to_hit_per_strike_type[strike_type]:
+        objects_to_hit_per_strike_type[strike_type].erase(object)
