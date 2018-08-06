@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://source/common/player/Player.gd" type="Script" id=1]
+[ext_resource path="res://source/common/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/common/player/Player.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/characters/person/strike_handler.tscn" type="PackedScene" id=3]
 
 [sub_resource type="SegmentShape2D" id=1]
 
@@ -30,7 +31,7 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 position = Vector2( 0, -55.4017 )
 scale = Vector2( 10, 10 )
 frames = ExtResource( 2 )
-animation = "punch"
+animation = "kick"
 frame = 2
 playing = true
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
@@ -91,6 +92,8 @@ audio_bus_name = "Master"
 
 position = Vector2( -2, -52.0002 )
 shape = SubResource( 3 )
+
+[node name="StrikeHandler" parent="." index="5" instance=ExtResource( 3 )]
 
 [connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]
 
