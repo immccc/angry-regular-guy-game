@@ -1,4 +1,4 @@
-extends Object
+extends "res://source/common/state/state.gd"
 
 const StrikeType = preload("res://source/characters/person/strike_type.gd").StrikeType
 
@@ -24,7 +24,6 @@ const ACTION_MOVE_UP = "move_up"
 const ACTION_MOVE_DOWN = "move_down"
 const ACTION_ACTION = "action"
 
-var node
 var sprite
 
 var knock_timer
@@ -37,15 +36,15 @@ var strike_handler
 
 var holding_object = false
 
-func _init(node):
-    self.node = node
+func _init(id, node).(id, node):
+
     sprite = node.get_node("Sprite")
     knock_timer = node.get_node("KnockTimer")
     kick_area = node.get_node("KickArea")
     punch_area = node.get_node("PunchArea")
     strike_handler = node.get_node("StrikeHandler")
 
-func process_input(delta):
+func process(delta):
     _process_input_action()
     _process_input_strike()
     _process_input_for_walking(delta)
@@ -118,7 +117,6 @@ func _set_character_flipped(flip):
 
     kick_area.rotation = deg2rad(sprite_rotation)
     punch_area.rotation = deg2rad(sprite_rotation)
-
 
 
 func _animate_based_on_movement(movement_x, movement_y):

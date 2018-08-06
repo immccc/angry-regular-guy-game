@@ -1,6 +1,6 @@
 extends "res://source/common/world_objects/stateful_world_object.gd"
 
-const STATE_CONSTANTS = preload("state_constants.gd")
+const StateConstants = preload("state_constants.gd")
 
 
 var StandState = preload("stand_state.gd")
@@ -16,17 +16,17 @@ func _ready():
 
 	var node = $"."
 
-	state_machine.add(StandState.new(STATE_CONSTANTS.STAND_STATE_ID, node))
-	state_machine.add(WalkState.new(STATE_CONSTANTS.WALK_STATE_ID, node))
-	state_machine.add(SmellState.new(STATE_CONSTANTS.SMELL_STATE_ID, node))
-	state_machine.add(PeeState.new(STATE_CONSTANTS.PEE_STATE_ID, node))
-	state_machine.add(HitState.new(STATE_CONSTANTS.HIT_STATE_ID, node))
-	state_machine.add(SeekHumanState.new(STATE_CONSTANTS.SEEK_HUMAN_STATE_ID, node))
+	state_machine.add(StandState.new(StateConstants.STAND_STATE_ID, node))
+	state_machine.add(WalkState.new(StateConstants.WALK_STATE_ID, node))
+	state_machine.add(SmellState.new(StateConstants.SMELL_STATE_ID, node))
+	state_machine.add(PeeState.new(StateConstants.PEE_STATE_ID, node))
+	state_machine.add(HitState.new(StateConstants.HIT_STATE_ID, node))
+	state_machine.add(SeekHumanState.new(StateConstants.SEEK_HUMAN_STATE_ID, node))
 
-	state_machine.current_state_id = STATE_CONSTANTS.STAND_STATE_ID
+	state_machine.current_state_id = StateConstants.STAND_STATE_ID
 
 func _on_kick_area_hit_received(strength, direction):
-	if state_machine.current_state_id != STATE_CONSTANTS.HIT_STATE_ID:
-		var hit_state = state_machine.get(STATE_CONSTANTS.HIT_STATE_ID)
+	if state_machine.current_state_id != StateConstants.HIT_STATE_ID:
+		var hit_state = state_machine.get(StateConstants.HIT_STATE_ID)
 		hit_state.direction = direction
-		state_machine.change(STATE_CONSTANTS.HIT_STATE_ID)
+		state_machine.change(StateConstants.HIT_STATE_ID)
