@@ -1,0 +1,104 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://source/characters/person/ia/ia_person.gd" type="Script" id=1]
+[ext_resource path="res://assets/common/player/Player.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/characters/person/strike_handler.tscn" type="PackedScene" id=3]
+
+[sub_resource type="SegmentShape2D" id=1]
+
+custom_solver_bias = 0.0
+a = Vector2( 0.291046, -26.7577 )
+b = Vector2( 0.493744, 24.0006 )
+
+[sub_resource type="SegmentShape2D" id=2]
+
+custom_solver_bias = 0.0
+a = Vector2( -0.171089, -13.2805 )
+b = Vector2( -0.171089, 41.0295 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 33.0012, 82.9997 )
+
+[node name="Node2D" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Sprite" type="AnimatedSprite" parent="." index="0"]
+
+position = Vector2( 0, -55.4017 )
+scale = Vector2( 10, 10 )
+frames = ExtResource( 2 )
+animation = "kick"
+frame = 2
+playing = true
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
+
+[node name="KnockTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="KickArea" type="Area2D" parent="." index="2"]
+
+position = Vector2( -0.902496, 0.319682 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pickable", "Transform", "Visibility", "Z Index" ]
+
+[node name="KickCollision" type="CollisionShape2D" parent="KickArea" index="0"]
+
+position = Vector2( 61.964, 1.86461 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="PunchArea" type="Area2D" parent="." index="3"]
+
+position = Vector2( -0.814514, -79.0071 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="PunchCollision" type="CollisionShape2D" parent="PunchArea" index="0"]
+
+position = Vector2( 63.1579, -8.86427 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="HitArea" type="Area2D" parent="." index="4"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" index="0"]
+
+position = Vector2( -2, -52.0002 )
+shape = SubResource( 3 )
+
+[node name="StrikeHandler" parent="." index="5" instance=ExtResource( 3 )]
+
+[connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]
+
+[connection signal="area_entered" from="KickArea" to="." method="_on_kick_area_area_entered"]
+
+[connection signal="area_exited" from="KickArea" to="." method="_on_kick_area_area_exited"]
+
+

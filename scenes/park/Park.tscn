@@ -1,19 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/park/park_tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://scenes/common/player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/characters/doggy/doggy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/park/churros/churros.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/characters/bird/bird.tscn" type="PackedScene" id=5]
+[ext_resource path="res://source/common/world_objects/world_object_container.gd" type="Script" id=2]
+[ext_resource path="res://scenes/common/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://source/common/world_objects/world_object_generator.gd" type="Script" id=4]
+[ext_resource path="res://scenes/park/churros/churros.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/characters/bird/bird.tscn" type="PackedScene" id=6]
 
-[sub_resource type="NavigationPolygon" id=1]
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 61.4375, 475.698 )
+
+[sub_resource type="NavigationPolygon" id=2]
 
 vertices = PoolVector2Array( 2462.51, 109.762, 2523.25, 20.3071, 2523.25, 661.005, 2460.7, 183.971, 215.546, 21.1121, 2076.98, 115.192, 215.546, 662.37, 2076.98, 185.781 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 1, 0, 5 ), PoolIntArray( 3, 2, 6, 7 ), PoolIntArray( 7, 6, 4, 5 ) ]
 outlines = [ PoolVector2Array( 215.546, 21.1121, 2523.25, 20.3071, 2523.25, 661.005, 215.546, 662.37 ), PoolVector2Array( 2076.98, 115.192, 2462.51, 109.762, 2460.7, 183.971, 2076.98, 185.781 ) ]
 _sections_unfolded = [ "Resource" ]
 
-[node name="Park" type="Node2D" index="0"]
+[node name="Park" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
@@ -40,8 +46,9 @@ _sections_unfolded = [ "Cell", "Occluder", "Visibility" ]
 [node name="YSort" type="YSort" parent="TileMap" index="0"]
 
 sort_enabled = true
+script = ExtResource( 2 )
 
-[node name="Player" parent="TileMap/YSort" index="0" instance=ExtResource( 2 )]
+[node name="Player" parent="TileMap/YSort" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 514.95, 166.327 )
 _sections_unfolded = [ "Pause", "Transform", "Visibility" ]
@@ -73,15 +80,50 @@ editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Limit", "Smoothing" ]
 
-[node name="TestDoggy" parent="TileMap/YSort" index="1" instance=ExtResource( 3 )]
+[node name="Generator1" type="Node2D" parent="TileMap/YSort/Player/Camera2D" index="0"]
 
-position = Vector2( 329.145, 204.071 )
+position = Vector2( -551.059, 139.821 )
+scale = Vector2( 1, 5 )
+script = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Churros" parent="TileMap/YSort" index="2" instance=ExtResource( 4 )]
+[node name="RemovalObjectArea1" type="Area2D" parent="TileMap/YSort/Player" index="7"]
+
+position = Vector2( 688.404, -339.645 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/YSort/Player/RemovalObjectArea1" index="0"]
+
+position = Vector2( 119.259, 427.688 )
+shape = SubResource( 1 )
+
+[node name="RemovalObjectArea2" type="Area2D" parent="TileMap/YSort/Player" index="8"]
+
+position = Vector2( -693.356, -343.757 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/YSort/Player/RemovalObjectArea2" index="0"]
+
+position = Vector2( -115.147, 427.688 )
+shape = SubResource( 1 )
+
+[node name="Churros" parent="TileMap/YSort" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 2043.16, 253.935 )
 
-[node name="Bird" parent="TileMap" index="1" instance=ExtResource( 5 )]
+[node name="Bird" parent="TileMap" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( -814.253, -20.5619 )
 
@@ -93,8 +135,14 @@ _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder" index="0"]
 
 position = Vector2( -1.63351, 0 )
-navpoly = SubResource( 1 )
+navpoly = SubResource( 2 )
 enabled = true
 _sections_unfolded = [ "Transform" ]
+
+[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/Camera2D/Generator1" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
+
+[connection signal="area_entered" from="TileMap/YSort/Player/RemovalObjectArea1" to="TileMap/YSort" method="_on_removal_area_entered"]
+
+[connection signal="area_entered" from="TileMap/YSort/Player/RemovalObjectArea2" to="TileMap/YSort" method="_on_removal_area_entered"]
 
 
