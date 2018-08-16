@@ -19,7 +19,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 1, 4, 5 ), PoolIntArra
 outlines = [ PoolVector2Array( 215.546, 21.1121, 3538.23, 20.3068, 3536.23, 654.416, 215.546, 662.37 ), PoolVector2Array( 2076.98, 115.192, 2462.51, 109.762, 2460.7, 183.971, 2076.98, 185.781 ) ]
 _sections_unfolded = [ "Resource" ]
 
-[node name="Park" type="Node2D" index="0"]
+[node name="Park" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
@@ -59,6 +59,7 @@ position = Vector2( 742.157, -5.14801 )
 points = PoolVector2Array( -3.61792, -176.668, -3.86768, 267.511 )
 width = 10.0
 default_color = Color( 0.4, 0.5, 1, 1 )
+texture_mode = -780839064
 sharp_limit = 2.0
 round_precision = 8
 script = ExtResource( 4 )
@@ -71,6 +72,7 @@ position = Vector2( -919.895, -18.6985 )
 points = PoolVector2Array( 60.7361, -190.118, 60.7361, 239.112 )
 width = 10.0
 default_color = Color( 0.4, 0.5, 1, 1 )
+texture_mode = -780838680
 sharp_limit = 2.0
 round_precision = 8
 script = ExtResource( 4 )

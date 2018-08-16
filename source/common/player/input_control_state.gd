@@ -49,6 +49,9 @@ func process(delta):
     _process_input_strike()
     _process_input_for_walking(delta)
 
+func on_knock_timer_timeout():
+    ready_to_knock = true
+
 func _process_input_action():
     #TODO Make this work only when there is an object to be picked up
     if strike_handler.is_striking():
@@ -72,13 +75,14 @@ func _process_input_strike():
 
     if Input.is_action_just_released(ACTION_STRIKE_PUNCH):
         knock_timer.stop()
-        ready_to_knock = false
+
 
         if ready_to_knock:
-            strike_handler.start(StrikeType.KNOCK, KNOCK_STRENGTH, _get_person_Direction())
+            strike_handler.start(StrikeType.KNOCK, KNOCK_STRENGTH, _get_person_direction())
         else:
             strike_handler.start(StrikeType.PUNCH, PUNCH_STRENGTH, _get_person_direction())
 
+        ready_to_knock = false
         return
 
     if Input.is_action_just_released(ACTION_STRIKE_KICK):
@@ -133,9 +137,6 @@ func _get_animation_based_on_holding(default_animation, holding_animation):
         return holding_animation
     else:
         return default_animation
-
-func _on_knock_timer_timeout():
-    ready_to_knock = true
 
 #TODO Move out of here, perhaps to a base method from player
 func _get_person_direction():
