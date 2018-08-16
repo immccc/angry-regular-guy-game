@@ -1,6 +1,7 @@
 extends Node2D
 
 var altitude = 0.0
+var direction
 
 func _init(altitude = 0.0):
 	self.altitude = altitude

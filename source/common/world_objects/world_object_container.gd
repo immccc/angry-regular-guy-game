@@ -18,15 +18,16 @@ var currents_per_object_type = {
 func _get_max_of_type(world_object_class):
     return maximum_per_object_type[world_object_class]
 
-func _on_object_requested_to_be_added(object_node_type, object_position):
+func _on_object_requested_to_be_added(object_node_type, object_position, direction):
     var currents_size = currents_per_object_type[object_node_type].size()
     var maximum = maximum_per_object_type[object_node_type]
 
     if currents_size < maximum:
         var instanced_object = object_node_type.instance()
-        instanced_object.global_position = object_position
         add_child(instanced_object, true)
         currents_per_object_type[object_node_type].append(instanced_object)
+        instanced_object.global_position = object_position
+        instanced_object.direction = direction
 
 
 func _on_removal_area_entered(object_to_remove):
