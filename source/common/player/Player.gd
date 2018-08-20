@@ -5,8 +5,6 @@ const StateConstants = preload("state_constants.gd")
 var InputControlState = preload("input_control_state.gd")
 
 func _ready():
-    ._ready()
-
     randomize()
 
     var node = $"."

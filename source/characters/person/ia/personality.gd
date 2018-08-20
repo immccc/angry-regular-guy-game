@@ -3,22 +3,24 @@ const MAX_FACTOR_FOR_PERSONALITY_RANGE = 100
 enum PersonalityAspect {
     COWARD,
     RIGHTEOUS,
-    AGGRESIVE
+    AGGRESIVE,
+    DISTRACTED
 }
 
 var personality_factors = {
     COWARD: 0,
     RIGHTEOUS: 0,
-    AGGRESIVE: 0
+    AGGRESIVE: 0,
+    DISTRACTED: 0
 }
 
 func _init():
-    set_random_values()
+    _set_random_values()
 
 func react_to_external_problem():
     var selected_personality_aspect
     var max_factor = 0
-    for personality_aspect in personality_factors.keys:
+    for personality_aspect in personality_factors.keys():
         var factor = personality_factors[personality_aspect]
         var random_remaining = randi() % (MAX_FACTOR_FOR_PERSONALITY_RANGE - factor + 1)
         if factor + random_remaining > max_factor:
@@ -36,5 +38,5 @@ func _set_random_values():
             selected_factor = remaining_factor_points
         else:
             selected_factor = randi() % (remaining_factor_points + 1)
-        
+
         personality_factors[personality_aspect] = selected_factor

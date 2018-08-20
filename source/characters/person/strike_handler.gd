@@ -65,7 +65,8 @@ func _hit_objects(strike_type):
     if !objects_to_hit_per_strike_type.has(strike_type):
         return
     for object in objects_to_hit_per_strike_type[strike_type]:
-        object.emit_signal("hit_received", strength, direction)
+        var from = get_node("..")
+        object.emit_signal("hit_received", from, strength, direction)
 
 func _is_striking_climax():
     return is_striking() and sprite.frame == climax_per_strike_type[strike_type]

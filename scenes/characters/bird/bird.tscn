@@ -3,7 +3,7 @@
 [ext_resource path="res://source/characters/bird/bird.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/bird/bird.tres" type="SpriteFrames" id=2]
 
-[node name="Node2D" type="Node2D"]
+[node name="Bird" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -12,7 +12,6 @@ script = ExtResource( 1 )
 scale = Vector2( 10, 10 )
 frames = ExtResource( 2 )
 animation = "flying"
-frame = 3
 playing = true
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 

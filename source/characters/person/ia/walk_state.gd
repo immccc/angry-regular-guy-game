@@ -1,7 +1,7 @@
 extends "res://source/common/state/move_state.gd"
 
 const STATE_CONSTANTS = preload("state_constants.gd")
-const DirectionType = preload("res://source/common/world_objects/direction.gd").Direction
+const DirectionType = preload("res://source/common/direction.gd").Direction
 
 
 const MOVE_SPEED = 100

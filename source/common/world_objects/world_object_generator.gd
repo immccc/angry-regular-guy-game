@@ -1,6 +1,6 @@
 extends Line2D
 
-#const Direction = preload("res://source/common/world_objects/direction.gd")
+#const Direction = preload("res://source/common/direction.gd")
 
 
 signal object_requested_to_be_added(object_node_type, object_position, direction)

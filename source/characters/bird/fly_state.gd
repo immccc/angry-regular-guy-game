@@ -4,7 +4,7 @@ const ANIMATION_FLY = "flying"
 
 const FLYING_VEL = 200
 const FLYING_AMPLITUDE = 0.5
-const DIRECTIONS = preload("res://source/common/world_objects/direction.gd")
+const DIRECTIONS = preload("res://source/common/direction.gd")
 
 var Shit = preload("res://scenes/characters/bird/shit/shit.tscn")
 
