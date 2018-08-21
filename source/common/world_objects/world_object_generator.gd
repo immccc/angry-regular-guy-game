@@ -14,6 +14,7 @@ func _get_real_direction():
 #TODO in subclass
 var Doggy = preload("res://scenes/characters/doggy/doggy.tscn")
 var Person = preload("res://scenes/characters/person/person.tscn")
+var Bird = preload("res://scenes/characters/bird/bird.tscn")
 
 func _ready():
     randomize()
@@ -25,10 +26,10 @@ func _process(delta):
 func _generate_objects_randomly():
     _generate_object_randomly(rand_range(0, 100), .2, Doggy)
     _generate_object_randomly(rand_range(0, 100), .2, Person)
+    _generate_object_randomly(rand_range(0, 100), 50, Bird)
 
-func _generate_object_randomly(rand_factor, rand_threshold, object_class):
+func _generate_object_randomly(rand_factor, rand_threshold, object_class, pos = _get_random_position()):
     if rand_factor < rand_threshold:
-        var pos = _get_random_position()
         emit_signal("object_requested_to_be_added", object_class, pos, _get_real_direction())
 
 

@@ -4,15 +4,18 @@ extends YSort
 
 var Doggy = preload("res://scenes/characters/doggy/doggy.tscn")
 var Person = preload("res://scenes/characters/person/person.tscn")
+var Bird = preload("res://scenes/characters/bird/bird.tscn")
 
 var maximum_per_object_type = {
     Doggy: 3,
-    Person: 5
+    Person: 5,
+    Bird: 1
 }
 
 var currents_per_object_type = {
     Doggy: [],
-    Person: []
+    Person: [],
+    Bird: []
 }
 
 func _get_max_of_type(world_object_class):

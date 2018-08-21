@@ -11,36 +11,34 @@ var STATE_CONSTANTS = preload("state_constants.gd")
 
 var sprite
 
-var direction = 1
-
 var force
-var initial_y
 var altitude
 
 
 func _init(id, node).(id, node):
-	sprite = node.get_node("Sprite")
-	_init_falling_force()
+    sprite = node.get_node("Sprite")
+    altitude = node.altitude
+    _init_falling_force()
 
 func process(delta):
-	sprite.play(ANIMATION_FALL)
+    sprite.play(ANIMATION_FALL)
 
-	node.global_position += force
-	altitude -= force.y
+    node.global_position += force
+    altitude -= force.y
 
-	force.y += FORCE_Y_INCREMENT * delta
-	if force.y > MAX_FORCE_Y:
-		force.y  = MAX_FORCE_Y
+    force.y += FORCE_Y_INCREMENT * delta
+    if force.y > MAX_FORCE_Y:
+        force.y  = MAX_FORCE_Y
 
 func get_next_state():
-	if altitude <= 0.0:
-		return STATE_CONSTANTS.HIT_STATE_ID
-	return id
+    if altitude <= 0.0:
+        return STATE_CONSTANTS.HIT_STATE_ID
+    return id
 
 func enter_into_state():
-	_init_falling_force()
+    _init_falling_force()
 
 func _init_falling_force():
-	force = Vector2(0.0, INITIAL_FORCE_Y)
+    force = Vector2(0.0, INITIAL_FORCE_Y)
 
 

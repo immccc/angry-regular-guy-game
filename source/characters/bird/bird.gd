@@ -6,13 +6,15 @@ var FlyState = preload("fly_state.gd")
 
 func _ready():
 
-	randomize()
+    randomize()
+    altitude = 500 + (randi() % 1500)
+    _setup_state_machine()
 
-	var node = $"."
+func _setup_state_machine():
+    var node = $"."
 
-	state_machine.add(FlyState.new(StateConstants.FLY_STATE_ID, node))
-	state_machine.current_state_id = StateConstants.FLY_STATE_ID
+    state_machine.add(FlyState.new(StateConstants.FLY_STATE_ID, node))
+    state_machine.current_state_id = StateConstants.FLY_STATE_ID
 
-func _process(delta):
-	state_machine.process(delta)
+
 

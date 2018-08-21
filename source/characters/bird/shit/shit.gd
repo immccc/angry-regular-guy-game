@@ -7,8 +7,6 @@ var HitState = preload("hit_state.gd")
 
 func _ready():
 
-	altitude = 2000 # TODO Change with real altitude
-
 	randomize()
 
 	var node = $"."
@@ -19,7 +17,6 @@ func _ready():
 	state_machine.current_state_id = StateConstants.FALL_STATE_ID
 
 	var fall_state = state_machine.get(StateConstants.FALL_STATE_ID)
-	fall_state.altitude = altitude
 
 func _on_hit_area_area_entered(area):
 	if state_machine.current_state_id != StateConstants.HIT_STATE_ID:

@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/park/park_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://source/common/world_objects/world_object_container.gd" type="Script" id=2]
 [ext_resource path="res://scenes/common/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/common/world_objects/world_object_generator.gd" type="Script" id=4]
 [ext_resource path="res://scenes/park/churros/churros.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/characters/bird/bird.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -19,11 +18,11 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 1, 4, 5 ), PoolIntArra
 outlines = [ PoolVector2Array( 215.546, 21.1121, 3538.23, 20.3068, 3536.23, 654.416, 215.546, 662.37 ), PoolVector2Array( 2076.98, 115.192, 2462.51, 109.762, 2460.7, 183.971, 2076.98, 185.781 ) ]
 _sections_unfolded = [ "Resource" ]
 
-[node name="Park" type="Node2D"]
+[node name="Park" type="Node2D" index="0"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
-position = Vector2( 1.51099, 52.489 )
+position = Vector2( -514.489, 52.489 )
 mode = 0
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 64, 64 )
@@ -114,8 +113,11 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision_layer = 0
+collision_mask = 4
 audio_bus_override = false
 audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/YSort/Player/RemovalObjectArea1" index="0"]
 
@@ -130,8 +132,11 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision_layer = 0
+collision_mask = 4
 audio_bus_override = false
 audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/YSort/Player/RemovalObjectArea2" index="0"]
 
@@ -142,10 +147,6 @@ _sections_unfolded = [ "Transform" ]
 [node name="Churros" parent="TileMap/YSort" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 2043.16, 253.935 )
-
-[node name="Bird" parent="TileMap" index="1" instance=ExtResource( 6 )]
-
-position = Vector2( -814.253, -20.5619 )
 
 [node name="PathFinder" type="Navigation2D" parent="." index="1"]
 
