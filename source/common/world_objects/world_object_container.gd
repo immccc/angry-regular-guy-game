@@ -9,7 +9,7 @@ var Bird = preload("res://scenes/characters/bird/bird.tscn")
 var maximum_per_object_type = {
     Doggy: 3,
     Person: 5,
-    Bird: 1
+    Bird: 2
 }
 
 var currents_per_object_type = {
@@ -51,8 +51,8 @@ func _on_object_requested_to_be_added(object_node_type, object_position, directi
 
 func _create_object(object_node_type, object_position, direction):
     var instanced_object = object_node_type.instance()
+    instanced_object.direction = direction
     add_child(instanced_object, true)
     currents_per_object_type[object_node_type].append(instanced_object)
     instanced_object.global_position = object_position
-    instanced_object.direction = direction
     _setup_other_objects_broadcast(instanced_object)

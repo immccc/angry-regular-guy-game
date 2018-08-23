@@ -26,7 +26,7 @@ func _process(delta):
 func _generate_objects_randomly():
     _generate_object_randomly(rand_range(0, 100), .2, Doggy)
     _generate_object_randomly(rand_range(0, 100), .2, Person)
-    _generate_object_randomly(rand_range(0, 100), 50, Bird)
+    _generate_object_randomly(rand_range(0, 100), .2, Bird)
 
 func _generate_object_randomly(rand_factor, rand_threshold, object_class, pos = _get_random_position()):
     if rand_factor < rand_threshold:
@@ -34,7 +34,7 @@ func _generate_object_randomly(rand_factor, rand_threshold, object_class, pos = 
 
 
 func _get_random_position():
-    var x = get_global_position().x
+    var x = to_global(get_point_position(0)).x
     var y_bound_1 = to_global(get_point_position(0)).y
     var y_bound_2 = to_global(get_point_position(1)).y
     return Vector2(x, rand_range(y_bound_1, y_bound_2))

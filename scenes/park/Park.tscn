@@ -2,9 +2,9 @@
 
 [ext_resource path="res://assets/park/park_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://source/common/world_objects/world_object_container.gd" type="Script" id=2]
-[ext_resource path="res://scenes/common/player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://source/common/world_objects/world_object_generator.gd" type="Script" id=4]
-[ext_resource path="res://scenes/park/churros/churros.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/park/churros/churros.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/common/player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/common/world_objects/world_object_generator.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -47,40 +47,43 @@ _sections_unfolded = [ "Cell", "Occluder", "Visibility" ]
 sort_enabled = true
 script = ExtResource( 2 )
 
-[node name="Player" parent="TileMap/YSort" index="0" instance=ExtResource( 3 )]
+[node name="Churros" parent="TileMap/YSort" index="0" instance=ExtResource( 3 )]
 
-position = Vector2( 558.95, 382.327 )
-_sections_unfolded = [ "Pause", "Transform", "Visibility" ]
+position = Vector2( 2043.16, 253.935 )
 
-[node name="Generator2" type="Line2D" parent="TileMap/YSort/Player" index="1"]
+[node name="Player" parent="TileMap/YSort" index="1" instance=ExtResource( 4 )]
 
-position = Vector2( 742.157, -5.14801 )
+position = Vector2( 564, 380 )
+
+[node name="Generator2" type="Line2D" parent="TileMap/YSort/Player" index="6"]
+
+position = Vector2( 737.107, -2.82104 )
 points = PoolVector2Array( -3.61792, -176.668, -3.86768, 267.511 )
 width = 10.0
 default_color = Color( 0.4, 0.5, 1, 1 )
 texture_mode = -780839064
 sharp_limit = 2.0
 round_precision = 8
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 direction_for_generated_objects = 0
 
-[node name="Generator1" type="Line2D" parent="TileMap/YSort/Player" index="2"]
+[node name="Generator1" type="Line2D" parent="TileMap/YSort/Player" index="7"]
 
-position = Vector2( -919.895, -18.6985 )
+position = Vector2( -924.945, -16.3715 )
 points = PoolVector2Array( 60.7361, -190.118, 60.7361, 239.112 )
 width = 10.0
 default_color = Color( 0.4, 0.5, 1, 1 )
 texture_mode = -780838680
 sharp_limit = 2.0
 round_precision = 8
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Capping", "Transform", "Z Index" ]
 direction_for_generated_objects = 2
 
-[node name="Camera2D" type="Camera2D" parent="TileMap/YSort/Player" index="3"]
+[node name="Camera2D" type="Camera2D" parent="TileMap/YSort/Player" index="8"]
 
-position = Vector2( -2.47626, 1.68256 )
+position = Vector2( -7.52625, 4.00952 )
 anchor_mode = 1
 rotating = false
 current = true
@@ -107,7 +110,8 @@ _sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Smoothing", "Transform
 
 [node name="RemovalObjectArea1" type="Area2D" parent="TileMap/YSort/Player" index="9"]
 
-position = Vector2( 808.404, -327.645 )
+editor/display_folded = true
+position = Vector2( 803.354, -325.318 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -126,7 +130,8 @@ shape = SubResource( 1 )
 
 [node name="RemovalObjectArea2" type="Area2D" parent="TileMap/YSort/Player" index="10"]
 
-position = Vector2( -693.356, -343.757 )
+editor/display_folded = true
+position = Vector2( -698.406, -341.43 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -143,10 +148,6 @@ _sections_unfolded = [ "Collision" ]
 position = Vector2( -331.147, 443.688 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
-
-[node name="Churros" parent="TileMap/YSort" index="1" instance=ExtResource( 5 )]
-
-position = Vector2( 2043.16, 253.935 )
 
 [node name="PathFinder" type="Navigation2D" parent="." index="1"]
 
