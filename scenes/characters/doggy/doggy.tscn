@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/characters/doggy/doggy.gd" type="Script" id=1]
-[ext_resource path="res://source/common/world_objects/hit_area.gd" type="Script" id=2]
+[ext_resource path="res://source/common/world_objects/damage_receiver_area.gd" type="Script" id=2]
 [ext_resource path="res://assets/characters/doggy/doggy.tres" type="SpriteFrames" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -40,6 +40,6 @@ frame = 2
 playing = true
 _sections_unfolded = [ "Transform" ]
 
-[connection signal="hit_received" from="DamageArea" to="." method="_on_damage_received"]
+[connection signal="damage_inflicted" from="DamageArea" to="." method="_on_damage_received"]
 
 

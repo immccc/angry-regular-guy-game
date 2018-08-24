@@ -16,6 +16,6 @@ func _ready():
 
     state_machine.current_state_id = StateConstants.FALL_STATE_ID
 
-func _on_hit_area_area_entered(area):
+func _on_damage_receiver_area_area_entered(area):
     if state_machine.current_state_id != StateConstants.HIT_STATE_ID:
         state_machine.change(StateConstants.HIT_STATE_ID)

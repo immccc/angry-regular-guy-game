@@ -22,7 +22,7 @@ frame = 2
 playing = true
 _sections_unfolded = [ "Transform" ]
 
-[node name="HitArea" type="Area2D" parent="." index="1"]
+[node name="DamageReceiverArea" type="Area2D" parent="." index="1"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -33,11 +33,11 @@ audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageReceiverArea" index="0"]
 
 position = Vector2( -4.42999, -6.32855 )
 shape = SubResource( 1 )
 
-[connection signal="area_entered" from="HitArea" to="." method="_on_hit_area_area_entered"]
+[connection signal="area_entered" from="DamageReceiverArea" to="." method="_on_damage_receiver_area_area_entered"]
 
 
