@@ -5,6 +5,7 @@ const StateConstants = preload("state_constants.gd")
 var FlyState = preload("fly_state.gd")
 
 func _ready():
+    ._ready()
 
     randomize()
     altitude = 500 + (randi() % 1500)

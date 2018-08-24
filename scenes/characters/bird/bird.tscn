@@ -8,17 +8,18 @@
 custom_solver_bias = 0.0
 extents = Vector2( 49.6461, 15.7327 )
 
-[node name="Bird" type="Node2D"]
+[node name="Bird" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+flippable = true
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 
 scale = Vector2( 10, 10 )
 frames = ExtResource( 2 )
 animation = "flying"
-frame = 1
+frame = 2
 playing = true
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 

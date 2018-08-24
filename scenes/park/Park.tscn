@@ -18,7 +18,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 1, 4, 5 ), PoolIntArra
 outlines = [ PoolVector2Array( 215.546, 21.1121, 3538.23, 20.3068, 3536.23, 654.416, 215.546, 662.37 ), PoolVector2Array( 2076.98, 115.192, 2462.51, 109.762, 2460.7, 183.971, 2076.98, 185.781 ) ]
 _sections_unfolded = [ "Resource" ]
 
-[node name="Park" type="Node2D" index="0"]
+[node name="Park" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
@@ -54,6 +54,7 @@ position = Vector2( 2043.16, 253.935 )
 [node name="Player" parent="TileMap/YSort" index="1" instance=ExtResource( 4 )]
 
 position = Vector2( 564, 380 )
+flippable = true
 
 [node name="Generator2" type="Line2D" parent="TileMap/YSort/Player" index="6"]
 

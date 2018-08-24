@@ -29,9 +29,6 @@ var sprite
 var knock_timer
 var ready_to_knock = false
 
-var kick_area
-var punch_area
-
 var strike_handler
 
 var holding_object = false
@@ -40,8 +37,6 @@ func _init(id, node).(id, node):
 
     sprite = node.get_node("Sprite")
     knock_timer = node.get_node("KnockTimer")
-    kick_area = node.get_node("KickArea")
-    punch_area = node.get_node("PunchArea")
     strike_handler = node.get_node("StrikeHandler")
 
 func process(delta):
@@ -78,15 +73,15 @@ func _process_input_strike():
 
 
         if ready_to_knock:
-            strike_handler.start(StrikeType.KNOCK, KNOCK_STRENGTH, _get_person_direction())
+            strike_handler.start(StrikeType.KNOCK, KNOCK_STRENGTH, node.direction)
         else:
-            strike_handler.start(StrikeType.PUNCH, PUNCH_STRENGTH, _get_person_direction())
+            strike_handler.start(StrikeType.PUNCH, PUNCH_STRENGTH, node.direction)
 
         ready_to_knock = false
         return
 
     if Input.is_action_just_released(ACTION_STRIKE_KICK):
-        strike_handler.start(StrikeType.KICK, KICK_STRENGTH, _get_person_direction())
+        strike_handler.start(StrikeType.KICK, KICK_STRENGTH, node.direction)
         return
 
 func _process_input_for_walking(delta):
@@ -98,10 +93,8 @@ func _process_input_for_walking(delta):
 
     if Input.is_action_pressed(ACTION_MOVE_LEFT):
         movement_x = -WALKING_SPEED * delta
-        _set_character_flipped(true)
     elif Input.is_action_pressed(ACTION_MOVE_RIGHT):
         movement_x = WALKING_SPEED * delta
-        _set_character_flipped(false)
 
     if Input.is_action_pressed(ACTION_MOVE_UP):
         movement_y = -WALKING_SPEED * delta
@@ -112,16 +105,6 @@ func _process_input_for_walking(delta):
     node.move_local_y(movement_y)
 
     _animate_based_on_movement(movement_x, movement_y)
-
-func _set_character_flipped(flip):
-    sprite.flip_h = flip
-    var sprite_rotation  = 0.0
-    if flip == true:
-        sprite_rotation = 180.0
-
-    kick_area.rotation = deg2rad(sprite_rotation)
-    punch_area.rotation = deg2rad(sprite_rotation)
-
 
 func _animate_based_on_movement(movement_x, movement_y):
     var animation_stand = _get_animation_based_on_holding(ANIMATION_STAND, ANIMATION_HOLD_AND_STAND)
@@ -137,10 +120,3 @@ func _get_animation_based_on_holding(default_animation, holding_animation):
         return holding_animation
     else:
         return default_animation
-
-#TODO Move out of here, perhaps to a base method from player
-func _get_person_direction():
-    if sprite.flip_h == true:
-        return -1
-    else:
-        return 1
