@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player_punch1.png-cfdd55c58578bdafb2d6689d31456419.stex"
+path="res://.import/player_knock3.png-e0247c9dbfbd8e934b2471e0103ed6c6.stex"
 
 [deps]
 
-source_file="res://assets/common/player/player_punch1.png"
-source_md5="63b9933966f6ae8ec9f5f25ba300548c"
+source_file="res://assets/characters/person/player/player_knock3.png"
+source_md5="01d50221586bf0daae63fe2b685d4b7e"
 
-dest_files=[ "res://.import/player_punch1.png-cfdd55c58578bdafb2d6689d31456419.stex" ]
-dest_md5="aab665d4faffc25a303cd5a37fb9d7d0"
+dest_files=[ "res://.import/player_knock3.png-e0247c9dbfbd8e934b2471e0103ed6c6.stex" ]
+dest_md5="287bc52df83a32ef0f53fede8a48a601"
 
 [params]
 

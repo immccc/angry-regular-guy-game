@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player_walk_and_hold3.png-9e3f48fe47b624c9f8c83a2c4e98da0c.stex"
+path="res://.import/player_stand_and_hold2.png-c0d840852be5d2611843dad8a7b9614c.stex"
 
 [deps]
 
-source_file="res://assets/common/player/player_walk_and_hold3.png"
-source_md5="058794e8109cb9794b398418dcaf7250"
+source_file="res://assets/characters/person/player/player_stand_and_hold2.png"
+source_md5="18c3d2aceffaf4e954ec99e113c8350c"
 
-dest_files=[ "res://.import/player_walk_and_hold3.png-9e3f48fe47b624c9f8c83a2c4e98da0c.stex" ]
-dest_md5="bc1ca2b532e9fced09d308319c1dabb4"
+dest_files=[ "res://.import/player_stand_and_hold2.png-c0d840852be5d2611843dad8a7b9614c.stex" ]
+dest_md5="75887e29ff238734fb7502ddc9aba7d6"
 
 [params]
 

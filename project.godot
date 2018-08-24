@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="Angry Regular Guy"
-run/main_scene="res://scenes/park/Park.tscn"
+run/main_scene="res://scenes/park/park.tscn"
 boot_splash/fullsize=false
 config/icon="res://icon.png"
 

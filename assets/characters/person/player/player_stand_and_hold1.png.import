@@ -6,7 +6,7 @@ path="res://.import/player_stand_and_hold1.png-12ba28d07310556648ccb1a981a950fa.
 
 [deps]
 
-source_file="res://assets/common/player/player_stand_and_hold1.png"
+source_file="res://assets/characters/person/player/player_stand_and_hold1.png"
 source_md5="058794e8109cb9794b398418dcaf7250"
 
 dest_files=[ "res://.import/player_stand_and_hold1.png-12ba28d07310556648ccb1a981a950fa.stex" ]
