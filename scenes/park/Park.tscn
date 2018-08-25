@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/park/park_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://source/common/world_objects/world_object_container.gd" type="Script" id=2]
 [ext_resource path="res://scenes/park/churros/churros.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/characters/person/player/player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://source/common/world_objects/world_object_generator.gd" type="Script" id=5]
+[ext_resource path="res://source/scenarios/park/ground_world_object_generator.gd" type="Script" id=5]
+[ext_resource path="res://source/scenarios/park/air_world_object_generator.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -56,7 +57,7 @@ position = Vector2( 2043.16, 253.935 )
 position = Vector2( 564, 380 )
 flippable = true
 
-[node name="Generator2" type="Line2D" parent="TileMap/YSort/Player" index="6"]
+[node name="GroundGenerator2" type="Line2D" parent="TileMap/YSort/Player" index="6"]
 
 position = Vector2( 737.107, -2.82104 )
 points = PoolVector2Array( -3.61792, -176.668, -3.86768, 267.511 )
@@ -67,9 +68,9 @@ sharp_limit = 2.0
 round_precision = 8
 script = ExtResource( 5 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
-direction_for_generated_objects = 0
+direction_for_generated_objects = 1
 
-[node name="Generator1" type="Line2D" parent="TileMap/YSort/Player" index="7"]
+[node name="GroundGenerator1" type="Line2D" parent="TileMap/YSort/Player" index="7"]
 
 position = Vector2( -924.945, -16.3715 )
 points = PoolVector2Array( 60.7361, -190.118, 60.7361, 239.112 )
@@ -82,7 +83,33 @@ script = ExtResource( 5 )
 _sections_unfolded = [ "Capping", "Transform", "Z Index" ]
 direction_for_generated_objects = 2
 
-[node name="Camera2D" type="Camera2D" parent="TileMap/YSort/Player" index="8"]
+[node name="AirGenerator2" type="Line2D" parent="TileMap/YSort/Player" index="8"]
+
+position = Vector2( -924.945, -157.371 )
+points = PoolVector2Array( 60.7361, -190.118, 60.9435, -41.2514 )
+width = 10.0
+default_color = Color( 0.4, 0.5, 1, 1 )
+texture_mode = -780838680
+sharp_limit = 2.0
+round_precision = 8
+script = ExtResource( 6 )
+_sections_unfolded = [ "Capping", "Transform", "Z Index" ]
+direction_for_generated_objects = 2
+
+[node name="AirGenerator1" type="Line2D" parent="TileMap/YSort/Player" index="9"]
+
+position = Vector2( 673.055, -142.371 )
+points = PoolVector2Array( 60.7361, -190.118, 60.9435, -41.2514 )
+width = 10.0
+default_color = Color( 0.4, 0.5, 1, 1 )
+texture_mode = -780838680
+sharp_limit = 2.0
+round_precision = 8
+script = ExtResource( 6 )
+_sections_unfolded = [ "Capping", "Transform", "Z Index" ]
+direction_for_generated_objects = 1
+
+[node name="Camera2D" type="Camera2D" parent="TileMap/YSort/Player" index="10"]
 
 position = Vector2( -7.52625, 4.00952 )
 anchor_mode = 1
@@ -109,7 +136,7 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 _sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Smoothing", "Transform" ]
 
-[node name="RemovalObjectArea1" type="Area2D" parent="TileMap/YSort/Player" index="9"]
+[node name="RemovalObjectArea1" type="Area2D" parent="TileMap/YSort/Player" index="11"]
 
 editor/display_folded = true
 position = Vector2( 803.354, -325.318 )
@@ -129,7 +156,7 @@ _sections_unfolded = [ "Collision" ]
 position = Vector2( 119.259, 427.688 )
 shape = SubResource( 1 )
 
-[node name="RemovalObjectArea2" type="Area2D" parent="TileMap/YSort/Player" index="10"]
+[node name="RemovalObjectArea2" type="Area2D" parent="TileMap/YSort/Player" index="12"]
 
 editor/display_folded = true
 position = Vector2( -698.406, -341.43 )
@@ -162,9 +189,13 @@ navpoly = SubResource( 2 )
 enabled = true
 _sections_unfolded = [ "Transform" ]
 
-[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/Generator2" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
+[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/GroundGenerator2" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
 
-[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/Generator1" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
+[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/GroundGenerator1" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
+
+[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/AirGenerator2" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
+
+[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/AirGenerator1" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
 
 [connection signal="area_entered" from="TileMap/YSort/Player/RemovalObjectArea1" to="TileMap/YSort" method="_on_removal_area_entered"]
 

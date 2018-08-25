@@ -7,8 +7,8 @@ var Person = preload("res://scenes/characters/person/person.tscn")
 var Bird = preload("res://scenes/characters/bird/bird.tscn")
 
 var maximum_per_object_type = {
-    Doggy: 0,
-    Person: 0,
+    Doggy: 3,
+    Person: 5,
     Bird: 5
 }
 
