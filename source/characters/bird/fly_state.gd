@@ -35,8 +35,9 @@ func _throw_shit_if_applicable():
     var shit_rand_flag = rand_range(0, 100) < 10
     if !shit_thrown and x_distance_with_player  < 100 and shit_rand_flag:
         var thrown_shit = Shit.instance()
-        thrown_shit.global_position = node.global_position
         node.get_parent().add_child(thrown_shit)
+        thrown_shit.global_position = node.global_position
+        thrown_shit.altitude = node.altitude
         shit_thrown = true
 
 

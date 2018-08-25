@@ -12,26 +12,23 @@ var STATE_CONSTANTS = preload("state_constants.gd")
 var sprite
 
 var force
-var altitude
-
 
 func _init(id, node).(id, node):
     sprite = node.get_node("Sprite")
-    altitude = node.altitude
     _init_falling_force()
 
 func process(delta):
     sprite.play(ANIMATION_FALL)
 
     node.global_position += force
-    altitude -= force.y
+    node.altitude -= force.y
 
     force.y += FORCE_Y_INCREMENT * delta
     if force.y > MAX_FORCE_Y:
         force.y  = MAX_FORCE_Y
 
 func get_next_state():
-    if altitude <= 0.0:
+    if node.altitude <= 0.0:
         return STATE_CONSTANTS.HIT_STATE_ID
     return id
 
