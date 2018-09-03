@@ -3,7 +3,7 @@ extends Node2D
 const DirectionType = preload("res://source/common/direction.gd").Direction
 
 var altitude = 0.0
-var direction
+var direction setget set_direction
 
 onready var last_position = global_position
 
@@ -24,10 +24,12 @@ func _ready():
 func _process(delta):
     _update_direction()
 
+func set_direction(new_direction):
+    direction = new_direction
+    last_position = global_position
+    flip()
+    
 func flip():
-    if !flippable or associated_sprite == null:
-        return
-
     if direction == DirectionType.RIGHT:
         associated_sprite.flip_h = false
     elif direction == DirectionType.LEFT:
@@ -40,10 +42,11 @@ func get_global_position_with_altitude():
     return global_position + Vector2(0, altitude)
 
 func _update_direction():
-    if last_position.x != global_position.x:
+    if !flippable or associated_sprite == null:
+        return
+    
+    if last_position.x != null and last_position.x != global_position.x:
         direction = sign(global_position.x - last_position.x)
-        flip()
 
     last_position = global_position
-
-
+    flip()

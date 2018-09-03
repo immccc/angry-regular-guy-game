@@ -15,7 +15,10 @@ func _init():
     .add_to_group("unfair_event_victims")
 
 func _ready():
+    _setup_states()
+    flippable = true
 
+func _setup_states():
     randomize()
 
     state_machine.add(StandState.new(StateConstants.STAND_STATE_ID, node))
@@ -26,6 +29,7 @@ func _ready():
     state_machine.add(SeekHumanState.new(StateConstants.SEEK_HUMAN_STATE_ID, node))
 
     state_machine.current_state_id = StateConstants.STAND_STATE_ID
+
 
 func _on_damage_received(from, strength, direction):
     if state_machine.current_state_id != StateConstants.HIT_STATE_ID:

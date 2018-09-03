@@ -45,11 +45,6 @@ func _move(delta):
 		path.remove(0)
 	else:
 		node.global_position = next_position
-		if next_position < current_position:
-			sprite.flip_h = true
-		else:
-			sprite.flip_h = false
-
 
 func _is_path_finished():
 	return path == null or path.size() == 0

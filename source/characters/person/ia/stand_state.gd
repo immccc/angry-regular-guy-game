@@ -1,8 +1,8 @@
 extends "res://source/common/state/state.gd"
 
-const ANIMATION_STAND = "stand"
+const StateConstants = preload("state_constants.gd")
 
-var STATE_CONSTANTS = preload("state_constants.gd")
+const ANIMATION_STAND = "stand"
 
 var sprite
 
@@ -14,6 +14,6 @@ func process(delta):
 
 func get_next_state():
 	if rand_range(0, 100) < 2:
-		return STATE_CONSTANTS.WALK_STATE_ID
+		return StateConstants.WALK_STATE_ID
 	else:
-		return STATE_CONSTANTS.STAND_STATE_ID
+		return StateConstants.STAND_STATE_ID

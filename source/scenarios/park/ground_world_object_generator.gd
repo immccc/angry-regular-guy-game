@@ -5,4 +5,4 @@ var Person = preload("res://scenes/characters/person/person.tscn")
 
 func _generate_objects_randomly():
     _generate_object_randomly(rand_range(0, 100), .2, Doggy)
-    _generate_object_randomly(rand_range(0, 100), .2, Person)
+    _generate_object_randomly(rand_range(0, 100), .5, Person)

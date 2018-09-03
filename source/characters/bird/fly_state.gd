@@ -9,7 +9,6 @@ const DirectionType = preload("res://source/common/direction.gd").Direction
 var Shit = preload("res://scenes/characters/bird/shit/shit.tscn")
 
 var sprite
-var direction = DirectionType.RIGHT
 var player
 var radians_counter = 0
 var shit_thrown = false
@@ -17,7 +16,6 @@ var shit_thrown = false
 func _init(id, node).(id, node):
     sprite = node.get_node("Sprite")
     player = node.get_node("/root").find_node("Player", true, false)
-    direction = node.direction
 
 func process(delta):
     sprite.play(ANIMATION_FLY)
@@ -26,7 +24,7 @@ func process(delta):
     _throw_shit_if_applicable()
 
 func _move(delta):
-    node.global_position.x += FLYING_VEL * direction * delta
+    node.global_position.x += FLYING_VEL * node.direction * delta
     node.global_position.y += FLYING_AMPLITUDE * cos(radians_counter)
     radians_counter += 1.0 * delta
 

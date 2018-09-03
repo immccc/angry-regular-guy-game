@@ -1,8 +1,7 @@
 extends "res://source/common/state/move_state.gd"
 
-const STATE_CONSTANTS = preload("state_constants.gd")
+const StateConstants = preload("state_constants.gd")
 const DirectionType = preload("res://source/common/direction.gd").Direction
-
 
 const MOVE_SPEED = 100
 const RUN_SPEED = 200
@@ -28,22 +27,22 @@ func _get_dest():
 
 
 func _get_dest_to_left():
-    var cells = tile_map.get_used_cells()
-    var min_cell_x = INF
-    for cell in cells:
-        var cell_pos = tile_map.map_to_world(cell)
-        min_cell_x = min(min_cell_x, cell_pos.x)
+   var cells = tile_map.get_used_cells()
+   var min_cell_x = INF
+   for cell in cells:
+       var cell_pos = tile_map.map_to_world(cell)
+       min_cell_x = min(min_cell_x, cell_pos.x)
 
-    var dest = Vector2(min_cell_x, node.global_position.y + rand_range(-20, 20))
-    return path_finder.get_closest_point(dest)
+   var dest = Vector2(min_cell_x, node.global_position.y + rand_range(-20, 20))
+   return path_finder.get_closest_point(path_finder.to_local(dest))
 
 func _get_dest_to_right():
     var cells = tile_map.get_used_cells()
-    var max_cell_x = 0
+    var max_cell_x = -INF
     for cell in cells:
         var cell_pos = tile_map.map_to_world(cell)
         max_cell_x = max(max_cell_x, cell_pos.x)
 
     var dest = Vector2(max_cell_x, node.global_position.y + rand_range(-20, 20))
-    return path_finder.get_closest_point(dest)
+    return path_finder.get_closest_point(path_finder.to_local(dest))
 

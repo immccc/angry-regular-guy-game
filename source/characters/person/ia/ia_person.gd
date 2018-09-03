@@ -18,6 +18,7 @@ func _init():
 
 func _ready():
     _setup_states()
+    flippable = true
 
 func _setup_states():
     randomize()
