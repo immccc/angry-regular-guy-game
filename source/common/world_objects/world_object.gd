@@ -28,7 +28,7 @@ func set_direction(new_direction):
     direction = new_direction
     last_position = global_position
     flip()
-    
+
 func flip():
     if direction == DirectionType.RIGHT:
         associated_sprite.flip_h = false
@@ -44,7 +44,7 @@ func get_global_position_with_altitude():
 func _update_direction():
     if !flippable or associated_sprite == null:
         return
-    
+
     if last_position.x != null and last_position.x != global_position.x:
         direction = sign(global_position.x - last_position.x)
 

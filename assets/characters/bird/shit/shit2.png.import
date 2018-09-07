@@ -7,10 +7,7 @@ path="res://.import/shit2.png-786e743278c9cf386073b5a9828c4c98.stex"
 [deps]
 
 source_file="res://assets/characters/bird/shit/shit2.png"
-source_md5="16fdda0ca97b673d5bc72c4bc34190b3"
-
 dest_files=[ "res://.import/shit2.png-786e743278c9cf386073b5a9828c4c98.stex" ]
-dest_md5="6f108b10edb1f3b78ed504f993bb102f"
 
 [params]
 

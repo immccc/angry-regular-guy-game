@@ -7,10 +7,7 @@ path="res://.import/man_punch2.png-c86a26569580e73ff77ef2f681146935.stex"
 [deps]
 
 source_file="res://assets/characters/person/man1/man_punch2.png"
-source_md5="45c78f02cb877f46d3748e8baf77001d"
-
 dest_files=[ "res://.import/man_punch2.png-c86a26569580e73ff77ef2f681146935.stex" ]
-dest_md5="ca53971866c34575e62ca431d49e03f5"
 
 [params]
 

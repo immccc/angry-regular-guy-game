@@ -16,7 +16,7 @@ func enter_into_state():
 	initial_y = node.global_position.y
 	node.flippable = false
 
-	force = Vector2(300, -100)
+	force = Vector2(300, 0.0)
 
 func _get_next_state_when_stopped():
 	if randi() % 2 < 1 :

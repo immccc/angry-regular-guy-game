@@ -7,10 +7,7 @@ path="res://.import/man_walk1.png-bd12ef6b3b7e4a451eff3e0fe9e2ba95.stex"
 [deps]
 
 source_file="res://assets/characters/person/man1/man_walk1.png"
-source_md5="63b9933966f6ae8ec9f5f25ba300548c"
-
 dest_files=[ "res://.import/man_walk1.png-bd12ef6b3b7e4a451eff3e0fe9e2ba95.stex" ]
-dest_md5="799ecf377dc02d4d8edb5f5c81c52c06"
 
 [params]
 

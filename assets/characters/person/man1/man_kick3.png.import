@@ -7,10 +7,7 @@ path="res://.import/man_kick3.png-7763398d33b03aa702dae7ea5b22ba99.stex"
 [deps]
 
 source_file="res://assets/characters/person/man1/man_kick3.png"
-source_md5="55d45ec1cfbc13a2a1f491d84c322fc0"
-
 dest_files=[ "res://.import/man_kick3.png-7763398d33b03aa702dae7ea5b22ba99.stex" ]
-dest_md5="b358066c1a3e16ea1d0b2c53bb35bf9a"
 
 [params]
 

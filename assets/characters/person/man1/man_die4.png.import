@@ -7,10 +7,7 @@ path="res://.import/man_die4.png-fc5adee9e8938b72fe16197a9ad3b7e7.stex"
 [deps]
 
 source_file="res://assets/characters/person/man1/man_die4.png"
-source_md5="1fba7fcf9b375acd1d9d12f0e72efb20"
-
 dest_files=[ "res://.import/man_die4.png-fc5adee9e8938b72fe16197a9ad3b7e7.stex" ]
-dest_md5="b8dfcad2fff914acb1d6fc77d8309a07"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/doggy_pee2.png-1692769b99dc16545c0db0794a645800.stex"
 [deps]
 
 source_file="res://assets/characters/doggy/doggy_pee2.png"
-source_md5="8df5cbe8f88acd432518c1bf3d169518"
-
 dest_files=[ "res://.import/doggy_pee2.png-1692769b99dc16545c0db0794a645800.stex" ]
-dest_md5="55a41bbaa515f4fa68c95fd2d7e2c209"
 
 [params]
 

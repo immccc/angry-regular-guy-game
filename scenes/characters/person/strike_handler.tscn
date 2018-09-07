@@ -2,8 +2,9 @@
 
 [ext_resource path="res://source/characters/person/strike_handler.gd" type="Script" id=1]
 
-[node name="Node" type="Node" index="0"]
+[node name="Node" type="Node"]
 
 script = ExtResource( 1 )
+y_distance_threshold = 0
 
 

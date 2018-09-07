@@ -7,10 +7,7 @@ path="res://.import/churros.png-3643875054a04d7ee8482568ce9a011e.stex"
 [deps]
 
 source_file="res://assets/park/churros/churros.png"
-source_md5="a17ea3173e18383f4a31fae1466ae287"
-
 dest_files=[ "res://.import/churros.png-3643875054a04d7ee8482568ce9a011e.stex" ]
-dest_md5="9d5bcb2a3faa20c3e74edfeabf3bd645"
 
 [params]
 

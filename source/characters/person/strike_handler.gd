@@ -2,6 +2,7 @@ extends Node
 
 const StrikeType = preload("strike_type.gd").StrikeType
 
+var node
 var sprite
 
 var strike_type
@@ -16,8 +17,11 @@ var objects_to_hit_per_strike_type = {}
 
 var animation_before_strike
 
+export var y_distance_threshold = 0
+
 func _ready():
-    sprite = get_node("../Sprite")
+    node = $".."
+    sprite = $"../Sprite"
     assert(sprite != null)
 
 func _process(delta):
@@ -65,8 +69,8 @@ func _hit_objects(strike_type):
     if !objects_to_hit_per_strike_type.has(strike_type):
         return
     for object in objects_to_hit_per_strike_type[strike_type]:
-        var from = get_node("..")
-        object.emit_signal("damage_inflicted", from, strength, direction)
+        if abs(object.global_position.y - node.global_position.y) <= y_distance_threshold:
+            object.emit_signal("damage_inflicted", node, strength, direction)
 
 func _is_striking_climax():
     return is_striking() and sprite.frame == climax_per_strike_type[strike_type]

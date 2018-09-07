@@ -7,10 +7,7 @@ path="res://.import/man_knock3.png-1755eb32b724df2370245399d9c78ff7.stex"
 [deps]
 
 source_file="res://assets/characters/person/man1/man_knock3.png"
-source_md5="01d50221586bf0daae63fe2b685d4b7e"
-
 dest_files=[ "res://.import/man_knock3.png-1755eb32b724df2370245399d9c78ff7.stex" ]
-dest_md5="287bc52df83a32ef0f53fede8a48a601"
 
 [params]
 
