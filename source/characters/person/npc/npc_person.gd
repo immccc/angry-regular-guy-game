@@ -8,7 +8,7 @@ const PersonalityAspect = preload("personality.gd").PersonalityAspect
 
 const StandState = preload("stand_state.gd")
 const WalkState = preload("walk_state.gd")
-const HitState = preload("res://source/characters/person/ia/hit_state.gd")
+const HitState = preload("hit_state.gd")
 const RunAwayState = preload("run_away_state.gd")
 const GoToAttackState = preload("go_to_attack_state.gd")
 const StrikeState = preload("strike_state.gd")
