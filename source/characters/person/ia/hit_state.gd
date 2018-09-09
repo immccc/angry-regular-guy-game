@@ -6,7 +6,7 @@ const ANIMATION_STAND = "stand"
 const FORCE_Y_STEP = 0.0
 const FORCE_X_STEP = 200.0
 
-var STATE_CONSTANTS = preload("state_constants.gd")
+const StateConstants = preload("state_constants.gd")
 
 func _init(id, node).(id, node):
 	pass
@@ -20,9 +20,9 @@ func enter_into_state():
 
 func _get_next_state_when_stopped():
 	if randi() % 2 < 1 :
-		return STATE_CONSTANTS.STAND_STATE_ID
+		return StateConstants.STAND_STATE_ID
 	else:
-		return STATE_CONSTANTS.WALK_STATE_ID
+		return StateConstants.WALK_STATE_ID
 
 
 func _update_on_ground(delta):

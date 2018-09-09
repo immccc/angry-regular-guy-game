@@ -50,7 +50,6 @@ func _on_object_requested_to_be_added(object_node_type, object_position, directi
 
 func _create_object(object_node_type, object_position, direction):
     var instanced_object = object_node_type.instance()
-    var global_position_before_adding_to_child = instanced_object.global_position #TODO Debug, remove!!!
     add_child(instanced_object, true)
     var global_position_after_adding_to_child = instanced_object.global_position #TODO Debug, remove!!!
     currents_per_object_type[object_node_type].append(instanced_object)

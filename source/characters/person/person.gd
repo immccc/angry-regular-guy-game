@@ -20,8 +20,9 @@ onready var sprite = $Sprite
 func _ready():
 	_setup_strike_handler()
 
-func get_width():
-	sprite.get_frame(sprite.animation, sprite.frame).get_width()
+func get_area():
+    var shape = $"DamageArea/CollisionShape2D".shape
+    return shape.get_extents() * 2
 
 func _on_kick_area_area_entered(area):
 	emit_signal("added_elements_to_be_hit", [area], $".", StrikeType.KICK)

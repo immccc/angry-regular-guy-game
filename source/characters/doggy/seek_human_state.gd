@@ -4,7 +4,6 @@ const StateConstants = preload("state_constants.gd")
 
 const THRESHOLD_DISTANCE = 50
 const MAX_ATTEMPTS_SEEKING = 4
-const ANIMATION_WALK = "walk"
 
 const RUN_FAST_SPEED = 600
 
@@ -34,16 +33,13 @@ func _is_player_reached():
     return node.global_position.distance_to(player.global_position) <= THRESHOLD_DISTANCE
 
 func enter_into_state():
-    _set_path()
+    .enter_into_state()
 
     speed = RUN_FAST_SPEED
     available_attempts_seeking = 1 + (randi() % MAX_ATTEMPTS_SEEKING)
 
-func _set_path():
-    var dest = path_finder.to_local(player.global_position)
-    path = path_finder.get_simple_path(path_finder.to_local(node.global_position), dest)
-    path.remove(0)
-
+func _get_dest():
+    return path_finder.to_local(player.global_position)
 
 func _move(delta):
     if _is_path_finished():

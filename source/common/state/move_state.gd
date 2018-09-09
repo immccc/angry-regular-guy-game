@@ -17,10 +17,12 @@ func process(delta):
 	_move(delta)
 
 func enter_into_state():
+	_set_path()
+
+func _set_path():
 	var dest = _get_dest()
 
 	path = path_finder.get_simple_path(path_finder.to_local(node.global_position), dest)
-
 	path.remove(0)
 
 func _get_dest():
