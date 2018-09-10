@@ -16,6 +16,9 @@ const KNOCKING_LAST_FRAME = 2
 
 onready var node = $"."
 onready var sprite = $Sprite
+onready var kick_area = $"KickArea"
+onready var punch_area = $"PunchArea"
+
 
 func _ready():
 	_setup_strike_handler()
@@ -23,6 +26,16 @@ func _ready():
 func get_area():
     var shape = $"DamageArea/CollisionShape2D".shape
     return shape.get_extents() * 2
+
+func flip():
+    .flip()
+
+    var sprite_rotation = 0.0
+    if direction == DirectionType.LEFT:
+        sprite_rotation = 180.0
+
+    kick_area.rotation = deg2rad(sprite_rotation)
+    punch_area.rotation = deg2rad(sprite_rotation)
 
 func _on_kick_area_area_entered(area):
 	emit_signal("added_elements_to_be_hit", [area], $".", StrikeType.KICK)
@@ -60,4 +73,3 @@ func _on_damage_received(from, strength, direction):
         var hit_state = state_machine.get(CommonPersonStateConstants.HIT_STATE_ID)
         hit_state.direction = direction
         state_machine.change(CommonPersonStateConstants.HIT_STATE_ID)
-        emit_signal("unfair_event_performed", from, node)

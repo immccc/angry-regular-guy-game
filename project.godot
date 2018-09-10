@@ -19,11 +19,15 @@ config/icon="res://icon.png"
 
 color=true
 
+[debug]
+
+settings/stdout/verbose_stdout=true
+
 [display]
 
 window/size/height=768
 window/stretch/mode="2d"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep_height"
 window/stretch/shrink="1"
 
 [input]
@@ -54,7 +58,6 @@ action=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":""
 [rendering]
 
 quality/intended_usage/framebuffer_allocation=0
-threads/thread_model=2
 quality/subsurface_scattering/scale=1
 environment/default_clear_color=Color( 0.351563, 0.351563, 0.351563, 1 )
 environment/default_environment="res://default_env.tres"

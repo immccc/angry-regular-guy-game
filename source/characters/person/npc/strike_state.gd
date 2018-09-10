@@ -18,8 +18,7 @@ const PROBABILITIES_PER_STRIKE_TYPE = {
 var strike_types = []
 
 var strike_handler
-var offender
-var offender_position_last_strike
+var action_receiver_node_position_last_strike
 
 func _init(id, node).(id, node):
     randomize()
@@ -36,13 +35,16 @@ func process(delta):
     if strike_handler.is_striking():
         return
 
-    if offender.global_position != offender_position_last_strike:
+    if action_receiver_node.get_ref().global_position != action_receiver_node_position_last_strike:
         return
 
     _strike()
 
 func get_next_state():
-    if !strike_handler.is_striking() and offender.global_position != offender_position_last_strike:
+    if !action_receiver_node.get_ref():
+        return StateConstants.STAND_STATE_ID
+
+    if !strike_handler.is_striking() and action_receiver_node.get_ref().global_position != action_receiver_node_position_last_strike:
         return StateConstants.GO_TO_ATTACK_STATE_ID
 
     return id
@@ -58,4 +60,4 @@ func _get_strike_type():
 func _strike():
     var strike_type = _get_strike_type()
     strike_handler.start(strike_type, STRENGTH_PER_STRIKE_TYPE[strike_type], node.direction)
-    offender_position_last_strike = offender.global_position
+    action_receiver_node_position_last_strike = action_receiver_node.get_ref().global_position

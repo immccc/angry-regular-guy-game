@@ -1,3 +1,3 @@
 extends Area2D
 
-signal damage_inflicted(from, strength, direction)
+signal inflict_damage(from, strength, direction)

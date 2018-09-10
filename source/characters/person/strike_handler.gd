@@ -70,7 +70,7 @@ func _hit_objects(strike_type):
         return
     for object in objects_to_hit_per_strike_type[strike_type]:
         if abs(object.global_position.y - node.global_position.y) <= y_distance_threshold:
-            object.emit_signal("damage_inflicted", node, strength, direction)
+            object.emit_signal("inflict_damage", node, strength, direction)
 
 func _is_striking_climax():
     return is_striking() and sprite.frame == climax_per_strike_type[strike_type]

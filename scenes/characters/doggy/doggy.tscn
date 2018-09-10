@@ -41,6 +41,6 @@ frame = 2
 playing = true
 _sections_unfolded = [ "Transform" ]
 
-[connection signal="damage_inflicted" from="DamageArea" to="." method="_on_damage_received"]
+[connection signal="inflict_damage" from="DamageArea" to="." method="_on_damage_received"]
 
 

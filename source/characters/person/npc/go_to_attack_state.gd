@@ -8,8 +8,7 @@ const GO_TO_ATTACK_SPEED_FAST = 350
 
 const DISTANCE_THRESHOLD = 50
 
-var offender
-var last_offender_position
+var last_action_receiver_node_position
 
 func _init(id, node).(id, node):
     pass
@@ -20,26 +19,31 @@ func enter_into_state():
 
 func process(delta):
     .process(delta)
-    last_offender_position = offender.global_position
+    last_action_receiver_node_position = action_receiver_node.get_ref().global_position
 
 func get_next_state():
-    if offender.global_position.distance_to(node.global_position) <= DISTANCE_THRESHOLD or _is_path_finished():
+    print("action_receiver_node: ", action_receiver_node)
+    if !action_receiver_node.get_ref():
+        return StateConstants.STAND_STATE_ID
+
+    if action_receiver_node.get_ref().global_position.distance_to(node.global_position) <= DISTANCE_THRESHOLD or _is_path_finished():
         return StateConstants.STRIKE_STATE_ID
     else:
         return id
 
 func _get_dest():
-    var dest = offender.global_position
+    var action_receiver_node_ref = action_receiver_node.get_ref()
+    var dest = action_receiver_node_ref.global_position
     if node.global_position >= dest:
-        dest += Vector2(offender.get_area().x / 2, 0)
+        dest += Vector2(action_receiver_node_ref.get_area().x / 2, 0)
     else:
-        dest -= Vector2(offender.get_area().x / 2, 0)
+        dest -= Vector2(action_receiver_node_ref.get_area().x / 2, 0)
 
     return path_finder.get_closest_point(path_finder.to_local(dest))
 
 
 func _move(delta):
-    if last_offender_position != offender.global_position:
+    if last_action_receiver_node_position != action_receiver_node.get_ref().global_position:
         _set_path()
 
     ._move(delta)
