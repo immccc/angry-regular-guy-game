@@ -9,9 +9,15 @@ const PersonalityAspect = preload("personality.gd").PersonalityAspect
 const StandState = preload("stand_state.gd")
 const WalkState = preload("walk_state.gd")
 const HitState = preload("hit_state.gd")
+
 const RunAwayState = preload("run_away_state.gd")
+
 const GoToAttackState = preload("go_to_attack_state.gd")
 const StrikeState = preload("strike_state.gd")
+
+const GoToCallPoliceState = preload("go_to_call_police_state.gd")
+const CallPoliceWalkingState = preload("call_police_walking_state.gd")
+const CallPoliceStandingState = preload("call_police_standing_state.gd")
 
 const MAX_INSTANCE_THRESHOLD = 2000
 
@@ -30,9 +36,15 @@ func _setup_states():
     state_machine.add(StandState.new(StateConstants.STAND_STATE_ID, node))
     state_machine.add(WalkState.new(StateConstants.WALK_STATE_ID, node))
     state_machine.add(HitState.new(CommonPersonStateConstants.HIT_STATE_ID, node))
+
     state_machine.add(RunAwayState.new(StateConstants.RUN_AWAY_STATE_ID, node))
+
     state_machine.add(GoToAttackState.new(StateConstants.GO_TO_ATTACK_STATE_ID, node))
     state_machine.add(StrikeState.new(StateConstants.STRIKE_STATE_ID, node))
+
+    state_machine.add(GoToCallPoliceState.new(StateConstants.GO_TO_CALL_POLICE_STATE_ID, node))
+    state_machine.add(CallPoliceWalkingState.new(StateConstants.CALL_POLICE_WALKING_STATE_ID, node))
+    state_machine.add(CallPoliceStandingState.new(StateConstants.CALL_POLICE_STANDING_STATE_ID, node))
 
     state_machine.current_state_id = StateConstants.STAND_STATE_ID
 
@@ -48,20 +60,17 @@ func _on_unfair_event_performed(offender, offended):
 func _set_reaction_when_looking(offender):
     var personality_aspect = personality.react_to_external_problem()
 
-    _set_offender_in_state(offender, StateConstants.STRIKE_STATE_ID)
-    _react(offender, StateConstants.GO_TO_ATTACK_STATE_ID)
-
-
-#    match personality_aspect:
-#        PersonalityAspect.COWARD:
-#            _react(offender, StateConstants.RUN_AWAY_STATE_ID)
-#        PersonalityAspect.RIGHTEOUS:
-#            print("I WILL CALL POLICE!!!")
-#        PersonalityAspect.AGGRESIVE:
-#            _set_offender_in_state(offender, StateConstants.STRIKE_STATE_ID)
-#            _react(offender, StateConstants.GO_TO_ATTACK_STATE_ID)
-#        PersonalityAspect.DISTRACTED:
-#            print("EITHER STOP FOR A MOMENT ON KEEP ON GOING")
+    _react(offender, StateConstants.GO_TO_CALL_POLICE_STATE_ID)
+    # match personality_aspect:
+    #     PersonalityAspect.COWARD:
+    #         _react(offender, StateConstants.RUN_AWAY_STATE_ID)
+    #     PersonalityAspect.RIGHTEOUS:
+    #         _react(offender, StateConstants.GO_TO_CALL_POLICE_ID)
+    #     PersonalityAspect.AGGRESIVE:
+    #         _set_offender_in_state(offender, StateConstants.STRIKE_STATE_ID)
+    #         _react(offender, StateConstants.GO_TO_ATTACK_STATE_ID)
+    #     PersonalityAspect.DISTRACTED:
+    #         print("EITHER STOP FOR A MOMENT ON KEEP ON GOING")
 
 func _set_reaction_when_not_looking():
     print("REACTION WHEN NOT LOOKING!")

@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/man_walk4.png-79f2d326862ccd4e5cc0c0a6c544583f.stex"
+path="res://.import/man_call_police_standing2.png-e1e7f53da33e6244271668f566ab13f8.stex"
 
 [deps]
 
-source_file="res://assets/characters/person/man1/man_walk4.png"
-dest_files=[ "res://.import/man_walk4.png-79f2d326862ccd4e5cc0c0a6c544583f.stex" ]
+source_file="res://assets/characters/person/man1/man_call_police_standing2.png"
+dest_files=[ "res://.import/man_call_police_standing2.png-e1e7f53da33e6244271668f566ab13f8.stex" ]
 
 [params]
 

@@ -22,7 +22,6 @@ func process(delta):
     last_action_receiver_node_position = action_receiver_node.get_ref().global_position
 
 func get_next_state():
-    print("action_receiver_node: ", action_receiver_node)
     if !action_receiver_node.get_ref():
         return StateConstants.STAND_STATE_ID
 

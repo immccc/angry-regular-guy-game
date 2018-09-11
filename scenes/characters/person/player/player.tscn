@@ -22,7 +22,7 @@ b = Vector2( -0.171089, 41.0295 )
 custom_solver_bias = 0.0
 extents = Vector2( 33.0012, 82.9997 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
@@ -99,7 +99,6 @@ _sections_unfolded = [ "Collision" ]
 
 position = Vector2( -2, -52.0002 )
 shape = SubResource( 3 )
-disabled = true
 
 [node name="StrikeHandler" parent="." index="5" instance=ExtResource( 4 )]
 

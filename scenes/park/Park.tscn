@@ -19,7 +19,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 1, 4, 5 ), PoolIntArra
 outlines = [ PoolVector2Array( 215.546, 21.1121, 3936.34, 22.319, 3936.34, 663.907, 215.546, 662.37 ), PoolVector2Array( 2076.98, 115.192, 2462.51, 109.762, 2460.7, 183.971, 2076.98, 185.781 ) ]
 _sections_unfolded = [ "Resource" ]
 
-[node name="Park" type="Node2D" index="0"]
+[node name="Park" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 

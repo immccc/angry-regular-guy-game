@@ -7,7 +7,6 @@ const RUN_SPEED_SLOW = 300
 const RUN_SPEED_FAST = 400
 
 var tile_map
-var offender
 
 func _init(id, node).(id, node):
     pass
@@ -21,7 +20,7 @@ func enter_into_state():
     speed = rand_range(RUN_SPEED_SLOW, RUN_SPEED_FAST)
 
 func _get_dest():
-    if node.global_position.x  - offender.global_position.x >= 0 :
+    if node.global_position.x  - action_receiver_node.get_ref().global_position.x >= 0 :
        return _get_dest_to_right()
     else:
        return _get_dest_to_left()
