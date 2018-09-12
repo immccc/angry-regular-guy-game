@@ -1,0 +1,5 @@
+const GO_TO_FINE_STATE = "go_to_fine_state"
+const FINE_STATE_ID = "fine_state"
+const LEAVE_ALONE_STATE_ID = "leave_alone_state"
+const REPRIMAND_STATE_ID = "reprimand_state"
+const SHOOTING_STATE_ID= "shoot_state"

@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://source/characters/person/npc/npc_person.gd" type="Script" id=1]
-[ext_resource path="res://assets/characters/person/man1/man.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://assets/characters/person/cop/cop.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://source/common/world_objects/damage_receiver_area.gd" type="Script" id=3]
-[ext_resource path="res://scenes/characters/person/strike_handler.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SegmentShape2D" id=1]
 
@@ -33,19 +32,12 @@ flippable = false
 position = Vector2( 0, -55.4017 )
 scale = Vector2( 10, 10 )
 frames = ExtResource( 2 )
-animation = "kick"
-frame = 2
+animation = "walk"
+frame = 3
 playing = true
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
 
-[node name="KnockTimer" type="Timer" parent="." index="1"]
-
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
-[node name="KickArea" type="Area2D" parent="." index="2"]
+[node name="KickArea" type="Area2D" parent="." index="1"]
 
 position = Vector2( -0.902496, 0.319682 )
 input_pickable = true
@@ -63,7 +55,7 @@ position = Vector2( 61.964, 1.86461 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="PunchArea" type="Area2D" parent="." index="3"]
+[node name="PunchArea" type="Area2D" parent="." index="2"]
 
 position = Vector2( -0.814514, -79.0071 )
 input_pickable = true
@@ -79,7 +71,7 @@ audio_bus_name = "Master"
 position = Vector2( 63.1579, -8.86427 )
 shape = SubResource( 2 )
 
-[node name="DamageArea" type="Area2D" parent="." index="4"]
+[node name="DamageArea" type="Area2D" parent="." index="3"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -96,13 +88,6 @@ _sections_unfolded = [ "Collision" ]
 
 position = Vector2( -2, -52.0002 )
 shape = SubResource( 3 )
-
-[node name="StrikeHandler" parent="." index="5" instance=ExtResource( 4 )]
-
-_sections_unfolded = [ "Pause" ]
-y_distance_threshold = 20
-
-[connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]
 
 [connection signal="area_entered" from="KickArea" to="." method="_on_kick_area_area_entered"]
 

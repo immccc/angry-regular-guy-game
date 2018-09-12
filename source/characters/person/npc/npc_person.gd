@@ -60,17 +60,16 @@ func _on_unfair_event_performed(offender, offended):
 func _set_reaction_when_looking(offender):
     var personality_aspect = personality.react_to_external_problem()
 
-    _react(offender, StateConstants.GO_TO_CALL_POLICE_STATE_ID)
-    # match personality_aspect:
-    #     PersonalityAspect.COWARD:
-    #         _react(offender, StateConstants.RUN_AWAY_STATE_ID)
-    #     PersonalityAspect.RIGHTEOUS:
-    #         _react(offender, StateConstants.GO_TO_CALL_POLICE_ID)
-    #     PersonalityAspect.AGGRESIVE:
-    #         _set_offender_in_state(offender, StateConstants.STRIKE_STATE_ID)
-    #         _react(offender, StateConstants.GO_TO_ATTACK_STATE_ID)
-    #     PersonalityAspect.DISTRACTED:
-    #         print("EITHER STOP FOR A MOMENT ON KEEP ON GOING")
+    match personality_aspect:
+        PersonalityAspect.COWARD:
+            _react(offender, StateConstants.RUN_AWAY_STATE_ID)
+        PersonalityAspect.RIGHTEOUS:
+            _react(offender, StateConstants.GO_TO_CALL_POLICE_STATE_ID)
+        PersonalityAspect.AGGRESIVE:
+            _set_offender_in_state(offender, StateConstants.STRIKE_STATE_ID)
+            _react(offender, StateConstants.GO_TO_ATTACK_STATE_ID)
+        PersonalityAspect.DISTRACTED:
+            print("EITHER STOP FOR A MOMENT ON KEEP ON GOING")
 
 func _set_reaction_when_not_looking():
     print("REACTION WHEN NOT LOOKING!")
