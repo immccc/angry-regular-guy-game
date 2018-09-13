@@ -18,6 +18,7 @@ const StrikeState = preload("strike_state.gd")
 const GoToCallPoliceState = preload("go_to_call_police_state.gd")
 const CallPoliceWalkingState = preload("call_police_walking_state.gd")
 const CallPoliceStandingState = preload("call_police_standing_state.gd")
+const WaitForPoliceState = preload("wait_for_police_state.gd")
 
 const MAX_INSTANCE_THRESHOLD = 2000
 
@@ -45,6 +46,7 @@ func _setup_states():
     state_machine.add(GoToCallPoliceState.new(StateConstants.GO_TO_CALL_POLICE_STATE_ID, node))
     state_machine.add(CallPoliceWalkingState.new(StateConstants.CALL_POLICE_WALKING_STATE_ID, node))
     state_machine.add(CallPoliceStandingState.new(StateConstants.CALL_POLICE_STANDING_STATE_ID, node))
+    state_machine.add(WaitForPoliceState.new(StateConstants.WAIT_FOR_POLICE_STATE_ID, node))
 
     state_machine.current_state_id = StateConstants.STAND_STATE_ID
 
@@ -60,14 +62,14 @@ func _on_unfair_event_performed(offender, offended):
 func _set_reaction_when_looking(offender):
     var personality_aspect = personality.react_to_external_problem()
 
+    _set_offender_in_states(offender)
     match personality_aspect:
         PersonalityAspect.COWARD:
-            _react(offender, StateConstants.RUN_AWAY_STATE_ID)
+            state_machine.change(StateConstants.RUN_AWAY_STATE_ID)
         PersonalityAspect.RIGHTEOUS:
-            _react(offender, StateConstants.GO_TO_CALL_POLICE_STATE_ID)
+            state_machine.change(StateConstants.GO_TO_CALL_POLICE_STATE_ID)
         PersonalityAspect.AGGRESIVE:
-            _set_offender_in_state(offender, StateConstants.STRIKE_STATE_ID)
-            _react(offender, StateConstants.GO_TO_ATTACK_STATE_ID)
+            state_machine.change(StateConstants.GO_TO_ATTACK_STATE_ID)
         PersonalityAspect.DISTRACTED:
             print("EITHER STOP FOR A MOMENT ON KEEP ON GOING")
 
@@ -95,10 +97,6 @@ func _is_noticed_unfair_event_by_distance(offender):
     return randi() % 100 <= probability_notice
 
 
-func _react(offender, state_id):
-    _set_offender_in_state(offender, state_id)
-    state_machine.change(state_id)
-
-func _set_offender_in_state(offender, state_id):
-    var state = state_machine.get(state_id)
-    state.action_receiver_node = offender
+func _set_offender_in_states(offender):
+    for state in state_machine.states.values():
+        state.action_receiver_node = offender

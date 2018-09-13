@@ -35,12 +35,18 @@ func _get_state_when_action_receiver_reached():
 func _get_dest():
     var action_receiver_node_ref = action_receiver_node.get_ref()
     var dest = action_receiver_node_ref.global_position
+    dest += _get_extra_distance_from_action_receiver()
+
     if node.global_position >= dest:
         dest += Vector2(action_receiver_node_ref.get_area().x / 2, 0)
     else:
         dest -= Vector2(action_receiver_node_ref.get_area().x / 2, 0)
 
+
     return path_finder.get_closest_point(path_finder.to_local(dest))
+
+func _get_extra_distance_from_action_receiver():
+    return Vector2(0.0, 0.0)
 
 func _get_speed_slow():
     print("Slow speed must be defined")
@@ -51,7 +57,7 @@ func _get_speed_fast():
     assert(false)
 
 func _move(delta):
-    if last_action_receiver_node_position != action_receiver_node.get_ref().global_position:
+    if last_action_receiver_node_position != action_receiver_node.get_ref().global_position + _get_extra_distance_from_action_receiver():
         _set_path()
 
     ._move(delta)
