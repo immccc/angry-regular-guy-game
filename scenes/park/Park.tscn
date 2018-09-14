@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/park/park_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://source/common/world_objects/world_object_container.gd" type="Script" id=2]
 [ext_resource path="res://scenes/park/churros/churros.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/characters/person/player/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/characters/person/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/scenarios/park/ground_world_object_generator.gd" type="Script" id=5]
 [ext_resource path="res://source/scenarios/park/air_world_object_generator.gd" type="Script" id=6]
 
@@ -138,7 +138,6 @@ _sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Smoothing", "Transform
 
 [node name="RemovalObjectArea1" type="Area2D" parent="TileMap/YSort/Player" index="11"]
 
-editor/display_folded = true
 position = Vector2( 803.354, -325.318 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )

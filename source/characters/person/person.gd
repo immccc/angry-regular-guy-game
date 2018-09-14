@@ -50,6 +50,10 @@ func _on_punch_area_area_exited(area):
     emit_signal("removed_elements_to_be_hit", [area], $".", StrikeType.PUNCH)
 
 func _setup_strike_handler():
+    var strike_handler = $StrikeHandler
+    if strike_handler == null:
+        return
+
     var animations_per_strike_type = {
         StrikeType.PUNCH: ANIMATION_PUNCH,
         StrikeType.KICK: ANIMATION_KICK,
@@ -61,7 +65,6 @@ func _setup_strike_handler():
         StrikeType.KNOCK: KNOCKING_LAST_FRAME
     }
 
-    var strike_handler = $StrikeHandler
     strike_handler.setup(animations_per_strike_type, climax_per_strike_type)
 
     connect("added_elements_to_be_hit", strike_handler, "_on_added_elements_to_be_hit")

@@ -3,7 +3,7 @@ extends "res://source/common/state/move_state.gd"
 const StateConstants = preload("state_constants.gd")
 const DirectionType = preload("res://source/common/direction.gd").Direction
 
-const ANIMATION_MOVE = "call_police_walking"
+const ANIMATION_MOVE = "call_cop_walking"
 
 const SPEED_SLOW = 150
 const SPEED_HIGH = 250
@@ -47,7 +47,7 @@ func _move(delta):
 
 func get_next_state():
     if(dialing_ticks >= MIN_DIALING_TICKS and rand_range(0, 100) > 25):
-        return StateConstants.WAIT_FOR_POLICE_STATE_ID
+        return StateConstants.WAIT_FOR_COP_STATE_ID
 
     return id
 

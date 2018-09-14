@@ -2,7 +2,7 @@ extends "res://source/common/state/state.gd"
 
 const StateConstants = preload("state_constants.gd")
 
-const ANIMATION_STAND = "call_police_standing"
+const ANIMATION_STAND = "call_cop_standing"
 
 const MIN_DIALING_TICKS = 5
 
@@ -22,6 +22,6 @@ func process(delta):
 
 func get_next_state():
     if(dialing_ticks >= MIN_DIALING_TICKS and rand_range(0, 100) > 25):
-        return StateConstants.WAIT_FOR_POLICE_STATE_ID
+        return StateConstants.WAIT_FOR_COP_STATE_ID
 
     return id

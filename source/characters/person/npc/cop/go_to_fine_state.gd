@@ -9,10 +9,10 @@ func _init(id, node).(id, node):
     pass
 
 func _get_state_when_action_receiver_does_not_exist():
-    return StateConstants.STAND_STATE_ID
+    return StateConstants.LEAVE_ALONE_STATE_ID
 
 func _get_state_when_action_receiver_reached():
-    return StateConstants.STRIKE_STATE_ID
+    return StateConstants.FINE_STATE_ID
 
 func _get_speed_slow():
     return GO_TO_ATTACK_SPEED_SLOW

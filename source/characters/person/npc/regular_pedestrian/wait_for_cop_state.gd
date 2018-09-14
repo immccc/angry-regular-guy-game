@@ -1,8 +1,11 @@
 extends "res://source/common/state/go_to_target_state.gd"
 
+const DirectionType = preload("res://source/common/direction.gd").Direction
 const StateConstants = preload("state_constants.gd")
 
 const EVADE_ACTION_RECEIVER_SPEED = 100
+
+const Cop = preload("res://scenes/characters/person/cop.tscn")
 
 var distance_with_action_receiver
 
@@ -13,6 +16,7 @@ func enter_into_state():
     .enter_into_state()
 
     node.flippable = false
+    _request_cop()
 
 func process(delta):
     .process(delta)
@@ -35,3 +39,10 @@ func _get_extra_distance_from_action_receiver():
         distance_with_action_receiver = node.global_position - action_receiver_node.get_ref().global_position
 
     return distance_with_action_receiver
+
+func _request_cop():
+    var random_direction = [DirectionType.LEFT, DirectionType.RIGHT][randi() % 2]
+
+    var world_object_generators = node.get_tree().get_nodes_in_group("world_object_generators")
+    for world_object_generator in world_object_generators:
+        world_object_generator.request_object_to_be_generated(Cop, random_direction, node, "set_offender_in_cop")

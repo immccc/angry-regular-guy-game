@@ -29,7 +29,7 @@ func get_next_state():
 		return StateConstants.LEAVE_ALONE_STATE_ID
 
 	var action_receiver_ref = action_receiver_node.get_ref()
-	if action_reciver_ref.distance_to(node) > TOLERATED_DISTANCE_WITH_PROSECUTED:
+	if action_receiver_ref.distance_to(node) > TOLERATED_DISTANCE_WITH_PROSECUTED:
 		if rand_range(0, 100) < 25:
 			return StateConstants.SHOOTING_STATE_ID
 		else:

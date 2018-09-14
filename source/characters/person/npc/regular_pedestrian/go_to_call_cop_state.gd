@@ -18,7 +18,7 @@ func enter_into_state():
 
 func get_next_state():
     if _is_path_finished():
-        return [StateConstants.CALL_POLICE_WALKING_STATE_ID, StateConstants.CALL_POLICE_STANDING_STATE_ID][randi() % 2]
+        return [StateConstants.CALL_COP_WALKING_STATE_ID, StateConstants.CALL_COP_STANDING_STATE_ID][randi() % 2]
 
     return id
 

@@ -11,36 +11,36 @@ var sprite
 var reprimand_ticks = 0
 
 func _init(id, node).(id, node):
-	sprite = node.get_node("Sprite")
+    sprite = node.get_node("Sprite")
 
 func enter_into_state():
-	fine_ticks = 0
+    reprimand_ticks = 0
 
 func process(delta):
-	sprite.play(ANIMATION_REPRIMAND)
+    sprite.play(ANIMATION_REPRIMAND)
 
-	_update_fine(delta)
+    _update_fine(delta)
 
 func _update_fine(delta):
-	fine_ticks += delta
+    reprimand_ticks += delta
 
 func get_next_state():
-	if fine_ticks > MIN_REPRIMAND_TICKS:
-		return _get_random_continuing_state()
+    if reprimand_ticks > MIN_REPRIMAND_TICKS:
+        return _get_random_continuing_state()
 
-	var action_receiver_ref = action_receiver_node.get_ref()
-	if action_reciver_ref.distance_to(node) > TOLERATED_DISTANCE_WITH_PROSECUTED:
-		if rand_range(0, 100) < 25:
-			return StateConstants.SHOOTING_STATE_ID
-		else:
-			return _get_random_continuing_state()
+    var action_receiver_ref = action_receiver_node.get_ref()
+    if action_receiver_ref.distance_to(node) > TOLERATED_DISTANCE_WITH_PROSECUTED:
+        if rand_range(0, 100) < 25:
+            return StateConstants.SHOOTING_STATE_ID
+        else:
+            return _get_random_continuing_state()
 
-	return id
+    return id
 
 func _get_random_continuing_state():
-	match rand_range(0, 100) <= 33:
-		return StateConstants.LEAVE_ALONE_STATE_ID
-	elif rand_range(0, 100) <= 50:
-		return StateConstants.FINE_STATE_ID
-	else:
-		return StateConstants.REPRIMAND_STATE_ID
+    if rand_range(0, 100) <= 33:
+        return StateConstants.LEAVE_ALONE_STATE_ID
+    elif rand_range(0, 100) <= 50:
+        return StateConstants.FINE_STATE_ID
+    else:
+        return StateConstants.REPRIMAND_STATE_ID
