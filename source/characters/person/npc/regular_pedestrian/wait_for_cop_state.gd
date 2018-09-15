@@ -31,12 +31,10 @@ func enter_into_state():
     _request_cop()
 
 func process(delta):
-    var current_global_position = node.global_position #TODO Remove, only for debug
     .process(delta)
 
     ticks_waiting_cop += delta
     last_position_action_receiver = action_receiver_node.get_ref().global_position
-    print("LAST_POS: ", last_position_node, " CURR POS: ", node.global_position)
     last_position_node = node.global_position
     node.direction = sign(action_receiver_node.get_ref().global_position.x - node.global_position.x)
 

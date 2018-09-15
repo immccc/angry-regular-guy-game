@@ -5,11 +5,10 @@ const DISTANCE_THRESHOLD = 50
 var last_action_receiver_node_position
 
 func _init(id, node).(id, node):
-    pass
+    speed = rand_range(_get_speed_slow(), _get_speed_fast())
 
 func enter_into_state():
     .enter_into_state()
-    speed = rand_range(_get_speed_slow(), _get_speed_fast())
 
 func process(delta):
     .process(delta)
@@ -19,7 +18,7 @@ func get_next_state():
     if !action_receiver_node.get_ref():
         return _get_state_when_action_receiver_does_not_exist()
 
-    if action_receiver_node.get_ref().global_position.distance_to(node.global_position) <= DISTANCE_THRESHOLD or _is_path_finished():
+    if action_receiver_node.get_ref().global_position.distance_to(node.global_position) <= DISTANCE_THRESHOLD:
         return _get_state_when_action_receiver_reached()
     else:
         return id
