@@ -3,24 +3,54 @@ extends "res://source/common/state/go_to_target_state.gd"
 const DirectionType = preload("res://source/common/direction.gd").Direction
 const StateConstants = preload("state_constants.gd")
 
+const ANIMATION_WALK = "walk"
+const ANIMATION_STAND = "stand"
+
 const EVADE_ACTION_RECEIVER_SPEED = 100
+const DISTANCE_THRESHOLD = 200
+const MIN_TICKS_WAITING_COP = 2
 
 const Cop = preload("res://scenes/characters/person/cop.tscn")
 
-var distance_with_action_receiver
+var initial_distance_with_action_receiver
+var last_position_action_receiver
+var last_position_node
+var ticks_waiting_cop = 0
 
 func _init(id, node).(id, node):
     pass
 
 func enter_into_state():
+    last_position_action_receiver = action_receiver_node.get_ref().global_position
+    last_position_node = node.global_position
+    node.flippable = false
+    ticks_waiting_cop = 0
+
     .enter_into_state()
 
-    node.flippable = false
     _request_cop()
 
 func process(delta):
+    var current_global_position = node.global_position #TODO Remove, only for debug
     .process(delta)
-    node.direction = action_receiver_node.get_ref().global_position.x - node.global_position.x
+
+    ticks_waiting_cop += delta
+    last_position_action_receiver = action_receiver_node.get_ref().global_position
+    print("LAST_POS: ", last_position_node, " CURR POS: ", node.global_position)
+    last_position_node = node.global_position
+    node.direction = sign(action_receiver_node.get_ref().global_position.x - node.global_position.x)
+
+func get_next_state():
+    if(ticks_waiting_cop >= MIN_TICKS_WAITING_COP and rand_range(0, 100) <= 25):
+        return StateConstants.RUN_AWAY_STATE_ID
+
+    return .get_next_state()
+
+func _anim():
+    if last_position_node != node.global_position:
+        sprite.play(ANIMATION_WALK)
+    else:
+        sprite.play(ANIMATION_STAND)
 
 func _get_state_when_action_receiver_does_not_exist():
     return StateConstants.STAND_STATE_ID
@@ -35,10 +65,12 @@ func _get_speed_fast():
     return EVADE_ACTION_RECEIVER_SPEED
 
 func _get_extra_distance_from_action_receiver():
-    if distance_with_action_receiver == null:
-        distance_with_action_receiver = node.global_position - action_receiver_node.get_ref().global_position
+    if initial_distance_with_action_receiver == null:
+        initial_distance_with_action_receiver = node.global_position - action_receiver_node.get_ref().global_position
 
-    return distance_with_action_receiver
+    var delta_movement_action_receiver = last_position_action_receiver - action_receiver_node.get_ref().global_position
+
+    return initial_distance_with_action_receiver - delta_movement_action_receiver
 
 func _request_cop():
     var random_direction = [DirectionType.LEFT, DirectionType.RIGHT][randi() % 2]

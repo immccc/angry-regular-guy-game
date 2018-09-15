@@ -33,7 +33,7 @@ position = Vector2( 0, -55.4017 )
 scale = Vector2( 10, 10 )
 frames = ExtResource( 2 )
 animation = "walk"
-frame = 3
+frame = 1
 playing = true
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
 

@@ -9,7 +9,7 @@ var Cop = preload("res://scenes/characters/person/cop.tscn")
 
 var maximum_per_object_type = {
     Doggy: 3,
-    RegularPedestrian: 5,
+    RegularPedestrian: 1,
     Bird: 1,
     Cop: 1
 }

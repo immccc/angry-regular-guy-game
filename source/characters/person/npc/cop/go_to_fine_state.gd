@@ -12,6 +12,9 @@ func _get_state_when_action_receiver_does_not_exist():
     return StateConstants.LEAVE_ALONE_STATE_ID
 
 func _get_state_when_action_receiver_reached():
+    if rand_range(0, 100) <= 25:
+        return StateConstants.REPRIMAND_STATE_ID
+
     return StateConstants.FINE_STATE_ID
 
 func _get_speed_slow():

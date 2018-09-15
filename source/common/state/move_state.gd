@@ -13,11 +13,15 @@ func _init(id, node).(id, node):
     path_finder = node.get_node("/root").find_node("PathFinder", true, false)
 
 func process(delta):
-    sprite.play(ANIMATION_MOVE)
     _move(delta)
+    _anim()
 
 func enter_into_state():
+    node.flippable = true
     _set_path()
+
+func _anim():
+    sprite.play(ANIMATION_MOVE)
 
 func _set_path():
     var dest = _get_dest()
