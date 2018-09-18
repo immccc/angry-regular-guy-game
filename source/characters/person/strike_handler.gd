@@ -69,6 +69,9 @@ func _hit_objects(strike_type):
     if !objects_to_hit_per_strike_type.has(strike_type):
         return
     for object in objects_to_hit_per_strike_type[strike_type]:
+        if !weakref(object).get_ref():
+            continue
+
         if abs(object.global_position.y - node.global_position.y) <= y_distance_threshold:
             object.emit_signal("inflict_damage", node, strength, direction)
 

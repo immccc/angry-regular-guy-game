@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/common/world_objects/queue.gd" type="Script" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 68.1122
+height = 329.807
+
+[node name="Queue" type="Node2D" index="0"]
+
+position = Vector2( 251.064, 238.567 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+debug_mode = true
+initial_people_on_queue_amount = 3
+capacity = 3
+
+[node name="Area" type="Area2D" parent="." index="0"]
+
+rotation = 0.785398
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+
+[node name="Shape" type="CollisionShape2D" parent="Area" index="0"]
+
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+

@@ -7,7 +7,7 @@ const DirectionType = preload("res://source/common/direction.gd").Direction
 const StandState = preload("stand_state.gd")
 const WalkState = preload("walk_state.gd")
 const HitState = preload("hit_state.gd")
-
+const ShockState = preload("res://source/characters/person/shock_state.gd")
 const RunAwayState = preload("run_away_state.gd")
 
 const GoToAttackState = preload("go_to_attack_state.gd")
@@ -31,6 +31,7 @@ func _setup_states():
     state_machine.add(StandState.new(StateConstants.STAND_STATE_ID, node))
     state_machine.add(WalkState.new(StateConstants.WALK_STATE_ID, node))
     state_machine.add(HitState.new(CommonPersonStateConstants.HIT_STATE_ID, node))
+    state_machine.add(ShockState.new(CommonPersonStateConstants.SHOCK_STATE_ID, node))
 
     state_machine.add(RunAwayState.new(StateConstants.RUN_AWAY_STATE_ID, node))
 
