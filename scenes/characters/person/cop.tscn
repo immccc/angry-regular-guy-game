@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://source/characters/person/npc/cop/cop.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/person/cop/cop.tres" type="SpriteFrames" id=2]
@@ -21,7 +21,13 @@ b = Vector2( -0.171089, 41.0295 )
 custom_solver_bias = 0.0
 extents = Vector2( 33.0012, 82.9997 )
 
-[node name="Cop" type="Node2D" index="0"]
+[sub_resource type="LineShape2D" id=4]
+
+custom_solver_bias = 0.0
+normal = Vector2( 0, -1 )
+d = 0.0
+
+[node name="Cop" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
@@ -33,7 +39,7 @@ position = Vector2( 0, -55.4017 )
 scale = Vector2( 10, 10 )
 frames = ExtResource( 2 )
 animation = "walk"
-frame = 1
+frame = 3
 playing = true
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
 
@@ -88,6 +94,24 @@ _sections_unfolded = [ "Collision" ]
 
 position = Vector2( -2, -52.0002 )
 shape = SubResource( 3 )
+
+[node name="GroundArea" type="Area2D" parent="." index="4"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 8
+collision_mask = 16
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundArea" index="0"]
+
+position = Vector2( -0.774841, 47.653 )
+shape = SubResource( 4 )
 
 [connection signal="area_entered" from="KickArea" to="." method="_on_kick_area_area_entered"]
 

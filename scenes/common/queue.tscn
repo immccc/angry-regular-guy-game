@@ -8,7 +8,7 @@ custom_solver_bias = 0.0
 radius = 68.1122
 height = 329.807
 
-[node name="Queue" type="Node2D" index="0"]
+[node name="Queue" type="Node2D"]
 
 position = Vector2( 251.064, 238.567 )
 script = ExtResource( 1 )

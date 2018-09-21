@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://source/characters/person/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/person/player/player.tres" type="SpriteFrames" id=2]
@@ -22,7 +22,13 @@ b = Vector2( -0.171089, 41.0295 )
 custom_solver_bias = 0.0
 extents = Vector2( 33.0012, 82.9997 )
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="LineShape2D" id=4]
+
+custom_solver_bias = 0.0
+normal = Vector2( 0, -1 )
+d = 0.0
+
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
@@ -103,6 +109,24 @@ shape = SubResource( 3 )
 [node name="StrikeHandler" parent="." index="5" instance=ExtResource( 4 )]
 
 y_distance_threshold = 20
+
+[node name="Area2D" type="Area2D" parent="." index="6"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 8
+collision_mask = 16
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( 0.124031, 37 )
+shape = SubResource( 4 )
 
 [connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]
 

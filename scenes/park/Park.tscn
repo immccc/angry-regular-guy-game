@@ -1,25 +1,25 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/park/park_tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://source/common/world_objects/world_object_container.gd" type="Script" id=2]
+[ext_resource path="res://source/scenarios/park/park_world_object_distributor.gd" type="Script" id=2]
 [ext_resource path="res://scenes/park/churros/churros.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/characters/person/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/scenarios/park/ground_world_object_generator.gd" type="Script" id=5]
 [ext_resource path="res://source/scenarios/park/air_world_object_generator.gd" type="Script" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
-extents = Vector2( 61.4375, 475.698 )
-
-[sub_resource type="NavigationPolygon" id=2]
+[sub_resource type="NavigationPolygon" id=1]
 
 vertices = PoolVector2Array( 215.546, 21.1121, 3936.34, 22.319, 2462.51, 109.762, 2076.98, 115.192, 3936.34, 663.907, 2460.7, 183.971, 215.546, 662.37, 2076.98, 185.781 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 1, 4, 5 ), PoolIntArray( 5, 4, 6, 7 ), PoolIntArray( 7, 6, 0, 3 ) ]
 outlines = [ PoolVector2Array( 215.546, 21.1121, 3936.34, 22.319, 3936.34, 663.907, 215.546, 662.37 ), PoolVector2Array( 2076.98, 115.192, 2462.51, 109.762, 2460.7, 183.971, 2076.98, 185.781 ) ]
 _sections_unfolded = [ "Resource" ]
 
-[node name="Park" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 61.4375, 475.698 )
+
+[node name="Park" type="Node2D" index="0"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
@@ -43,21 +43,38 @@ format = 1
 tile_data = PoolIntArray( -65542, 1, 0, -65538, 1, 0, -131070, 1, 0, -131068, 1, 0, -131064, 1, 0, -131060, 1, 0, -131056, 1, 0, -131052, 1, 0, -131048, 1, 0, -131044, 1, 0, -131040, 1, 0, -131036, 1, 0, -131032, 1, 0, -131028, 1, 0, -131024, 1, 0, 196602, 0, 0, 196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 196606, 0, 0, 131072, 0, 0, 131074, 0, 0, 131076, 0, 0, 131078, 0, 0, 131080, 0, 0, 131082, 0, 0, 131084, 0, 0, 131086, 0, 0, 131088, 0, 0, 131090, 0, 0, 131092, 0, 0, 131094, 0, 0, 131095, 0, 0, 131096, 0, 0, 131097, 0, 0, 131098, 0, 0, 131100, 0, 0, 131101, 0, 0, 131102, 0, 0, 131103, 0, 0, 131104, 0, 0, 131106, 0, 0, 131108, 0, 0, 131110, 0, 0, 131112, 0, 0, 131113, 0, 0, 131115, 0, 0, 131117, 0, 0, 131119, 0, 0, 131121, 0, 0, 131122, 0, 0, 262138, 0, 0, 262140, 0, 0, 262141, 0, 0, 196613, 0, 0, 196632, 0, 0, 196633, 0, 0, 196638, 0, 0, 196639, 0, 0, 196640, 0, 0, 327674, 0, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 262144, 0, 0, 262146, 0, 0, 262148, 0, 0, 262150, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262156, 0, 0, 262158, 0, 0, 262160, 0, 0, 262162, 0, 0, 262164, 0, 0, 262166, 0, 0, 262167, 0, 0, 262168, 0, 0, 262169, 0, 0, 262170, 0, 0, 262172, 0, 0, 262173, 0, 0, 262178, 0, 0, 262180, 0, 0, 262182, 0, 0, 262184, 0, 0, 262186, 0, 0, 262187, 0, 0, 262189, 0, 0, 262191, 0, 0, 262192, 0, 0, 262194, 0, 0, 393210, 0, 0, 393212, 0, 0, 393213, 0, 0, 327703, 0, 0, 327704, 0, 0, 327706, 0, 0, 327708, 0, 0, 327709, 0, 0, 327710, 0, 0, 327712, 0, 0, 327716, 0, 0, 327718, 0, 0, 458746, 0, 0, 458748, 0, 0, 458749, 0, 0, 458750, 0, 0, 393216, 0, 0, 393218, 0, 0, 393220, 0, 0, 393222, 0, 0, 393223, 0, 0, 393225, 0, 0, 393227, 0, 0, 393229, 0, 0, 393231, 0, 0, 393233, 0, 0, 393235, 0, 0, 393236, 0, 0, 393238, 0, 0, 393239, 0, 0, 393240, 0, 0, 393242, 0, 0, 393244, 0, 0, 393245, 0, 0, 393246, 0, 0, 393247, 0, 0, 393248, 0, 0, 393250, 0, 0, 393254, 0, 0, 393256, 0, 0, 393258, 0, 0, 393259, 0, 0, 393261, 0, 0, 393263, 0, 0, 393265, 0, 0, 393266, 0, 0, 524282, 0, 0, 524284, 0, 0, 524285, 0, 0, 458754, 0, 0, 458774, 0, 0, 458776, 0, 0, 458777, 0, 0, 458778, 0, 0, 458779, 0, 0, 458780, 0, 0, 458781, 0, 0, 458783, 0, 0, 458784, 0, 0, 458788, 0, 0, 458790, 0, 0, 589818, 0, 0, 589820, 0, 0, 589821, 0, 0, 589822, 0, 0, 524288, 0, 0, 524292, 0, 0, 524294, 0, 0, 524296, 0, 0, 524298, 0, 0, 524300, 0, 0, 524302, 0, 0, 524304, 0, 0, 524306, 0, 0, 524307, 0, 0, 524308, 0, 0, 524310, 0, 0, 524312, 0, 0, 524313, 0, 0, 524314, 0, 0, 524316, 0, 0, 524317, 0, 0, 524318, 0, 0, 524319, 0, 0, 524320, 0, 0, 524322, 0, 0, 524326, 0, 0, 524328, 0, 0, 524330, 0, 0, 524331, 0, 0, 524333, 0, 0, 524335, 0, 0, 524337, 0, 0, 524338, 0, 0, 655354, 0, 0, 655356, 0, 0, 655357, 0, 0, 589826, 0, 0, 589831, 0, 0, 589832, 0, 0, 589847, 0, 0, 589848, 0, 0, 589849, 0, 0, 589850, 0, 0, 589851, 0, 0, 589852, 0, 0, 589854, 0, 0, 589855, 0, 0, 589856, 0, 0, 589860, 0, 0, 589862, 0, 0, 720890, 0, 0, 720891, 0, 0, 720892, 0, 0, 720894, 0, 0, 655360, 0, 0, 655362, 0, 0, 655363, 0, 0, 655365, 0, 0, 655367, 0, 0, 655369, 0, 0, 655370, 0, 0, 655372, 0, 0, 655374, 0, 0, 655376, 0, 0, 655378, 0, 0, 655380, 0, 0, 655382, 0, 0, 655383, 0, 0, 655384, 0, 0, 655385, 0, 0, 655386, 0, 0, 655387, 0, 0, 655388, 0, 0, 655389, 0, 0, 655390, 0, 0, 655392, 0, 0, 655394, 0, 0, 655396, 0, 0, 655398, 0, 0, 655399, 0, 0, 655401, 0, 0, 655403, 0, 0, 655405, 0, 0, 655407, 0, 0, 655408, 0, 0, 655409, 0, 0, 655410, 0, 0 )
 _sections_unfolded = [ "Cell", "Occluder", "Transform", "Visibility" ]
 
-[node name="YSort" type="YSort" parent="TileMap" index="0"]
+[node name="PathFinder" type="Navigation2D" parent="." index="1"]
 
-sort_enabled = true
+position = Vector2( -1115.59, 158.273 )
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder" index="0"]
+
+position = Vector2( -10.0376, 2.86787 )
+navpoly = SubResource( 1 )
+enabled = true
+_sections_unfolded = [ "Transform" ]
+
+[node name="ObjectDistributor" type="Node2D" parent="." index="2"]
+
 script = ExtResource( 2 )
 
-[node name="Churros" parent="TileMap/YSort" index="0" instance=ExtResource( 3 )]
+[node name="Ground" type="YSort" parent="ObjectDistributor" index="0"]
+
+position = Vector2( -514.489, 52.489 )
+sort_enabled = true
+_sections_unfolded = [ "Sort" ]
+
+[node name="Churros" parent="ObjectDistributor/Ground" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 1655.16, 257.935 )
 
-[node name="Player" parent="TileMap/YSort" index="1" instance=ExtResource( 4 )]
+[node name="Player" parent="ObjectDistributor/Ground" index="1" instance=ExtResource( 4 )]
 
 position = Vector2( 564, 380 )
 flippable = true
 
-[node name="GroundGenerator2" type="Line2D" parent="TileMap/YSort/Player" index="6"]
+[node name="GroundGenerator2" type="Line2D" parent="ObjectDistributor/Ground/Player" index="6"]
 
 position = Vector2( 735.107, -4.82098 )
 points = PoolVector2Array( -3.61792, -176.668, -3.86768, 267.511 )
@@ -70,7 +87,7 @@ script = ExtResource( 5 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 direction_for_generated_objects = 1
 
-[node name="GroundGenerator1" type="Line2D" parent="TileMap/YSort/Player" index="7"]
+[node name="GroundGenerator1" type="Line2D" parent="ObjectDistributor/Ground/Player" index="7"]
 
 position = Vector2( -856.893, -14.821 )
 points = PoolVector2Array( -3.61792, -176.668, -3.86768, 267.511 )
@@ -83,7 +100,7 @@ script = ExtResource( 5 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 direction_for_generated_objects = 2
 
-[node name="AirGenerator1" type="Line2D" parent="TileMap/YSort/Player" index="8"]
+[node name="AirGenerator1" type="Line2D" parent="ObjectDistributor/Ground/Player" index="8"]
 
 position = Vector2( -924.945, -157.371 )
 points = PoolVector2Array( 60.7361, -190.118, 60.9435, -41.2514 )
@@ -96,7 +113,7 @@ script = ExtResource( 6 )
 _sections_unfolded = [ "Capping", "Transform", "Z Index" ]
 direction_for_generated_objects = 2
 
-[node name="AirGenerator2" type="Line2D" parent="TileMap/YSort/Player" index="9"]
+[node name="AirGenerator2" type="Line2D" parent="ObjectDistributor/Ground/Player" index="9"]
 
 position = Vector2( 673.055, -142.371 )
 points = PoolVector2Array( 60.7361, -190.118, 60.9435, -41.2514 )
@@ -109,7 +126,7 @@ script = ExtResource( 6 )
 _sections_unfolded = [ "Capping", "Transform", "Z Index" ]
 direction_for_generated_objects = 1
 
-[node name="Camera2D" type="Camera2D" parent="TileMap/YSort/Player" index="10"]
+[node name="Camera2D" type="Camera2D" parent="ObjectDistributor/Ground/Player" index="10"]
 
 position = Vector2( -7.52625, 4.00952 )
 anchor_mode = 1
@@ -136,7 +153,7 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 _sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Smoothing", "Transform" ]
 
-[node name="RemovalObjectArea1" type="Area2D" parent="TileMap/YSort/Player" index="11"]
+[node name="RemovalObjectArea1" type="Area2D" parent="ObjectDistributor/Ground/Player" index="11"]
 
 position = Vector2( 803.354, -325.318 )
 input_pickable = true
@@ -148,14 +165,14 @@ collision_layer = 0
 collision_mask = 4
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Pause" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/YSort/Player/RemovalObjectArea1" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectDistributor/Ground/Player/RemovalObjectArea1" index="0"]
 
 position = Vector2( 119.259, 427.688 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
-[node name="RemovalObjectArea2" type="Area2D" parent="TileMap/YSort/Player" index="12"]
+[node name="RemovalObjectArea2" type="Area2D" parent="ObjectDistributor/Ground/Player" index="12"]
 
 editor/display_folded = true
 position = Vector2( -698.406, -341.43 )
@@ -170,34 +187,24 @@ audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Collision" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/YSort/Player/RemovalObjectArea2" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectDistributor/Ground/Player/RemovalObjectArea2" index="0"]
 
 position = Vector2( -331.147, 443.688 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="PathFinder" type="Navigation2D" parent="." index="1"]
+[node name="Air" type="Node2D" parent="ObjectDistributor" index="1"]
 
-position = Vector2( -1115.59, 158.273 )
-_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+[connection signal="object_requested_to_be_added" from="ObjectDistributor/Ground/Player/GroundGenerator2" to="ObjectDistributor" method="_on_object_requested_to_be_added"]
 
-[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="PathFinder" index="0"]
+[connection signal="object_requested_to_be_added" from="ObjectDistributor/Ground/Player/GroundGenerator1" to="ObjectDistributor" method="_on_object_requested_to_be_added"]
 
-position = Vector2( -10.0376, 2.86787 )
-navpoly = SubResource( 2 )
-enabled = true
-_sections_unfolded = [ "Transform" ]
+[connection signal="object_requested_to_be_added" from="ObjectDistributor/Ground/Player/AirGenerator1" to="ObjectDistributor" method="_on_object_requested_to_be_added"]
 
-[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/GroundGenerator2" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
+[connection signal="object_requested_to_be_added" from="ObjectDistributor/Ground/Player/AirGenerator2" to="ObjectDistributor" method="_on_object_requested_to_be_added"]
 
-[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/GroundGenerator1" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
+[connection signal="area_entered" from="ObjectDistributor/Ground/Player/RemovalObjectArea1" to="ObjectDistributor" method="_on_removal_area_entered"]
 
-[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/AirGenerator1" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
-
-[connection signal="object_requested_to_be_added" from="TileMap/YSort/Player/AirGenerator2" to="TileMap/YSort" method="_on_object_requested_to_be_added"]
-
-[connection signal="area_entered" from="TileMap/YSort/Player/RemovalObjectArea1" to="TileMap/YSort" method="_on_removal_area_entered"]
-
-[connection signal="area_entered" from="TileMap/YSort/Player/RemovalObjectArea2" to="TileMap/YSort" method="_on_removal_area_entered"]
+[connection signal="area_entered" from="ObjectDistributor/Ground/Player/RemovalObjectArea2" to="ObjectDistributor" method="_on_removal_area_entered"]
 
 
