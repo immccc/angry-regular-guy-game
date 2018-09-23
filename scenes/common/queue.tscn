@@ -19,7 +19,6 @@ capacity = 3
 
 [node name="Area" type="Area2D" parent="." index="0"]
 
-rotation = 0.785398
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

@@ -2,14 +2,16 @@ extends Node2D
 
 const DirectionType = preload("res://source/common/direction.gd").Direction
 
-var altitude = 0.0
+export (float) var altitude = 0.0
+export (bool) var static_on_scene = false
+export (bool) var flippable = false
+
 var direction setget set_direction
 
 onready var last_position = global_position
 
 signal unfair_event_performed(offender, offended)
 
-export (bool) var flippable = false
 var associated_sprite
 
 func _init(altitude = 0.0):
@@ -19,7 +21,9 @@ func _ready():
     for node in get_children():
         if node is AnimatedSprite or node is Sprite:
             associated_sprite = node
-            return
+
+        if node is VisibilityNotifier2D:
+            _setup_object_disable_when_out_of_sight(node)
 
 func _process(delta):
     _update_direction()
@@ -54,3 +58,15 @@ func _update_direction():
 
     last_position = global_position
     flip()
+
+func _setup_object_disable_when_out_of_sight(visibility_notifier):
+    visibility_notifier.connect("screen_entered", self, "_on_visibility_change", [true])
+    visibility_notifier.connect("screen_exited", self, "_on_visibility_change", [false])
+
+func _on_visibility_change(is_visible):
+    if !static_on_scene:
+        set_process(true)
+    elif is_visible:
+        set_process(true)
+    else:
+        set_process(false)

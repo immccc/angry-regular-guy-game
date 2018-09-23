@@ -31,8 +31,10 @@ class Line:
         return LineFunc.new(m, b)
 
 
-#TODO extends to any other kind of character
-const Person = preload("res://scenes/characters/person/regular_pedestrian.tscn")
+const DirectionType = preload("res://source/common/direction.gd").Direction
+const RegularPedestrian = preload("res://scenes/characters/person/regular_pedestrian.tscn")
+
+signal initial_people_requested_to_be_added(object_node_type, object_position, direction, node_caller, prepare_object_to_be_added_method)
 
 export(bool) var debug_mode = false
 export(int) var initial_people_on_queue_amount = 3
@@ -48,7 +50,6 @@ func _ready():
     _fill_with_initial_people()
 
 func _process(delta):
-    #area.rotation_degrees += 5 * delta
     _update_positions()
     update()
 
@@ -128,16 +129,18 @@ func _update_positions():
             positions.append(Vector2(x, y))
 
 func _fill_with_initial_people():
-    #TODO Person creation must be handled by world container
-    var created_persons = 0
+    var created_regular_pedestrians = 0
     for position in positions:
-        var person = Person.instance()
-        add_child(person)
-        person.global_position = to_global(position)
-        created_persons += 1
-        if created_persons == initial_people_on_queue_amount:
+        if created_regular_pedestrians == initial_people_on_queue_amount:
             return
 
+        emit_signal("initial_people_requested_to_be_added", RegularPedestrian, to_global(position), _get_created_regular_pedestrian_direction(), self, "_setup_regular_pedestrian_state")
+        created_regular_pedestrians += 1
 
+func _get_created_regular_pedestrian_direction():
+    return [DirectionType.LEFT, DirectionType.RIGHT][randi() % 2]
+
+func _setup_regular_pedestrian_state(regular_pedestrian):
+    regular_pedestrian.initial_state = "wait_in_queue_state"
 
 

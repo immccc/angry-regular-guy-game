@@ -11,8 +11,7 @@ const ReprimandState = preload("reprimand_state.gd")
 const ShootingState = preload("shooting_state.gd")
 
 func _setup_states():
-    randomize()
-
+    var node = $"."
     state_machine.add(HitState.new(CommonPersonStateConstants.HIT_STATE_ID, node))
     state_machine.add(FineState.new(StateConstants.FINE_STATE_ID, node))
     state_machine.add(GoToFineState.new(StateConstants.GO_TO_FINE_STATE_ID, node))
@@ -23,7 +22,8 @@ func _setup_states():
     assert(offender != null)
     _update_offender_in_states()
 
-    state_machine.current_state_id = StateConstants.GO_TO_FINE_STATE_ID
+func _get_default_first_state():
+    return StateConstants.GO_TO_FINE_STATE_ID
 
 func _set_reaction_when_looking():
     _update_offender_in_states()

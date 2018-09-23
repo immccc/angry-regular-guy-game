@@ -28,10 +28,12 @@ custom_solver_bias = 0.0
 normal = Vector2( 0, -1 )
 d = 0.0
 
-[node name="RegularPedestrian" type="Node2D" index="0"]
+[node name="RegularPedestrian" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
+altitude = 0.0
+static_on_scene = false
 flippable = false
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="0"]
@@ -53,6 +55,7 @@ autostart = false
 
 [node name="KickArea" type="Area2D" parent="." index="2"]
 
+editor/display_folded = true
 position = Vector2( -0.902496, 0.319682 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -71,6 +74,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="PunchArea" type="Area2D" parent="." index="3"]
 
+editor/display_folded = true
 position = Vector2( -0.814514, -79.0071 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -87,6 +91,7 @@ shape = SubResource( 2 )
 
 [node name="DamageArea" type="Area2D" parent="." index="4"]
 
+editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -110,6 +115,7 @@ y_distance_threshold = 20
 
 [node name="GroundArea" type="Area2D" parent="." index="6"]
 
+editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -125,6 +131,12 @@ _sections_unfolded = [ "Collision" ]
 
 position = Vector2( 0.315552, 36.6047 )
 shape = SubResource( 4 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="." index="7"]
+
+position = Vector2( -12.946, -8.78376 )
+rect = Rect2( -22, -126, 66, 170 )
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]
 

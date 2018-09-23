@@ -16,18 +16,21 @@ const StrikeState = preload("strike_state.gd")
 const GoToCallCopState = preload("go_to_call_cop_state.gd")
 const CallCopWalkingState = preload("call_cop_walking_state.gd")
 const CallCopStandingState = preload("call_cop_standing_state.gd")
-const WaitForcopState = preload("wait_for_cop_state.gd")
+const WaitForCopState = preload("wait_for_cop_state.gd")
+
+const WaitInQueueState = preload("wait_in_queue_state.gd")
 
 func _init():
     add_to_group("unfair_event_listeners")
 
 func _ready():
-    _setup_states()
+    ._ready()
     flippable = true
 
 func _setup_states():
     randomize()
 
+    node = $"."
     state_machine.add(StandState.new(StateConstants.STAND_STATE_ID, node))
     state_machine.add(WalkState.new(StateConstants.WALK_STATE_ID, node))
     state_machine.add(HitState.new(CommonPersonStateConstants.HIT_STATE_ID, node))
@@ -41,9 +44,12 @@ func _setup_states():
     state_machine.add(GoToCallCopState.new(StateConstants.GO_TO_CALL_COP_STATE_ID, node))
     state_machine.add(CallCopWalkingState.new(StateConstants.CALL_COP_WALKING_STATE_ID, node))
     state_machine.add(CallCopStandingState.new(StateConstants.CALL_COP_STANDING_STATE_ID, node))
-    state_machine.add(WaitForcopState.new(StateConstants.WAIT_FOR_COP_STATE_ID, node))
+    state_machine.add(WaitForCopState.new(StateConstants.WAIT_FOR_COP_STATE_ID, node))
 
-    state_machine.current_state_id = StateConstants.STAND_STATE_ID
+    state_machine.add(WaitInQueueState.new(StateConstants.WAIT_IN_QUEUE_STATE_ID, node))
+
+func _get_default_first_state():
+    return StateConstants.STAND_STATE_ID
 
 func _get_state_by_personality_aspect(personality_aspect):
     match personality_aspect:

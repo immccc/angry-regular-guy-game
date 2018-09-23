@@ -11,12 +11,7 @@ func _init():
     add_to_group("unfair_event_listeners")
 
 func _ready():
-    _setup_states()
     flippable = true
-
-func _setup_states():
-    print("NPC Person must have states defined in _setup_states")
-    assert(false)
 
 func _on_unfair_event_performed(offender, offended):
     self.offender = offender

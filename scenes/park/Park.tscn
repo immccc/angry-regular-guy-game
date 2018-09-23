@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/park/park_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://source/scenarios/park/park_world_object_distributor.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/characters/person/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/scenarios/park/ground_world_object_generator.gd" type="Script" id=5]
 [ext_resource path="res://source/scenarios/park/air_world_object_generator.gd" type="Script" id=6]
+[ext_resource path="res://scenes/common/queue.tscn" type="PackedScene" id=7]
 
 [sub_resource type="NavigationPolygon" id=1]
 
@@ -72,7 +73,10 @@ position = Vector2( 1655.16, 257.935 )
 [node name="Player" parent="ObjectDistributor/Ground" index="1" instance=ExtResource( 4 )]
 
 position = Vector2( 564, 380 )
+altitude = 0.0
+static_on_scene = false
 flippable = true
+initial_state = null
 
 [node name="GroundGenerator2" type="Line2D" parent="ObjectDistributor/Ground/Player" index="6"]
 
@@ -195,6 +199,17 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Air" type="Node2D" parent="ObjectDistributor" index="1"]
 
+[node name="Queue" parent="." index="3" instance=ExtResource( 7 )]
+
+position = Vector2( 927.753, 472.091 )
+debug_mode = false
+initial_people_on_queue_amount = 5
+capacity = 6
+
+[node name="Area" parent="Queue" index="0"]
+
+rotation = 1.22173
+
 [connection signal="object_requested_to_be_added" from="ObjectDistributor/Ground/Player/GroundGenerator2" to="ObjectDistributor" method="_on_object_requested_to_be_added"]
 
 [connection signal="object_requested_to_be_added" from="ObjectDistributor/Ground/Player/GroundGenerator1" to="ObjectDistributor" method="_on_object_requested_to_be_added"]
@@ -207,4 +222,7 @@ _sections_unfolded = [ "Transform" ]
 
 [connection signal="area_entered" from="ObjectDistributor/Ground/Player/RemovalObjectArea2" to="ObjectDistributor" method="_on_removal_area_entered"]
 
+[connection signal="initial_people_requested_to_be_added" from="Queue" to="ObjectDistributor" method="_on_static_object_requested_to_be_added"]
 
+
+[editable path="Queue"]

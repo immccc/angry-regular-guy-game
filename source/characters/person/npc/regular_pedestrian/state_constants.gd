@@ -10,3 +10,5 @@ const GO_TO_CALL_COP_STATE_ID = "go_to_call_cop_state"
 const CALL_COP_WALKING_STATE_ID ="call_cop_walking_state"
 const CALL_COP_STANDING_STATE_ID ="call_cop_standing_state"
 const WAIT_FOR_COP_STATE_ID = "wait_for_cop_state"
+
+const WAIT_IN_QUEUE_STATE_ID = "wait_in_queue_state"
