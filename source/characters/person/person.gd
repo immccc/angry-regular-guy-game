@@ -76,3 +76,6 @@ func _on_damage_received(from, strength, direction):
         var hit_state = state_machine.get(CommonPersonStateConstants.HIT_STATE_ID)
         hit_state.direction = direction
         state_machine.change(CommonPersonStateConstants.HIT_STATE_ID)
+
+func _on_enter_queue(queue):
+    queue.add_person(self)

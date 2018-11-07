@@ -205,6 +205,8 @@ position = Vector2( 927.753, 472.091 )
 debug_mode = false
 initial_people_on_queue_amount = 5
 capacity = 6
+people_bothered_behind_intrusion = 1
+people_bothered_front_of_intrusion = 0
 
 [node name="Area" parent="Queue" index="0"]
 
