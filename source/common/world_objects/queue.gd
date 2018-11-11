@@ -81,8 +81,8 @@ func _update_people_ranking():
                 print("BOTHERED PERSON %s !!!" % person)
 
 func _get_rank(person):
-    var position = to_local(person.global_position)
-    var order = _get_order_in_queue(position)
+    var pos = to_local(person.global_position)
+    var order = _get_order_in_queue(pos)
 
     for ranking_order_range in ranking_per_order:
         if order >= ranking_order_range[0] and order <= ranking_order_range[1]:
@@ -94,7 +94,7 @@ func _get_order_in_queue(object_position):
     var intersecting_point = _get_intersecting_point_in_queue(object_position)
     var queue_line = _get_queue_line()
 
-    return intersecting_point.distance_to(queue_line.start) * 100 / queue_line.end.distance_to(queue_line.start)
+    return round(intersecting_point.distance_to(queue_line.start) * 100 / queue_line.end.distance_to(queue_line.start))
 
 func _get_queue_line():
     var half_line_height = Vector2(- (shape.shape.height/2 + shape.shape.radius) * sin(area.rotation), (shape.shape.height/2 + shape.shape.radius) * cos(area.rotation))
