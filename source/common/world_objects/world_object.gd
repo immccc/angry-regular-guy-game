@@ -5,10 +5,13 @@ const DirectionType = preload("res://source/common/direction.gd").Direction
 export (float) var altitude = 0.0
 export (bool) var static_on_scene = false
 export (bool) var flippable = false
+export (bool) var debug_mode = true
 
 var direction setget set_direction
 
 onready var last_position = global_position
+
+onready var debug_info_font = (Label.new()).get_font("font")
 
 signal unfair_event_performed(offender, offended)
 
@@ -27,6 +30,17 @@ func _ready():
 
 func _process(delta):
     _update_direction()
+
+    if debug_mode:
+        update()
+
+func _draw():
+    if !debug_mode:
+        return
+
+
+    draw_string(debug_info_font, Vector2(15, 0), "NODE %s" % name, Color(1, 0, 0))
+    draw_string(debug_info_font, Vector2(15, 30), "ID %s" % self, Color(1, 0, 0))
 
 func set_direction(new_direction):
     direction = new_direction

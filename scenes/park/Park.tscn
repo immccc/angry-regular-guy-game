@@ -73,10 +73,8 @@ position = Vector2( 1655.16, 257.935 )
 [node name="Player" parent="ObjectDistributor/Ground" index="1" instance=ExtResource( 4 )]
 
 position = Vector2( 564, 380 )
-altitude = 0.0
-static_on_scene = false
 flippable = true
-initial_state = null
+debug_mode = true
 
 [node name="GroundGenerator2" type="Line2D" parent="ObjectDistributor/Ground/Player" index="6"]
 
@@ -202,11 +200,8 @@ _sections_unfolded = [ "Transform" ]
 [node name="Queue" parent="." index="3" instance=ExtResource( 7 )]
 
 position = Vector2( 927.753, 472.091 )
-debug_mode = false
 initial_people_on_queue_amount = 5
 capacity = 6
-people_bothered_behind_intrusion = 1
-people_bothered_front_of_intrusion = 0
 
 [node name="Area" parent="Queue" index="0"]
 

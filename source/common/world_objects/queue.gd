@@ -42,6 +42,9 @@ export(int) var capacity = 3
 export(int) var people_bothered_behind_intrusion = 1
 export(int) var people_bothered_front_of_intrusion = 0
 
+
+onready var debug_info_font = (Label.new()).get_font("font")
+
 var positions = []
 var ranking_per_order = {}
 var ranking_per_people = {}
@@ -63,6 +66,10 @@ func _process(delta):
 func add_person(person):
     people.append(person)
 
+func remove_person(person):
+    people.erase(person)
+    ranking_per_people.erase(person)
+
 func _update_people_ranking():
     for person in people:
         var rank = _get_rank(person)
@@ -71,7 +78,7 @@ func _update_people_ranking():
             ranking_per_people[person] = rank
         else:
             if rank > ranking_per_people[person]:
-                print("BOTHERED PERSON!!!")
+                print("BOTHERED PERSON %s !!!" % person)
 
 func _get_rank(person):
     var position = to_local(person.global_position)
@@ -167,6 +174,9 @@ func _setup_regular_pedestrian_state(regular_pedestrian):
 func _on_queue_area_entered(ground_area_from_object):
     ground_area_from_object.emit_signal("entered_in_queue", self)
 
+func _on_queue_area_exited(ground_area_from_object):
+    ground_area_from_object.emit_signal("exited_from_queue", self)
+
 
 #---
 func _draw():
@@ -175,6 +185,7 @@ func _draw():
 
     _draw_queue_line()
     _draw_positions()
+    _draw_ranks()
 
 func _draw_queue_line():
     var queue_line = _get_queue_line()
@@ -186,3 +197,8 @@ func _draw_positions():
     var color = Color(1.0, 0.5, 0.5, 1.0)
     for position in positions:
         draw_circle(position, 5, color)
+
+func _draw_ranks():
+    for person in ranking_per_people:
+        var rank = ranking_per_people[person]
+        draw_string(debug_info_font, to_local(person.global_position) + Vector2(50, 15), "POSITION %s" % rank, Color(0, 0, 1))

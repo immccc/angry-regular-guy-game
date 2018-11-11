@@ -19,7 +19,6 @@ onready var sprite = $Sprite
 onready var kick_area = $"KickArea"
 onready var punch_area = $"PunchArea"
 
-
 func _ready():
 	_setup_strike_handler()
 
@@ -79,3 +78,6 @@ func _on_damage_received(from, strength, direction):
 
 func _on_enter_queue(queue):
     queue.add_person(self)
+
+func _on_exit_queue(queue):
+    queue.remove_person(self)

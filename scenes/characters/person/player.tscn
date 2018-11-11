@@ -23,11 +23,10 @@ b = Vector2( -0.171089, 41.0295 )
 custom_solver_bias = 0.0
 extents = Vector2( 33.0012, 82.9997 )
 
-[sub_resource type="LineShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-normal = Vector2( 0, -1 )
-d = 0.0
+extents = Vector2( 59.7565, 6.6911 )
 
 [node name="Player" type="Node2D" index="0"]
 
@@ -126,12 +125,13 @@ collision_mask = 16
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 5 )
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundArea" index="0"]
 
-position = Vector2( 0.124031, 37 )
+position = Vector2( 0.416023, 27.9483 )
 shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]
 
@@ -147,4 +147,5 @@ shape = SubResource( 4 )
 
 [connection signal="entered_in_queue" from="GroundArea" to="." method="_on_enter_queue"]
 
+[connection signal="exited_from_queue" from="GroundArea" to="." method="_on_exit_queue"]
 
