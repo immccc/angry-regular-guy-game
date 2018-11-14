@@ -1,38 +1,9 @@
 extends Node2D
 
-class LineFunc:
-    var m
-    var b
-    func _init(m, b):
-        self.m = m
-        self.b = b
-
-    func get_y(x):
-        return m * x + b
-
-class Line:
-    var start
-    var end
-
-    func _init(start, end):
-        self.start = start
-        self.end = end
-
-    func get_func():
-        var delta_x = end.x - start.x
-        var delta_y = end.y - start.y
-        var m
-        if delta_x == 0:
-            m = INF * sign(delta_y)
-        else:
-            m = delta_y / delta_x
-
-        var b = start.y - (start.x * m)
-        return LineFunc.new(m, b)
-
-
 const DirectionType = preload("res://source/common/direction.gd").Direction
 const RegularPedestrian = preload("res://scenes/characters/person/regular_pedestrian.tscn")
+
+const Line = preload("line.gd")
 
 signal initial_people_requested_to_be_added(object_node_type, object_position, direction, node_caller, prepare_object_to_be_added_method)
 
@@ -42,12 +13,11 @@ export(int) var capacity = 3
 export(int) var people_bothered_behind_intrusion = 1
 export(int) var people_bothered_front_of_intrusion = 0
 
-
 onready var debug_info_font = (Label.new()).get_font("font")
 
 var positions = []
-var ranking_per_order = {}
-var ranking_per_people = {}
+var rank_per_position_ranges = {}
+var ranking_per_person = {}
 var people = []
 
 onready var area = $Area
@@ -56,37 +26,41 @@ onready var shape = $Area/Shape
 func _ready():
     _fill_positions()
     _fill_with_initial_people()
-    _fill_ranking_per_order()
+    _fill_rank_per_position_ranges()
 
 func _process(delta):
     _update_people_ranking()
+    _notify_people_to_be_bothered()
 
-    update()
+    if debug_mode:
+        update()
 
 func add_person(person):
     people.append(person)
 
 func remove_person(person):
     people.erase(person)
-    ranking_per_people.erase(person)
+    ranking_per_person.erase(person)
 
 func _update_people_ranking():
+    var people_per_ranking = {}
+
     for person in people:
         var rank = _get_rank(person)
+        ranking_per_person[person] = rank
 
-        if !ranking_per_people.has(person):
-            ranking_per_people[person] = rank
-        else:
-            if rank > ranking_per_people[person]:
-                print("BOTHERED PERSON %s !!!" % person)
+        if !people_per_ranking.has(rank):
+            people_per_ranking[rank] = []
+
+        people_per_ranking[rank].append(person)
 
 func _get_rank(person):
     var pos = to_local(person.global_position)
     var order = _get_order_in_queue(pos)
 
-    for ranking_order_range in ranking_per_order:
+    for ranking_order_range in rank_per_position_ranges:
         if order >= ranking_order_range[0] and order <= ranking_order_range[1]:
-            return ranking_per_order[ranking_order_range]
+            return rank_per_position_ranges[ranking_order_range]
 
     return people.size()
 
@@ -155,12 +129,12 @@ func _fill_with_initial_people():
         emit_signal("initial_people_requested_to_be_added", RegularPedestrian, to_global(position), _get_created_regular_pedestrian_direction(), self, "_setup_regular_pedestrian_state")
         created_regular_pedestrians += 1
 
-func _fill_ranking_per_order():
+func _fill_rank_per_position_ranges():
     var lower_bound = 0
     var ranking = 1
     for position in positions:
         var upper_bound = _get_order_in_queue(position)
-        ranking_per_order[[lower_bound, upper_bound]] = ranking
+        rank_per_position_ranges[[lower_bound, upper_bound]] = ranking
         lower_bound = upper_bound
         ranking += 1
 
@@ -170,6 +144,9 @@ func _get_created_regular_pedestrian_direction():
 func _setup_regular_pedestrian_state(regular_pedestrian):
     regular_pedestrian.initial_state = "wait_in_queue_state"
     people.append(regular_pedestrian)
+
+func _notify_people_to_be_bothered():
+    pass
 
 func _on_queue_area_entered(ground_area_from_object):
     ground_area_from_object.emit_signal("entered_in_queue", self)
@@ -199,6 +176,6 @@ func _draw_positions():
         draw_circle(position, 5, color)
 
 func _draw_ranks():
-    for person in ranking_per_people:
-        var rank = ranking_per_people[person]
+    for person in ranking_per_person:
+        var rank = ranking_per_person[person]
         draw_string(debug_info_font, to_local(person.global_position) + Vector2(50, 15), "POSITION %s" % rank, Color(0, 0, 1))
