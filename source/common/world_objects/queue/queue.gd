@@ -4,6 +4,7 @@ const DirectionType = preload("res://source/common/direction.gd").Direction
 const RegularPedestrian = preload("res://scenes/characters/person/regular_pedestrian.tscn")
 
 const Line = preload("line.gd")
+const PersonInQueueProperties = preload("person_in_queue_properties.gd")
 
 signal initial_people_requested_to_be_added(object_node_type, object_position, direction, node_caller, prepare_object_to_be_added_method)
 
@@ -43,16 +44,18 @@ func remove_person(person):
     ranking_per_person.erase(person)
 
 func _update_people_ranking():
-    var people_per_ranking = {}
-
     for person in people:
-        var rank = _get_rank(person)
-        ranking_per_person[person] = rank
 
-        if !people_per_ranking.has(rank):
-            people_per_ranking[rank] = []
+        var properties
+        if !ranking_per_person.has(person):
+            properties = PersonInQueueProperties.new()
+            properties.joined_time = OS.get_unix_time()
 
-        people_per_ranking[rank].append(person)
+            ranking_per_person[person] = properties
+        else:
+            properties = ranking_per_person[person]
+
+        properties.rank = _get_rank(person)
 
 func _get_rank(person):
     var pos = to_local(person.global_position)
@@ -177,5 +180,5 @@ func _draw_positions():
 
 func _draw_ranks():
     for person in ranking_per_person:
-        var rank = ranking_per_person[person]
+        var rank = ranking_per_person[person].rank
         draw_string(debug_info_font, to_local(person.global_position) + Vector2(50, 15), "POSITION %s" % rank, Color(0, 0, 1))
