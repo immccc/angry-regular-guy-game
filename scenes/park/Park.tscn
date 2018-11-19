@@ -202,6 +202,7 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 927.753, 472.091 )
 initial_people_on_queue_amount = 5
 capacity = 6
+amount_people_bothered_behind_intrusion = 0
 
 [node name="Area" parent="Queue" index="0"]
 

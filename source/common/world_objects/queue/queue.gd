@@ -11,14 +11,13 @@ signal initial_people_requested_to_be_added(object_node_type, object_position, d
 export(bool) var debug_mode = false
 export(int) var initial_people_on_queue_amount = 3
 export(int) var capacity = 3
-export(int) var people_bothered_behind_intrusion = 1
-export(int) var people_bothered_front_of_intrusion = 0
+export(int) var amount_people_bothered_behind_intrusion = 0
 
 onready var debug_info_font = (Label.new()).get_font("font")
 
 var positions = []
 var rank_per_position_ranges = {}
-var ranking_per_person = {}
+var properties_per_person = {}
 var people = []
 
 onready var area = $Area
@@ -38,24 +37,41 @@ func _process(delta):
 
 func add_person(person):
     people.append(person)
+    var properties = PersonInQueueProperties.new()
+    properties.joined_time = OS.get_unix_time()
+    properties_per_person[person] = properties
 
 func remove_person(person):
     people.erase(person)
-    ranking_per_person.erase(person)
+    properties_per_person.erase(person)
 
 func _update_people_ranking():
     for person in people:
-
-        var properties
-        if !ranking_per_person.has(person):
-            properties = PersonInQueueProperties.new()
-            properties.joined_time = OS.get_unix_time()
-
-            ranking_per_person[person] = properties
-        else:
-            properties = ranking_per_person[person]
-
+        var properties = properties_per_person[person]
         properties.rank = _get_rank(person)
+
+func _notify_people_to_be_bothered():
+    for potentially_bothering_person in people:
+        var bothered_people = _get_bothered_people(potentially_bothering_person)
+        #TODO REMOVE, ONLY DEBUG!!!!!!!!!
+        if bothered_people.size() > 0:
+            print("BOTHERING %s IS BOTHERING %s" % [potentially_bothering_person, bothered_people])
+
+func _get_bothered_people(potentially_bothering_person):
+    var bothered_people = []
+    var potentially_bothering_person_rank = properties_per_person[potentially_bothering_person].rank
+    var potentially_bothering_person_joined_time = properties_per_person[potentially_bothering_person].joined_time
+
+    for potentially_bothered_person in properties_per_person:
+        var potentially_bothered_person_rank = properties_per_person[potentially_bothered_person].rank
+        var potentially_bothered_person_joined_time = properties_per_person[potentially_bothered_person].joined_time
+        var potentially_bothering_person_is_in_front = potentially_bothered_person_rank <= potentially_bothered_person_rank && potentially_bothered_person_rank >= potentially_bothering_person_rank - amount_people_bothered_behind_intrusion
+        var potentially_bothering_person_joined_later = potentially_bothering_person_joined_time > potentially_bothered_person_joined_time
+
+        if potentially_bothering_person_is_in_front and potentially_bothering_person_joined_later:
+            bothered_people.append(potentially_bothered_person)
+
+    return bothered_people
 
 func _get_rank(person):
     var pos = to_local(person.global_position)
@@ -146,10 +162,7 @@ func _get_created_regular_pedestrian_direction():
 
 func _setup_regular_pedestrian_state(regular_pedestrian):
     regular_pedestrian.initial_state = "wait_in_queue_state"
-    people.append(regular_pedestrian)
-
-func _notify_people_to_be_bothered():
-    pass
+    add_person(regular_pedestrian)
 
 func _on_queue_area_entered(ground_area_from_object):
     ground_area_from_object.emit_signal("entered_in_queue", self)
@@ -179,6 +192,6 @@ func _draw_positions():
         draw_circle(position, 5, color)
 
 func _draw_ranks():
-    for person in ranking_per_person:
-        var rank = ranking_per_person[person].rank
+    for person in properties_per_person:
+        var rank = properties_per_person[person].rank
         draw_string(debug_info_font, to_local(person.global_position) + Vector2(50, 15), "POSITION %s" % rank, Color(0, 0, 1))
