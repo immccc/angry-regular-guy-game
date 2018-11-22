@@ -67,4 +67,3 @@ func _set_reaction_when_not_looking():
 
 func set_offender_in_cop(cop):
     cop.offender = offender
-

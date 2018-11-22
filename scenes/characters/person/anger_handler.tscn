@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://source/characters/person/anger_handler.gd" type="Script" id=1]
+
+[node name="AngerHandler" type="Node"]
+
+script = ExtResource( 1 )
+considerable_bothered_level = 70
+maximum_bothered_level = 100
+
+
