@@ -53,9 +53,9 @@ func _update_people_ranking():
 func _notify_people_to_be_bothered():
     for potentially_bothering_person in people:
         var bothered_people = _get_bothered_people(potentially_bothering_person)
-        #TODO REMOVE, ONLY DEBUG!!!!!!!!!
-        if bothered_people.size() > 0:
-            print("BOTHERING %s IS BOTHERING %s" % [potentially_bothering_person, bothered_people])
+        for bothered_person in bothered_people:
+            # bothered_person.bother_by(potentially_bothering_person)
+            pass
 
 func _get_bothered_people(potentially_bothering_person):
     var bothered_people = []
