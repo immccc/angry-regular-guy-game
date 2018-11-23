@@ -30,6 +30,8 @@ func _ready():
 
 func _process(delta):
     _update_people_ranking()
+    _sort_people_by_ranking()
+    _notify_people_position_empty()
     _notify_people_to_be_bothered()
 
     if debug_mode:
@@ -49,6 +51,18 @@ func _update_people_ranking():
     for person in people:
         var properties = properties_per_person[person]
         properties.rank = _get_rank(person)
+
+func _sort_people_by_ranking():
+    people.sort_custom(self, "_compare_persons_by_rank")
+
+func _compare_persons_by_rank(person1, person2):
+    var rank_1 = properties_per_person[person1].rank
+    var rank_2 = properties_per_person[person2].rank
+
+    return rank_1 < rank_2
+
+func _notify_people_position_empty():
+    pass
 
 func _notify_people_to_be_bothered():
     for potentially_bothering_person in people:

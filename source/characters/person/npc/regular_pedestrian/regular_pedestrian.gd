@@ -9,6 +9,7 @@ const WalkState = preload("walk_state.gd")
 const HitState = preload("hit_state.gd")
 const ShockState = preload("res://source/characters/person/shock_state.gd")
 const RunAwayState = preload("run_away_state.gd")
+const GoToPositionInQueueState = preload("go_to_position_in_queue_state.gd")
 
 const GoToAttackState = preload("go_to_attack_state.gd")
 const StrikeState = preload("strike_state.gd")
@@ -47,6 +48,7 @@ func _setup_states():
     state_machine.add(WaitForCopState.new(StateConstants.WAIT_FOR_COP_STATE_ID, node))
 
     state_machine.add(WaitInQueueState.new(StateConstants.WAIT_IN_QUEUE_STATE_ID, node))
+    state_machine.add(GoToPositionInQueueState.new(StateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID, node))
 
 func _get_default_first_state():
     return StateConstants.STAND_STATE_ID
@@ -67,3 +69,6 @@ func _set_reaction_when_not_looking():
 
 func set_offender_in_cop(cop):
     cop.offender = offender
+
+func _on_requested_move_to_position(position):
+    pass

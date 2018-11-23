@@ -5,6 +5,8 @@ export (String) var initial_state
 var StateMachine = preload("res://source/common/state/state_machine.gd")
 onready var state_machine = StateMachine.new()
 
+signal requested_move_to_position(position)
+
 func _ready():
 	randomize()
 

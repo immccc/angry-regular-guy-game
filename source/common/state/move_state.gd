@@ -30,7 +30,8 @@ func _set_path():
     path.remove(0)
 
 func _get_dest():
-    pass
+    print("_get_dest() must be defined")
+    assert(false)
 
 func _move(delta):
     if _is_path_finished():
