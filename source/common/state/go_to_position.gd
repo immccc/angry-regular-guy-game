@@ -9,8 +9,9 @@ func enter_into_state():
     .enter_into_state()
 
 func get_next_state():
-    print("Next state when reaching a new position must be defined")
-    assert(false)
+    if _is_path_finished():
+        return _get_next_state()
+    return id
 
 func _get_dest():
     return path_finder.get_closest_point(path_finder.to_local(position_dest))

@@ -9,7 +9,6 @@ const WalkState = preload("walk_state.gd")
 const HitState = preload("hit_state.gd")
 const ShockState = preload("res://source/characters/person/shock_state.gd")
 const RunAwayState = preload("run_away_state.gd")
-const GoToPositionInQueueState = preload("go_to_position_in_queue_state.gd")
 
 const GoToAttackState = preload("go_to_attack_state.gd")
 const StrikeState = preload("strike_state.gd")
@@ -20,6 +19,7 @@ const CallCopStandingState = preload("call_cop_standing_state.gd")
 const WaitForCopState = preload("wait_for_cop_state.gd")
 
 const WaitInQueueState = preload("wait_in_queue_state.gd")
+const GoToPositionInQueueState = preload("go_to_position_in_queue_state.gd")
 
 func _init():
     add_to_group("unfair_event_listeners")
@@ -71,4 +71,6 @@ func set_offender_in_cop(cop):
     cop.offender = offender
 
 func _on_requested_move_to_position(position):
-    pass
+    var state = state_machine.get(StateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID)
+    state.position_dest = position
+    state_machine.change(StateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID)

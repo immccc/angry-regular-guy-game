@@ -16,6 +16,7 @@ export(int) var amount_people_bothered_behind_intrusion = 0
 onready var debug_info_font = (Label.new()).get_font("font")
 
 var positions = []
+var positions_per_rank = {}
 var rank_per_position_ranges = {}
 var properties_per_person = {}
 var people = []
@@ -27,6 +28,7 @@ func _ready():
     _fill_positions()
     _fill_with_initial_people()
     _fill_rank_per_position_ranges()
+    _fill_positions_per_rank()
 
 func _process(delta):
     _update_people_ranking()
@@ -50,7 +52,7 @@ func remove_person(person):
 func _update_people_ranking():
     for person in people:
         var properties = properties_per_person[person]
-        properties.rank = _get_rank(person)
+        properties.rank = _get_rank_per_person(person)
 
 func _sort_people_by_ranking():
     people.sort_custom(self, "_compare_persons_by_rank")
@@ -62,14 +64,34 @@ func _compare_persons_by_rank(person1, person2):
     return rank_1 < rank_2
 
 func _notify_people_position_empty():
-    pass
+    var next_rank_to_fill = _get_empty_rank()
+    if next_rank_to_fill == null:
+        return
+
+    for person in people:
+        var person_rank = properties_per_person[person].rank
+        if person_rank > next_rank_to_fill:
+            person.emit_signal("requested_move_to_position", to_global(positions_per_rank[next_rank_to_fill]))
+            next_rank_to_fill +=1
+
+func _get_empty_rank():
+    var former_person_rank = 0
+    for person in people:
+        var current_person_rank = properties_per_person[person].rank
+
+        var ranks_without_person = current_person_rank - former_person_rank - 1
+        if ranks_without_person > 0:
+            return current_person_rank - ranks_without_person
+
+        former_person_rank = current_person_rank
+    return null
+
 
 func _notify_people_to_be_bothered():
     for potentially_bothering_person in people:
         var bothered_people = _get_bothered_people(potentially_bothering_person)
-        for bothered_person in bothered_people:
-            # bothered_person.bother_by(potentially_bothering_person)
-            pass
+        # bothered_person.bother_by(potentially_bothering_person)
+        return
 
 func _get_bothered_people(potentially_bothering_person):
     var bothered_people = []
@@ -87,8 +109,10 @@ func _get_bothered_people(potentially_bothering_person):
 
     return bothered_people
 
-func _get_rank(person):
-    var pos = to_local(person.global_position)
+func _get_rank_per_person(person):
+    return _get_rank_per_position(to_local(person.global_position))
+
+func _get_rank_per_position(pos):
     var order = _get_order_in_queue(pos)
 
     for ranking_order_range in rank_per_position_ranges:
@@ -170,6 +194,11 @@ func _fill_rank_per_position_ranges():
         rank_per_position_ranges[[lower_bound, upper_bound]] = ranking
         lower_bound = upper_bound
         ranking += 1
+
+func _fill_positions_per_rank():
+    for pos in positions:
+        var rank = _get_rank_per_position(pos)
+        positions_per_rank[rank] = pos
 
 func _get_created_regular_pedestrian_direction():
     return [DirectionType.LEFT, DirectionType.RIGHT][randi() % 2]
