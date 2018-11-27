@@ -2,6 +2,7 @@ extends Node2D
 
 const DirectionType = preload("res://source/common/direction.gd").Direction
 const RegularPedestrian = preload("res://scenes/characters/person/regular_pedestrian.tscn")
+const RegularPedestrianStateConstants = preload("res://source/characters/person/npc/regular_pedestrian/state_constants.gd")
 
 const Line = preload("line.gd")
 const PersonInQueueProperties = preload("person_in_queue_properties.gd")
@@ -18,6 +19,8 @@ onready var debug_info_font = (Label.new()).get_font("font")
 var positions = []
 var positions_per_rank = {}
 var rank_per_position_ranges = {}
+var people_per_rank = {}
+var people_per_position_update = {}
 var properties_per_person = {}
 var people = []
 
@@ -33,7 +36,9 @@ func _ready():
 func _process(delta):
     _update_people_ranking()
     _sort_people_by_ranking()
-    _notify_people_position_empty()
+    _update_people_per_rank()
+    _notify_people_change_position()
+    _update_people_per_position_update()
     _notify_people_to_be_bothered()
 
     if debug_mode:
@@ -57,13 +62,30 @@ func _update_people_ranking():
 func _sort_people_by_ranking():
     people.sort_custom(self, "_compare_persons_by_rank")
 
+func _update_people_per_rank():
+    people_per_rank.clear()
+    for person in people:
+        var rank = properties_per_person[person].rank
+        if !people_per_rank.has(rank):
+            people_per_rank[rank] = []
+        people_per_rank[rank].append(person)
+
+    for people_in_same_rank in people_per_rank.values():
+        people_in_same_rank.sort_custom(self, "_compare_persons_by_joined_time")
+
 func _compare_persons_by_rank(person1, person2):
     var rank_1 = properties_per_person[person1].rank
     var rank_2 = properties_per_person[person2].rank
 
     return rank_1 < rank_2
 
-func _notify_people_position_empty():
+func _compare_persons_by_joined_time(person1, person2):
+    var joined_time_1 = properties_per_person[person1].joined_time
+    var joined_time_2 = properties_per_person[person2].joined_time
+
+    return joined_time_1 < joined_time_2
+
+func _notify_people_change_position():
     var next_rank_to_fill = _get_empty_rank()
     if next_rank_to_fill == null:
         return
@@ -71,8 +93,33 @@ func _notify_people_position_empty():
     for person in people:
         var person_rank = properties_per_person[person].rank
         if person_rank > next_rank_to_fill:
-            person.emit_signal("requested_move_to_position", to_global(positions_per_rank[next_rank_to_fill]))
-            next_rank_to_fill +=1
+            var people_in_same_rank = people_per_rank[person_rank]
+            var first_joined_person = people_in_same_rank.pop_front()
+
+            var position_to_be_filled = to_global(positions_per_rank[next_rank_to_fill])
+
+            #TODO DEBUG!!! REMOVE!!!!!
+            if people_per_position_update.has(position_to_be_filled):
+                print("PEOPLE PER POSITION UPDATE IN POS ", position_to_be_filled, " = ", people_per_position_update[position_to_be_filled])
+
+            while people_per_position_update.has(position_to_be_filled) && people_per_position_update[position_to_be_filled] != person:
+                position_to_be_filled = to_global(positions_per_rank[next_rank_to_fill])
+                next_rank_to_fill += 1
+
+            first_joined_person.emit_signal("requested_move_to_position", position_to_be_filled)
+            people_per_position_update[position_to_be_filled] = first_joined_person
+
+            next_rank_to_fill += 1
+
+
+func _update_people_per_position_update():
+
+    for pos in people_per_position_update.keys():
+        if people_per_position_update.has(pos):
+            var person = people_per_position_update[pos]
+            if (person.get_current_state() == RegularPedestrianStateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID
+                && person.state_machine.get(RegularPedestrianStateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID).position_dest != pos):
+                people_per_position_update.erase(pos)
 
 func _get_empty_rank():
     var former_person_rank = 0

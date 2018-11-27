@@ -13,6 +13,9 @@ func _ready():
 	_setup_states()
 	_setup_initial_state()
 
+func get_current_state():
+	return state_machine.current_state_id
+
 func _setup_initial_state():
 	if initial_state == null or initial_state == "":
 		state_machine.current_state_id = _get_default_first_state()
