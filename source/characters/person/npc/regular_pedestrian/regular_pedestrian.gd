@@ -70,7 +70,7 @@ func _set_reaction_when_not_looking():
 func set_offender_in_cop(cop):
     cop.offender = offender
 
-func _on_requested_move_to_position(position):
+func _on_requested_move_to_position(pos):
     var state = state_machine.get(StateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID)
-    state.position_dest = position
+    state.position_dest = pos
     state_machine.change(StateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID)

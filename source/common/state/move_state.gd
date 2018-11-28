@@ -47,7 +47,7 @@ func _move(delta):
 
     var next_position = current_position.linear_interpolate(next_point_on_path, step / distance_to_next_point_on_path)
 
-    if (current_position - next_position).length() > (next_point_on_path - next_position).length():
+    if (current_position - next_position).length() >= (next_point_on_path - next_position).length():
         node.global_position = next_point_on_path
         path.remove(0)
     else:

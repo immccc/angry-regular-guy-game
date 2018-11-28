@@ -20,7 +20,6 @@ var positions = []
 var positions_per_rank = {}
 var rank_per_position_ranges = {}
 var people_per_rank = {}
-var people_per_position_update = {}
 var properties_per_person = {}
 var people = []
 
@@ -37,9 +36,11 @@ func _process(delta):
     _update_people_ranking()
     _sort_people_by_ranking()
     _update_people_per_rank()
-    _notify_people_change_position()
-    _update_people_per_position_update()
-    _notify_people_to_be_bothered()
+
+    if _are_people_positioned_correctly():
+        _notify_people_to_be_bothered()
+    else:
+        _notify_people_change_position()
 
     if debug_mode:
         update()
@@ -53,6 +54,14 @@ func add_person(person):
 func remove_person(person):
     people.erase(person)
     properties_per_person.erase(person)
+
+    for rank in people_per_rank:
+        if people_per_rank[rank].find(person) >= 0:
+            people_per_rank[rank].erase(person)
+
+func _are_people_positioned_correctly():
+    var first_empty_rank = _get_first_empty_rank()
+    return first_empty_rank == null or first_empty_rank >= people.size()
 
 func _update_people_ranking():
     for person in people:
@@ -86,59 +95,32 @@ func _compare_persons_by_joined_time(person1, person2):
     return joined_time_1 < joined_time_2
 
 func _notify_people_change_position():
-    var next_rank_to_fill = _get_empty_rank()
+    var next_rank_to_fill = _get_first_empty_rank()
     if next_rank_to_fill == null:
         return
 
-    for person in people:
-        var person_rank = properties_per_person[person].rank
-        if person_rank > next_rank_to_fill:
-            var people_in_same_rank = people_per_rank[person_rank]
-            var first_joined_person = people_in_same_rank.pop_front()
+    for rank in range(next_rank_to_fill + 1, positions.size() + 1):
+        if !people_per_rank.has(rank) or people_per_rank[rank].empty():
+            continue
 
+        for person in people_per_rank[rank]:
+            if next_rank_to_fill > rank:
+                return
             var position_to_be_filled = to_global(positions_per_rank[next_rank_to_fill])
-
-            #TODO DEBUG!!! REMOVE!!!!!
-            if people_per_position_update.has(position_to_be_filled):
-                print("PEOPLE PER POSITION UPDATE IN POS ", position_to_be_filled, " = ", people_per_position_update[position_to_be_filled])
-
-            while people_per_position_update.has(position_to_be_filled) && people_per_position_update[position_to_be_filled] != person:
-                position_to_be_filled = to_global(positions_per_rank[next_rank_to_fill])
-                next_rank_to_fill += 1
-
-            first_joined_person.emit_signal("requested_move_to_position", position_to_be_filled)
-            people_per_position_update[position_to_be_filled] = first_joined_person
-
+            person.emit_signal("requested_move_to_position", position_to_be_filled)
             next_rank_to_fill += 1
 
 
-func _update_people_per_position_update():
-
-    for pos in people_per_position_update.keys():
-        if people_per_position_update.has(pos):
-            var person = people_per_position_update[pos]
-            if (person.get_current_state() == RegularPedestrianStateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID
-                && person.state_machine.get(RegularPedestrianStateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID).position_dest != pos):
-                people_per_position_update.erase(pos)
-
-func _get_empty_rank():
-    var former_person_rank = 0
-    for person in people:
-        var current_person_rank = properties_per_person[person].rank
-
-        var ranks_without_person = current_person_rank - former_person_rank - 1
-        if ranks_without_person > 0:
-            return current_person_rank - ranks_without_person
-
-        former_person_rank = current_person_rank
+func _get_first_empty_rank():
+    for rank in range(1, people.size() + 1):
+        if !people_per_rank.has(rank) or people_per_rank[rank].size() == 0:
+            return rank
     return null
-
 
 func _notify_people_to_be_bothered():
     for potentially_bothering_person in people:
         var bothered_people = _get_bothered_people(potentially_bothering_person)
         # bothered_person.bother_by(potentially_bothering_person)
-        return
 
 func _get_bothered_people(potentially_bothering_person):
     var bothered_people = []
@@ -157,7 +139,10 @@ func _get_bothered_people(potentially_bothering_person):
     return bothered_people
 
 func _get_rank_per_person(person):
-    return _get_rank_per_position(to_local(person.global_position))
+    if person.get_current_state() == RegularPedestrianStateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID:
+        return _get_rank_per_position(to_local(person.state_machine.get(RegularPedestrianStateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID).position_dest))
+    else:
+        return _get_rank_per_position(to_local(person.global_position))
 
 func _get_rank_per_position(pos):
     var order = _get_order_in_queue(pos)
@@ -259,7 +244,6 @@ func _on_queue_area_entered(ground_area_from_object):
 
 func _on_queue_area_exited(ground_area_from_object):
     ground_area_from_object.emit_signal("exited_from_queue", self)
-
 
 #---
 func _draw():
