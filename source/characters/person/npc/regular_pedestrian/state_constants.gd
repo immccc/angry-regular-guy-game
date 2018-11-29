@@ -13,3 +13,5 @@ const WAIT_FOR_COP_STATE_ID = "wait_for_cop_state"
 
 const WAIT_IN_QUEUE_STATE_ID = "wait_in_queue_state"
 const GO_TO_POSITION_IN_QUEUE_STATE_ID = "go_to_position_in_queue_state"
+
+const COMPLAINING_STATE_ID = "complaining_state"

@@ -21,6 +21,8 @@ const WaitForCopState = preload("wait_for_cop_state.gd")
 const WaitInQueueState = preload("wait_in_queue_state.gd")
 const GoToPositionInQueueState = preload("go_to_position_in_queue_state.gd")
 
+const ComplainingState = preload("complaining_state.gd")
+
 func _init():
     add_to_group("unfair_event_listeners")
 
@@ -49,6 +51,8 @@ func _setup_states():
 
     state_machine.add(WaitInQueueState.new(StateConstants.WAIT_IN_QUEUE_STATE_ID, node))
     state_machine.add(GoToPositionInQueueState.new(StateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID, node))
+
+    state_machine.add(ComplainingState.new(StateConstants.COMPLAINING_STATE_ID, node))
 
 func _get_default_first_state():
     return StateConstants.STAND_STATE_ID

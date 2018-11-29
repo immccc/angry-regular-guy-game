@@ -144,6 +144,14 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="AngerHandler" parent="." index="8" instance=ExtResource( 6 )]
 
+considerable_bothered_level_total = 120
+maximum_bothered_level_total = 150
+considerable_bothered_level_per_each = 70
+maximum_bothered_level_per_each = 100
+bother_decreasing_factor = 1
+
+[connection signal="bothered_by" from="." to="AngerHandler" method="_on_bothered_by"]
+
 [connection signal="requested_move_to_position" from="." to="." method="_on_requested_move_to_position"]
 
 [connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]

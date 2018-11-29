@@ -20,7 +20,7 @@ _sections_unfolded = [ "Resource" ]
 custom_solver_bias = 0.0
 extents = Vector2( 61.4375, 475.698 )
 
-[node name="Park" type="Node2D" index="0"]
+[node name="Park" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 

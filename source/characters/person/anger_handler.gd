@@ -1,10 +1,15 @@
 extends Node
 
-signal on_being_bothered(from)
-signal on_being_forgiving(from)
+signal bothered_considerably_by(from)
+signal bothered_totally_by(from)
+signal bothered_considerably()
+signal bothered_totally()
 
-export (int) var considerable_bothered_level = 70
-export (int) var maximum_bothered_level = 100
+export (int) var considerable_bothered_level_total = 120
+export (int) var maximum_bothered_level_total = 150
+export (int) var considerable_bothered_level_per_each = 70
+export (int) var maximum_bothered_level_per_each = 100
+export (int) var bother_decreasing_factor = 1
 
 var bothered_by = {}
 
@@ -12,29 +17,46 @@ func _ready():
     pass
 
 func _process(delta):
-    pass
+    for bothering_element in bothered_by.keys():
+        _notify_bothering(bothering_element)
+        _decrease_bother_level(bothered_by[bothering_element], bother_decreasing_factor * delta)
 
-func increase_anger(from):
-    _update_anger(from, 1)
+func _notify_total_bothering():
+    var total_bother_level = _get_total_bothered_level()
+    if total_bother_level >= maximum_bothered_level_total:
+        emit_signal("bothered_considerably")
+    elif total_bother_level >= considerable_bothered_level_total:
+        emit_signal("bothered_totally")
 
-func decrease_anger(from):
-    _update_anger(from, -1)
 
-func get_total_anger_level():
+func _notify_bothering(bothering_element):
+    var bother_level_for_element = bothered_by[bothering_element]
+    if bother_level_for_element >= maximum_bothered_level_per_each:
+        emit_signal("bothered_considerably_by", bothering_element)
+    elif bother_level_for_element >= considerable_bothered_level_per_each:
+        emit_signal("bothered_totally_by", bothering_element)
+
+func _decrease_bother_level(from, amount):
+    _update_bother_level(from, -amount)
+
+func _get_total_bothered_level():
     var anger_levels = bothered_by.values()
     var total = 0
     for anger_level in anger_levels:
         total += anger_level
     return total
 
-func _update_anger(from, amount):
+func _update_bother_level(from, amount):
 
-    var bother_factor = 0
-    if bothered_by.has(from):
-        bother_factor = bothered_by[from] + amount
+    if !bothered_by.has(from):
+        bothered_by[from] = 0
+
+    var bother_factor = bothered_by[from] + amount
 
     if bother_factor <= 0:
         bothered_by.erase(from)
     else:
         bothered_by[from] = bother_factor
 
+func _on_bothered_by(from, amount):
+    _update_bother_level(from, amount)

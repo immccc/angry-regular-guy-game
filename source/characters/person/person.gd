@@ -3,6 +3,8 @@ extends "res://source/common/world_objects/stateful_world_object.gd"
 signal added_elements_to_be_hit(objects, strike_performer, strike_type)
 signal removed_elements_to_be_hit(objects, strike_performer, strike_type)
 
+signal bothered_by(element, amount)
+
 const CommonPersonStateConstants = preload("res://source/characters/person/common_person_state_constants.gd")
 const StrikeType = preload("res://source/characters/person/strike_type.gd").StrikeType
 
