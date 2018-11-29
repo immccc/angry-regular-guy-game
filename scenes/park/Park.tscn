@@ -46,6 +46,7 @@ _sections_unfolded = [ "Cell", "Occluder", "Transform", "Visibility" ]
 
 [node name="PathFinder" type="Navigation2D" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( -1115.59, 158.273 )
 _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
@@ -198,10 +199,11 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Queue" parent="." index="3" instance=ExtResource( 7 )]
 
+editor/display_folded = true
 position = Vector2( 927.753, 472.091 )
 initial_people_on_queue_amount = 5
 capacity = 6
-amount_people_bothered_behind_intrusion = 0
+amount_people_bothered_behind_intrusion = 2
 
 [node name="Area" parent="Queue" index="0"]
 

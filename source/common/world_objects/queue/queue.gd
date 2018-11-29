@@ -38,7 +38,7 @@ func _process(delta):
     _update_people_per_rank()
 
     if _are_people_positioned_correctly():
-        _notify_people_to_be_bothered()
+        _notify_people_to_be_bothered(delta)
     else:
         _notify_people_change_position()
 
@@ -117,10 +117,11 @@ func _get_first_empty_rank():
             return rank
     return null
 
-func _notify_people_to_be_bothered():
+func _notify_people_to_be_bothered(delta):
     for potentially_bothering_person in people:
         var bothered_people = _get_bothered_people(potentially_bothering_person)
-        # bothered_person.bother_by(potentially_bothering_person)
+        for bothered_person in bothered_people:
+            bothered_person.emit_signal("bothered_by", potentially_bothering_person, delta)
 
 func _get_bothered_people(potentially_bothering_person):
     var bothered_people = []
@@ -130,7 +131,7 @@ func _get_bothered_people(potentially_bothering_person):
     for potentially_bothered_person in properties_per_person:
         var potentially_bothered_person_rank = properties_per_person[potentially_bothered_person].rank
         var potentially_bothered_person_joined_time = properties_per_person[potentially_bothered_person].joined_time
-        var potentially_bothering_person_is_in_front = potentially_bothered_person_rank <= potentially_bothered_person_rank && potentially_bothered_person_rank >= potentially_bothering_person_rank - amount_people_bothered_behind_intrusion
+        var potentially_bothering_person_is_in_front = potentially_bothered_person_rank >= potentially_bothering_person_rank and potentially_bothered_person_rank < amount_people_bothered_behind_intrusion + potentially_bothering_person_rank
         var potentially_bothering_person_joined_later = potentially_bothering_person_joined_time > potentially_bothered_person_joined_time
 
         if potentially_bothering_person_is_in_front and potentially_bothering_person_joined_later:

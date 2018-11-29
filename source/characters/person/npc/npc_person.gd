@@ -1,6 +1,6 @@
 extends "res://source/characters/person/person.gd"
 
-const PersonalityAspect = preload("res://source/characters/person/npc/personality.gd").PersonalityAspect
+const PersonalityAspect = preload("res://source/characters/person/npc/personality_aspects.gd").PersonalityAspect
 
 const MAX_NOTICE_DISTANCE_THRESHOLD = 2000
 
@@ -24,8 +24,8 @@ func _on_unfair_event_performed(offender, offended):
     elif noticed_by_distance and noticed_by_direction:
         _set_reaction_when_looking()
 
-func _set_reaction_when_looking():
-    var personality_aspect = personality.react_to_external_problem()
+func _set_reaction_when_looking(discarded_personality_aspects = []):
+    var personality_aspect = personality.react_to_external_problem(discarded_personality_aspects)
 
     _update_offender_in_states()
     state_machine.change(_get_state_by_personality_aspect(personality_aspect))

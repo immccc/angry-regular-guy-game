@@ -38,7 +38,6 @@ func _draw():
     if !debug_mode:
         return
 
-
     draw_string(debug_info_font, Vector2(15, 0), "NODE %s" % name, Color(1, 0, 0))
     draw_string(debug_info_font, Vector2(15, 30), "ID %s" % self, Color(1, 0, 0))
 

@@ -23,6 +23,8 @@ const GoToPositionInQueueState = preload("go_to_position_in_queue_state.gd")
 
 const ComplainingState = preload("complaining_state.gd")
 
+var bothered_completely = false
+
 func _init():
     add_to_group("unfair_event_listeners")
 
@@ -78,3 +80,16 @@ func _on_requested_move_to_position(pos):
     var state = state_machine.get(StateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID)
     state.position_dest = pos
     state_machine.change(StateConstants.GO_TO_POSITION_IN_QUEUE_STATE_ID)
+
+func _on_considerably_bothered_by(bothering_element):
+    var state = state_machine.get(StateConstants.COMPLAINING_STATE_ID)
+    state.action_receiver_node = bothering_element
+    state_machine.change(StateConstants.COMPLAINING_STATE_ID)
+
+
+func _on_bothered_totally_by(bothering_element):
+    if !bothered_completely:
+        self.offender = bothering_element
+        _set_reaction_when_looking([PersonalityAspect.COWARD, PersonalityAspect.DISTRACTED])
+        bothered_completely = true
+

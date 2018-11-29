@@ -1,11 +1,6 @@
-const MAX_FACTOR_FOR_PERSONALITY_RANGE = 100
+const PersonalityAspect = preload("res://source/characters/person/npc/personality_aspects.gd").PersonalityAspect
 
-enum PersonalityAspect {
-    COWARD,
-    RIGHTEOUS,
-    AGGRESIVE,
-    DISTRACTED
-}
+const MAX_FACTOR_FOR_PERSONALITY_RANGE = 100
 
 var personality_factors = {
 }
@@ -13,11 +8,14 @@ var personality_factors = {
 func _init():
     _set_random_values()
 
-func react_to_external_problem():
+func react_to_external_problem(discarded_personality_aspects = []):
     var selected_personality_aspect
     var max_factor = 0
 
     for personality_aspect in personality_factors.keys():
+        if discarded_personality_aspects.find(personality_aspect) >= 0:
+            continue
+
         var factor = personality_factors[personality_aspect]
         var random_remaining = randi() % (MAX_FACTOR_FOR_PERSONALITY_RANGE - factor + 1)
         if factor + random_remaining > max_factor:
