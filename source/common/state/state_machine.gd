@@ -16,7 +16,6 @@ func get(state_id):
 func change(state_id):
     current_state_id = state_id
     states[current_state_id].enter_into_state()
-    return
 
 func process(delta):
     var state = states[current_state_id]
