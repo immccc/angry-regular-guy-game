@@ -29,7 +29,7 @@ extents = Vector2( 33.0012, 82.9997 )
 custom_solver_bias = 0.0
 extents = Vector2( 34.8835, 2.21491 )
 
-[node name="RegularPedestrian" type="Node2D" index="0"]
+[node name="RegularPedestrian" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
@@ -144,12 +144,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="AngerHandler" parent="." index="8" instance=ExtResource( 6 )]
 
-considerable_bothered_level_total = 10
-maximum_bothered_level_total = 7
-considerable_bothered_level_per_each = 3
-maximum_bothered_level_per_each = 5
-bother_decreasing_factor = 1
-
 [connection signal="bothered_by" from="." to="AngerHandler" method="_on_bothered_by"]
 
 [connection signal="requested_move_to_position" from="." to="." method="_on_requested_move_to_position"]
@@ -171,5 +165,7 @@ bother_decreasing_factor = 1
 [connection signal="bothered_considerably_by" from="AngerHandler" to="." method="_on_considerably_bothered_by"]
 
 [connection signal="bothered_totally_by" from="AngerHandler" to="." method="_on_bothered_totally_by"]
+
+[connection signal="calmed_down_for" from="AngerHandler" to="." method="_on_calmed_down_for"]
 
 

@@ -88,8 +88,10 @@ func _on_considerably_bothered_by(bothering_element):
 
 
 func _on_bothered_totally_by(bothering_element):
-    if !bothered_completely:
-        self.offender = bothering_element
-        _set_reaction_when_looking([PersonalityAspect.COWARD, PersonalityAspect.DISTRACTED])
-        bothered_completely = true
+    self.offender = bothering_element
+    _set_reaction_when_looking([PersonalityAspect.COWARD, PersonalityAspect.DISTRACTED])
+    bothered_completely = true
 
+
+func _on_calmed_down_for(element):
+    state_machine.revert_to_last_state()

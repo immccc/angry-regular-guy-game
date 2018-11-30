@@ -2,10 +2,13 @@
 
 [ext_resource path="res://source/characters/person/anger_handler.gd" type="Script" id=1]
 
-[node name="AngerHandler" type="Node"]
+[node name="AngerHandler" type="Node" index="0"]
 
 script = ExtResource( 1 )
-considerable_bothered_level = 70
-maximum_bothered_level = 100
+considerable_bothered_level_total = 10
+maximum_bothered_level_total = 7
+considerable_bothered_level_per_each = 3
+maximum_bothered_level_per_each = 5
+bother_decreasing_factor = 0.05
 
 

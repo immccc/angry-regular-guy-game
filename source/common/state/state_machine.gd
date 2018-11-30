@@ -1,6 +1,9 @@
 extends Object
 
+const StateHistory = preload("state_history.gd")
+
 var states = {}
+var state_history = StateHistory.new()
 
 var current_state_id
 
@@ -14,8 +17,17 @@ func get(state_id):
 	return states[state_id]
 
 func change(state_id):
+    state_history.add(current_state_id)
     current_state_id = state_id
     states[current_state_id].enter_into_state()
+
+func revert_to_last_state():
+    var last_state_id = state_history.pop_front()
+    if last_state_id != null:
+        change(last_state_id)
+    else:
+        #TODO Add logging!
+        print("Warning! There is no last state in state machine to revert!")
 
 func process(delta):
     var state = states[current_state_id]
