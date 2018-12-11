@@ -1,0 +1,171 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://source/characters/person/npc/regular_pedestrian/regular_pedestrian.gd" type="Script" id=1]
+[ext_resource path="res://assets/characters/person/chef/chef.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://source/common/world_objects/damage_receiver_area.gd" type="Script" id=3]
+[ext_resource path="res://scenes/characters/person/strike_handler.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/common/world_objects/ground_area.gd" type="Script" id=5]
+[ext_resource path="res://scenes/characters/person/anger_handler.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SegmentShape2D" id=1]
+
+custom_solver_bias = 0.0
+a = Vector2( 0.291046, -26.7577 )
+b = Vector2( 0.493744, 24.0006 )
+
+[sub_resource type="SegmentShape2D" id=2]
+
+custom_solver_bias = 0.0
+a = Vector2( -0.171089, -13.2805 )
+b = Vector2( -0.171089, 41.0295 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 33.0012, 82.9997 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 34.8835, 2.21491 )
+
+[node name="Chef" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+altitude = 0.0
+static_on_scene = false
+flippable = false
+debug_mode = true
+initial_state = null
+
+[node name="Sprite" type="AnimatedSprite" parent="." index="0"]
+
+position = Vector2( 0, -55.4017 )
+scale = Vector2( 10, 10 )
+frames = ExtResource( 2 )
+animation = "kick"
+frame = 2
+playing = true
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
+
+[node name="KnockTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="KickArea" type="Area2D" parent="." index="2"]
+
+editor/display_folded = true
+position = Vector2( -0.902496, 0.319682 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Audio Bus", "Collision", "Material", "Pickable", "Transform", "Visibility", "Z Index" ]
+
+[node name="KickCollision" type="CollisionShape2D" parent="KickArea" index="0"]
+
+position = Vector2( 61.964, 1.86461 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="PunchArea" type="Area2D" parent="." index="3"]
+
+editor/display_folded = true
+position = Vector2( -0.814514, -79.0071 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="PunchCollision" type="CollisionShape2D" parent="PunchArea" index="0"]
+
+position = Vector2( 63.1579, -8.86427 )
+shape = SubResource( 2 )
+
+[node name="DamageArea" type="Area2D" parent="." index="4"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 6
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 3 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" index="0"]
+
+position = Vector2( -2, -52.0002 )
+shape = SubResource( 3 )
+
+[node name="StrikeHandler" parent="." index="5" instance=ExtResource( 4 )]
+
+_sections_unfolded = [ "Pause" ]
+y_distance_threshold = 20
+
+[node name="GroundArea" type="Area2D" parent="." index="6"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 8
+collision_mask = 16
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 5 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundArea" index="0"]
+
+position = Vector2( -0.105072, 32.625 )
+scale = Vector2( 1.00277, 1 )
+shape = SubResource( 4 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="." index="7"]
+
+position = Vector2( -12.946, -10.2177 )
+rect = Rect2( -22, -126, 66, 170 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="AngerHandler" parent="." index="8" instance=ExtResource( 6 )]
+
+[connection signal="bothered_by" from="." to="AngerHandler" method="_on_bothered_by"]
+
+[connection signal="requested_move_to_position" from="." to="." method="_on_requested_move_to_position"]
+
+[connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]
+
+[connection signal="area_entered" from="KickArea" to="." method="_on_kick_area_area_entered"]
+
+[connection signal="area_exited" from="KickArea" to="." method="_on_kick_area_area_exited"]
+
+[connection signal="area_entered" from="PunchArea" to="." method="_on_punch_area_area_entered"]
+
+[connection signal="area_exited" from="PunchArea" to="." method="_on_punch_area_area_exited"]
+
+[connection signal="inflict_damage" from="DamageArea" to="." method="_on_damage_received"]
+
+[connection signal="exited_from_queue" from="GroundArea" to="." method="_on_exit_queue"]
+
+[connection signal="bothered_considerably_by" from="AngerHandler" to="." method="_on_considerably_bothered_by"]
+
+[connection signal="bothered_totally_by" from="AngerHandler" to="." method="_on_bothered_totally_by"]
+
+[connection signal="calmed_down_for" from="AngerHandler" to="." method="_on_calmed_down_for"]
+
+

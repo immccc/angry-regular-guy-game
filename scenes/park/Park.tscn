@@ -20,7 +20,7 @@ _sections_unfolded = [ "Resource" ]
 custom_solver_bias = 0.0
 extents = Vector2( 61.4375, 475.698 )
 
-[node name="Park" type="Node2D"]
+[node name="Park" type="Node2D" index="0"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
@@ -73,6 +73,7 @@ position = Vector2( 1655.16, 257.935 )
 
 [node name="Player" parent="ObjectDistributor/Ground" index="1" instance=ExtResource( 4 )]
 
+editor/display_folded = true
 position = Vector2( 564, 380 )
 flippable = true
 
