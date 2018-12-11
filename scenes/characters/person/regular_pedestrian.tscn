@@ -29,7 +29,7 @@ extents = Vector2( 33.0012, 82.9997 )
 custom_solver_bias = 0.0
 extents = Vector2( 34.8835, 2.21491 )
 
-[node name="RegularPedestrian" type="Node2D"]
+[node name="RegularPedestrian" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
