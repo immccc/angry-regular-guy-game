@@ -6,8 +6,9 @@ const CommonNPCStateConstants = preload("res://source/characters/person/npc/stat
 
 const MAX_NOTICE_DISTANCE_THRESHOLD = 2000
 
-var personality = preload("personality.gd").new()
 var offender = null
+
+onready var personality = $"./PersonalityHandler"
 
 func _init():
     add_to_group("unfair_event_listeners")

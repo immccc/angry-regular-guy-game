@@ -4,4 +4,3 @@ enum PersonalityAspect {
     AGGRESIVE,
     DISTRACTED
 }
-  

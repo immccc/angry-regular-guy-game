@@ -20,7 +20,6 @@ const CallCopWalkingState = preload("res://source/characters/person/npc/states/c
 const CallCopStandingState = preload("res://source/characters/person/npc/states/call_cop_standing_state.gd")
 const WaitForCopState = preload("res://source/characters/person/npc/states/wait_for_cop_state.gd")
 
-const WaitInQueueState = preload("wait_in_queue_state.gd")
 const GoToPositionInQueueState = preload("go_to_position_in_queue_state.gd")
 
 const ComplainingState = preload("res://source/characters/person/npc/states/complaining_state.gd")
