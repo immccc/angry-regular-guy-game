@@ -62,13 +62,13 @@ func _get_default_first_state():
 func _get_state_by_personality_aspect(personality_aspect):
     match personality_aspect:
         PersonalityAspect.COWARD:
-            return StateConstants.RUN_AWAY_STATE_ID
+            return CommonNPCStateConstants.RUN_AWAY_STATE_ID
         PersonalityAspect.RIGHTEOUS:
-            return StateConstants.GO_TO_CALL_COP_STATE_ID
+            return CommonNPCStateConstants.GO_TO_CALL_COP_STATE_ID
         PersonalityAspect.AGGRESIVE:
-            return StateConstants.GO_TO_ATTACK_STATE_ID
+            return CommonNPCStateConstants.GO_TO_ATTACK_STATE_ID
         PersonalityAspect.DISTRACTED:
-            return StateConstants.STAND_STATE_ID
+            return CommonNPCStateConstants.STAND_STATE_ID
 
 func _set_reaction_when_not_looking():
     print("REACTION WHEN NOT LOOKING!")

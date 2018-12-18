@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://source/characters/person/npc/regular_pedestrian/regular_pedestrian.gd" type="Script" id=1]
+[ext_resource path="res://source/characters/person/npc/chef/chef.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/person/chef/chef.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://source/common/world_objects/damage_receiver_area.gd" type="Script" id=3]
 [ext_resource path="res://scenes/characters/person/strike_handler.tscn" type="PackedScene" id=4]

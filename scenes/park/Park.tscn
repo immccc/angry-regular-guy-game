@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/park/park_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://source/scenarios/park/park_world_object_distributor.gd" type="Script" id=2]
@@ -6,7 +6,8 @@
 [ext_resource path="res://scenes/characters/person/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/scenarios/park/ground_world_object_generator.gd" type="Script" id=5]
 [ext_resource path="res://source/scenarios/park/air_world_object_generator.gd" type="Script" id=6]
-[ext_resource path="res://scenes/common/queue.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/characters/person/chef.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/common/queue.tscn" type="PackedScene" id=8]
 
 [sub_resource type="NavigationPolygon" id=1]
 
@@ -20,11 +21,11 @@ _sections_unfolded = [ "Resource" ]
 custom_solver_bias = 0.0
 extents = Vector2( 61.4375, 475.698 )
 
-[node name="Park" type="Node2D"]
+[node name="Park" type="Node2D" index="0"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
-position = Vector2( -514.489, 52.489 )
+position = Vector2( -1095.1, 52.489 )
 mode = 0
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 64, 64 )
@@ -67,13 +68,12 @@ position = Vector2( -514.489, 52.489 )
 sort_enabled = true
 _sections_unfolded = [ "Sort" ]
 
-[node name="Churros" parent="ObjectDistributor/Ground" index="0" instance=ExtResource( 3 )]
+[node name="ChurrosStand" parent="ObjectDistributor/Ground" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 1655.16, 257.935 )
 
 [node name="Player" parent="ObjectDistributor/Ground" index="1" instance=ExtResource( 4 )]
 
-editor/display_folded = true
 position = Vector2( 564, 380 )
 flippable = true
 
@@ -196,12 +196,15 @@ position = Vector2( -331.147, 443.688 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
+[node name="Chef" parent="ObjectDistributor/Ground" index="2" instance=ExtResource( 7 )]
+
+position = Vector2( 1663.86, 214.948 )
+
 [node name="Air" type="Node2D" parent="ObjectDistributor" index="1"]
 
-[node name="Queue" parent="." index="3" instance=ExtResource( 7 )]
+[node name="Queue" parent="." index="3" instance=ExtResource( 8 )]
 
-editor/display_folded = true
-position = Vector2( 927.753, 472.091 )
+position = Vector2( 950, 420 )
 initial_people_on_queue_amount = 5
 capacity = 6
 amount_people_bothered_behind_intrusion = 2
@@ -225,4 +228,5 @@ rotation = 1.22173
 [connection signal="initial_people_requested_to_be_added" from="Queue" to="ObjectDistributor" method="_on_static_object_requested_to_be_added"]
 
 
+[editable path="ObjectDistributor/Ground/Chef"]
 [editable path="Queue"]

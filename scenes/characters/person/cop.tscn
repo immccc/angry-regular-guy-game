@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://source/characters/person/npc/cop/cop.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/person/cop/cop.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://source/common/world_objects/damage_receiver_area.gd" type="Script" id=3]
+[ext_resource path="res://source/characters/person/npc/personality.gd" type="Script" id=4]
 
 [sub_resource type="SegmentShape2D" id=1]
 
@@ -31,7 +32,11 @@ d = 0.0
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
+altitude = 0.0
+static_on_scene = false
 flippable = false
+debug_mode = true
+initial_state = null
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 
@@ -39,7 +44,7 @@ position = Vector2( 0, -55.4017 )
 scale = Vector2( 10, 10 )
 frames = ExtResource( 2 )
 animation = "walk"
-frame = 3
+frame = 1
 playing = true
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
 
@@ -112,6 +117,14 @@ _sections_unfolded = [ "Collision" ]
 
 position = Vector2( -0.774841, 47.653 )
 shape = SubResource( 4 )
+
+[node name="PersonalityHandler" type="Node" parent="." index="5"]
+
+script = ExtResource( 4 )
+preset_coward_factor = null
+preset_righteous_factor = null
+preset_aggressive_factor = null
+preset_distracted_factor = null
 
 [connection signal="area_entered" from="KickArea" to="." method="_on_kick_area_area_entered"]
 
