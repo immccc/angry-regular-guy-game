@@ -1,5 +1,7 @@
 extends Node2D
 
+signal initial_people_requested_to_be_added(object_node_type, object_position, direction, node_caller, prepare_object_to_be_added_method)
+
 const DirectionType = preload("res://source/common/direction.gd").Direction
 const RegularPedestrian = preload("res://scenes/characters/person/regular_pedestrian.tscn")
 const RegularPedestrianStateConstants = preload("res://source/characters/person/npc/regular_pedestrian/state_constants.gd")
@@ -7,7 +9,7 @@ const RegularPedestrianStateConstants = preload("res://source/characters/person/
 const Line = preload("line.gd")
 const PersonInQueueProperties = preload("person_in_queue_properties.gd")
 
-signal initial_people_requested_to_be_added(object_node_type, object_position, direction, node_caller, prepare_object_to_be_added_method)
+
 
 export(bool) var debug_mode = false
 export(int) var initial_people_on_queue_amount = 3
@@ -22,6 +24,7 @@ var rank_per_position_ranges = {}
 var people_per_rank = {}
 var properties_per_person = {}
 var people = []
+var person_called
 
 onready var area = $Area
 onready var shape = $Area/Shape

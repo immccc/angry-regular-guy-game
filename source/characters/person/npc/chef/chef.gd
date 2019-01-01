@@ -1,5 +1,8 @@
 extends "res://source/characters/person/npc/npc_person.gd"
 
+signal called_next(position_to_place_called)
+signal delivered
+
 const CommonPersonStateConstants = preload("res://source/characters/person/common_person_state_constants.gd")
 const CommonNPCStateConstants = preload("res://source/characters/person/npc/states/state_constants.gd")
 const StateConstants = preload("res://source/characters/person/npc/chef/state_constants.gd")
@@ -7,7 +10,7 @@ const StateConstants = preload("res://source/characters/person/npc/chef/state_co
 const DirectionType = preload("res://source/common/direction.gd").Direction
 
 const WaitState = preload("res://source/characters/person/npc/chef/wait_state.gd")
-#const CookState = preload("res://source/characters/person/npc/chef/cook_state.gd")
+const CookState = preload("res://source/characters/person/npc/chef/cook_state.gd")
 
 const StandState = preload("res://source/characters/person/npc/states/stand_state.gd")
 const WalkState = preload("res://source/characters/person/npc/states/walk_state.gd")
@@ -25,20 +28,17 @@ const WaitForCopState = preload("res://source/characters/person/npc/states/wait_
 
 const ComplainingState = preload("res://source/characters/person/npc/states/complaining_state.gd")
 
-func _init():
-    add_to_group("unfair_event_listeners")
+export(NodePath) var stand
 
 func _ready():
     ._ready()
     flippable = true
 
 func _setup_states():
-    randomize()
-
     node = $"."
 
     state_machine.add(WaitState.new(StateConstants.WAIT_STATE_ID, node))
-    #state_machine.add(CookState.new(StateConstants.COOK_STATE_ID, node))
+    state_machine.add(CookState.new(StateConstants.COOK_STATE_ID, node, stand))
 
     state_machine.add(StandState.new(CommonNPCStateConstants.STAND_STATE_ID, node))
     state_machine.add(HitState.new(CommonPersonStateConstants.HIT_STATE_ID, node))
@@ -57,7 +57,7 @@ func _setup_states():
     state_machine.add(ComplainingState.new(CommonNPCStateConstants.COMPLAINING_STATE_ID, node))
 
 func _get_default_first_state():
-    return StateConstants.WAIT_STATE_ID
+    return StateConstants.COOK_STATE_ID
 
 func _get_state_by_personality_aspect(personality_aspect):
     return CommonNPCStateConstants.COMPLAINING_STATE_ID

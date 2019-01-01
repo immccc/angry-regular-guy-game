@@ -45,7 +45,7 @@ func _process(delta):
 func _update_global_bothering():
     var total_bother_level = _get_total_bothered_level()
     if total_bother_level >= maximum_bothered_level_total:
-        _update_last_status(BotherStatus.GLOBAL_BOTHERED_TOTALLY)
+        _update_last_status(BotherStatus.GLOBAL_TOTALLY_BOTHERED)
     elif total_bother_level >= considerable_bothered_level_total:
         _update_last_status(BotherStatus.GLOBAL_BOTHERED_CONSIDERABLY)
     else:
@@ -62,14 +62,18 @@ func _update_bothering(bothering_element, amount):
 
     _decrease_bother_level(bothering_element, amount)
 
-func _update_last_status(status, source = null):
-    var signal_to_emit = SIGNALS_PER_BOTHER_STATUS[status]
-    if source == null and status != last_global_status:
-        emit_signal(signal_to_emit)
-        last_global_status = status
-    elif source != null and last_status_for.has(source) and last_status_for[source] != status:
+func _update_last_status(new_status, source = null):
+    var signal_to_emit = SIGNALS_PER_BOTHER_STATUS[new_status]
+    if source == null and new_status != last_global_status:
+        _emit_signal_if_applicable(last_global_status, new_status, signal_to_emit)
+        last_global_status = new_status
+    elif source != null and last_status_for.has(source) and last_status_for[source] != new_status:
+        _emit_signal_if_applicable(last_status_for[source], new_status, signal_to_emit, source)
+        last_status_for[source] = new_status
+
+func _emit_signal_if_applicable(old_status, new_status, signal_to_emit, source):
+    if old_status < new_status:
         emit_signal(signal_to_emit, source)
-        last_status_for[source] = status
 
 func _decrease_bother_level(bothering_element, amount):
     _update_bother_level(bothering_element, -amount)

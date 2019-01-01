@@ -198,7 +198,10 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Chef" parent="ObjectDistributor/Ground" index="2" instance=ExtResource( 7 )]
 
+editor/display_folded = true
 position = Vector2( 1663.86, 214.948 )
+initial_state = ""
+stand = NodePath("../ChurrosStand")
 
 [node name="Air" type="Node2D" parent="ObjectDistributor" index="1"]
 

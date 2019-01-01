@@ -5,7 +5,7 @@ const DirectionType = preload("res://source/common/direction.gd").Direction
 export (float) var altitude = 0.0
 export (bool) var static_on_scene = false
 export (bool) var flippable = false
-export (bool) var debug_mode = true
+export (bool) var debug_mode = false
 
 var direction setget set_direction
 

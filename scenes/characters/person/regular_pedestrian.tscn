@@ -37,7 +37,7 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 altitude = 0.0
 static_on_scene = false
 flippable = false
-debug_mode = true
+debug_mode = false
 initial_state = null
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="0"]

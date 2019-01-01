@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/park/churros/churros.tres" type="SpriteFrames" id=1]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 [node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 
@@ -11,6 +11,14 @@ scale = Vector2( 8, 8 )
 frames = ExtResource( 1 )
 animation = "stand"
 playing = true
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="LeftLimit" type="Node2D" parent="." index="1"]
+
+position = Vector2( -167, -99 )
+
+[node name="RightLimit" type="Node2D" parent="." index="2"]
+
+position = Vector2( 175, -101 )
 
 
