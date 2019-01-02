@@ -65,7 +65,7 @@ func _update_bothering(bothering_element, amount):
 func _update_last_status(new_status, source = null):
     var signal_to_emit = SIGNALS_PER_BOTHER_STATUS[new_status]
     if source == null and new_status != last_global_status:
-        _emit_signal_if_applicable(last_global_status, new_status, signal_to_emit)
+        _emit_signal_if_applicable(last_global_status, new_status, signal_to_emit, source)
         last_global_status = new_status
     elif source != null and last_status_for.has(source) and last_status_for[source] != new_status:
         _emit_signal_if_applicable(last_status_for[source], new_status, signal_to_emit, source)
