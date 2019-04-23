@@ -17,5 +17,13 @@ func _get_dest():
     return path_finder.get_closest_point(path_finder.to_local(position_dest))
 
 func _get_speed_slow():
-    print("Slow speed must be defined")
+    push_error("Slow speed must be defined")
+    assert(false)
+
+func _get_speed_fast():
+    push_error("Fast speed must be defined")
+    assert(false)
+
+func _get_next_state():
+    push_error("Next state must be defined")
     assert(false)

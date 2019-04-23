@@ -1,10 +1,6 @@
 extends "res://source/characters/person/npc/npc_person.gd"
 
-const CommonPersonStateConstants = preload("res://source/characters/person/common_person_state_constants.gd")
-const CommonNPCStateConstants = preload("res://source/characters/person/npc/states/state_constants.gd")
 const StateConstants = preload("res://source/characters/person/npc/regular_pedestrian/state_constants.gd")
-
-const DirectionType = preload("res://source/common/direction.gd").Direction
 
 const StandState = preload("res://source/characters/person/npc/states/stand_state.gd")
 const WalkState = preload("res://source/characters/person/npc/states/walk_state.gd")

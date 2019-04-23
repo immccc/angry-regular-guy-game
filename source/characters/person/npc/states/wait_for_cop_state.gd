@@ -7,7 +7,6 @@ const ANIMATION_WALK = "walk"
 const ANIMATION_STAND = "stand"
 
 const EVADE_ACTION_RECEIVER_SPEED = 100
-const DISTANCE_THRESHOLD = 200
 const MIN_TICKS_WAITING_COP = 2
 
 const Cop = preload("res://scenes/characters/person/cop.tscn")
@@ -76,3 +75,6 @@ func _request_cop():
     var world_object_generators = node.get_tree().get_nodes_in_group("world_object_generators")
     for world_object_generator in world_object_generators:
         world_object_generator.request_object_to_be_generated(Cop, random_direction, node, "set_offender_in_cop")
+
+func _get_distance_threshold():
+    return 200

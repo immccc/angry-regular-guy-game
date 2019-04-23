@@ -1,6 +1,5 @@
 extends "res://source/characters/person/npc/npc_person.gd"
 
-const CommonPersonStateConstants = preload("res://source/characters/person/common_person_state_constants.gd")
 const StateConstants = preload("state_constants.gd")
 
 const HitState = preload("hit_state.gd")
@@ -25,7 +24,7 @@ func _setup_states():
 func _get_default_first_state():
     return StateConstants.GO_TO_FINE_STATE_ID
 
-func _set_reaction_when_looking():
+func _set_reaction_when_looking(discarded_personality_aspects = []):
     _update_offender_in_states()
     state_machine.change(StateConstants.GO_TO_FINE_STATE_ID)
 

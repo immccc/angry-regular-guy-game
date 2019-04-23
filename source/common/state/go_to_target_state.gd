@@ -1,7 +1,5 @@
 extends "res://source/common/state/move_state.gd"
 
-const DISTANCE_THRESHOLD = 50
-
 var last_action_receiver_node_position
 
 func _init(id, node).(id, node):
@@ -18,7 +16,7 @@ func get_next_state():
     if !action_receiver_node.get_ref():
         return _get_state_when_action_receiver_does_not_exist()
 
-    if action_receiver_node.get_ref().global_position.distance_to(node.global_position) <= DISTANCE_THRESHOLD:
+    if action_receiver_node.get_ref().global_position.distance_to(node.global_position) <= _get_distance_threshold():
         return _get_state_when_action_receiver_reached()
     else:
         return id
@@ -60,3 +58,6 @@ func _move(delta):
         _set_path()
 
     ._move(delta)
+
+func _get_distance_threshold():
+    return 50

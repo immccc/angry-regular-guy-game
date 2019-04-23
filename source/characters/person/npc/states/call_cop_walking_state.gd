@@ -3,7 +3,7 @@ extends "res://source/common/state/move_state.gd"
 const StateConstants = preload("state_constants.gd")
 const DirectionType = preload("res://source/common/direction.gd").Direction
 
-const ANIMATION_MOVE = "call_cop_walking"
+const ANIMATION_WALK = "call_cop_walking"
 
 const SPEED_SLOW = 150
 const SPEED_HIGH = 250
@@ -34,7 +34,7 @@ func enter_into_state():
     _set_path()
 
 func process(delta):
-    sprite.play(ANIMATION_MOVE)
+    sprite.play(ANIMATION_WALK)
     _move(delta)
     dialing_ticks += delta
 

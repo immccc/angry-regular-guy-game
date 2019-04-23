@@ -4,31 +4,30 @@
 [ext_resource path="res://assets/park/fence.png" type="Texture" id=2]
 
 [sub_resource type="NavigationPolygon" id=1]
-
 vertices = PoolVector2Array( -64.6431, -64.2622, 63.4223, -64.2622, 63.4223, 63.2628, -64.6431, 63.2628 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( -64.6431, -64.2622, 63.4223, -64.2622, 63.4223, 63.2628, -64.6431, 63.2628 ) ]
 
 [resource]
-
 0/name = "Grass"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 128, 128 )
-0/is_autotile = false
+0/tile_mode = 0
 0/occluder_offset = Vector2( 64, 64 )
 0/navigation_offset = Vector2( 64, 64 )
 0/navigation = SubResource( 1 )
 0/shapes = [  ]
+0/z_index = 0
 1/name = "Fence"
 1/texture = ExtResource( 2 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 0, 256, 256 )
-1/is_autotile = false
+1/tile_mode = 0
 1/occluder_offset = Vector2( 128, 128 )
 1/navigation_offset = Vector2( 128, 128 )
 1/shapes = [  ]
-_sections_unfolded = [ "0", "Resource" ]
+1/z_index = 0
 

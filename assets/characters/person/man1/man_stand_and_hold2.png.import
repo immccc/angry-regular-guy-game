@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/man_stand_and_hold2.png-66d0af6316da287c576f4f7342f96bae.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
@@ -14,6 +17,7 @@ dest_files=[ "res://.import/man_stand_and_hold2.png-66d0af6316da287c576f4f7342f9
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=false
@@ -23,6 +27,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true

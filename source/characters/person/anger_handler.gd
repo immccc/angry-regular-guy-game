@@ -17,12 +17,12 @@ enum BotherStatus {
 }
 
 const SIGNALS_PER_BOTHER_STATUS = {
-    GLOBAL_CALMED_DOWN: "calmed_down",
-    GLOBAL_CONSIDERABLY_BOTHERED: "bothered_considerably",
-    GLOBAL_TOTALLY_BOTHERED: "bothered_totally",
-    CALMED_DOWN_FOR_ELEMENT: "calmed_down_for",
-    BOTHERED_CONSIDERABLY_BY_ELEMENT: "bothered_considerably_by",
-    BOTHERED_TOTALLY_BY_ELEMENT: "bothered_totally_by"
+    BotherStatus.GLOBAL_CALMED_DOWN: "calmed_down",
+    BotherStatus.GLOBAL_CONSIDERABLY_BOTHERED: "bothered_considerably",
+    BotherStatus.GLOBAL_TOTALLY_BOTHERED: "bothered_totally",
+    BotherStatus.CALMED_DOWN_FOR_ELEMENT: "calmed_down_for",
+    BotherStatus.BOTHERED_CONSIDERABLY_BY_ELEMENT: "bothered_considerably_by",
+    BotherStatus.BOTHERED_TOTALLY_BY_ELEMENT: "bothered_totally_by"
 }
 
 export (int) var considerable_bothered_level_total = 10

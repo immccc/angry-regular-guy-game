@@ -33,7 +33,8 @@ func _get_dest_to_left():
        var cell_pos = tile_map.map_to_world(cell)
        min_cell_x = min(min_cell_x, cell_pos.x)
 
-   var dest = Vector2(min_cell_x, node.global_position.y + rand_range(-20, 20))
+   #var dest = Vector2(min_cell_x, node.global_position.y + rand_range(-20, 20))
+   var dest = Vector2(-30000, node.global_position.y + rand_range(-20, 20))
    return path_finder.get_closest_point(path_finder.to_local(dest))
 
 func _get_dest_to_right():

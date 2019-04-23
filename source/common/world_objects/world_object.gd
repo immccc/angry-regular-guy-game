@@ -59,7 +59,7 @@ func get_global_position_with_altitude():
     return global_position + Vector2(0, altitude)
 
 func get_area():
-    print("Attempted to get area for object " + get_instance_id() + ", but it´s not defined")
+    push_error("Attempted to get area for object " + str(get_instance_id()) + " but it´s not defined")
     assert(false)
 
 func _update_direction():

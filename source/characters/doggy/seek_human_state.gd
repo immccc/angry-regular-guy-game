@@ -1,6 +1,5 @@
 extends "walk_state.gd"
 
-const StateConstants = preload("state_constants.gd")
 
 const THRESHOLD_DISTANCE = 50
 const MAX_ATTEMPTS_SEEKING = 4

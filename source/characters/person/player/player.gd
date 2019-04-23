@@ -1,6 +1,5 @@
 extends "res://source/characters/person/person.gd"
 
-const CommonPersonStateConstants = preload("res://source/characters/person/common_person_state_constants.gd")
 const StateConstants = preload("state_constants.gd")
 
 const InputControlState = preload("input_control_state.gd")

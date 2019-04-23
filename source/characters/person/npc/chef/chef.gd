@@ -3,11 +3,7 @@ extends "res://source/characters/person/npc/npc_person.gd"
 signal called_next(position_to_place_called)
 signal delivered
 
-const CommonPersonStateConstants = preload("res://source/characters/person/common_person_state_constants.gd")
-const CommonNPCStateConstants = preload("res://source/characters/person/npc/states/state_constants.gd")
 const StateConstants = preload("res://source/characters/person/npc/chef/state_constants.gd")
-
-const DirectionType = preload("res://source/common/direction.gd").Direction
 
 const WaitState = preload("res://source/characters/person/npc/chef/wait_state.gd")
 const CookState = preload("res://source/characters/person/npc/chef/cook_state.gd")
