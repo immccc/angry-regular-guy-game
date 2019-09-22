@@ -44,6 +44,7 @@ position = Vector2( 1655.16, 257.935 )
 [node name="Player" parent="ObjectDistributor/Ground" instance=ExtResource( 4 )]
 position = Vector2( 564, 380 )
 flippable = true
+initial_state = ""
 
 [node name="GroundGenerator2" type="Line2D" parent="ObjectDistributor/Ground/Player"]
 position = Vector2( 735.107, -4.82098 )
